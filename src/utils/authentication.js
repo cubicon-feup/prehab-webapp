@@ -2,9 +2,9 @@ import store from '../store/store';
 import { loggedIn, loggedOut } from '../actions/actions';
 import { SESSION_COOKIE_NAME } from '../constants/configuration';
 import { setCookie, deleteCookie, getCookie } from './cookie-handler';
-import * as actionTypes from '../actionTypes/actionTypes';
 import { authenticateUser } from '../utils/communication-manager';
-
+import * as actionTypes from '../actionTypes/actionTypes';
+import {LOGGED_IN} from "../actionTypes/actionTypes";
 
 /**
  * Authenticates an user.
@@ -12,15 +12,18 @@ import { authenticateUser } from '../utils/communication-manager';
  * @param {*} provider Provider the user used to login.
  */
 export function authenticate(userID) {
-  authenticateUser(userID).then(function (response) {
-    setCookie(SESSION_COOKIE_NAME, response.message);
-
-    response["isLoggedIn"] = "true";
-    store.dispatch(loggedIn(response));
-  }).catch(function (error) {
-    console.log(error);
-  });
+    authenticateUser(userID).then(function (response) {
+        setCookie(SESSION_COOKIE_NAME, response.message);
+        //console.log("Login");
+        response["isLoggedIn"] = "true";
+        store.dispatch(loggedIn({
+            type: LOGGED_IN
+        }));
+    }).catch(function (error) {
+        console.log(error);
+    });
 }
+
 
 /**
  * Logs out the user.

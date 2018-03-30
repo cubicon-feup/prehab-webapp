@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import store from '../../store/store';
 
 
 class MainWindow extends Component {
@@ -15,8 +16,9 @@ class MainWindow extends Component {
       }
 
     renderContent = () => {
-        console.log(this.props.authentication)
-        if (this.props.authentication) {
+        const { authentication } = store.getState();
+        if(authentication['isLoggedIn'] === true)
+        {
             this.setState({ Message: 'Login Success' });
         } else {
             this.setState({ Message: 'Login Failed' });
