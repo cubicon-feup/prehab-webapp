@@ -1,28 +1,34 @@
 import React, {Component} from 'react';
 
+
 class MainWindow extends Component {
+
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          Message: '',
+        }
+      }
+    componentWillMount() {
+          this.renderContent();
+      }
 
     renderContent = () => {
         console.log(this.props.authentication)
         if (this.props.authentication) {
-          return (
-                <div>
-                    <h1>Hi Doctor!</h1>
-                    <h3>Thank yor for log In!</h3>
-                </div>
-          );
+            this.setState({ Message: 'Login Success' });
         } else {
-            return (
-                <div>
-                    <h1>Go Login!</h1>
-                </div>
-            )
+            this.setState({ Message: 'Login Failed' });
+
         }
       }
 
 	render() {
 		return (
-            this.renderContent()
+            <div>
+                <h1>{this.state.Message}</h1>
+            </div>
 		);
 	}
 }

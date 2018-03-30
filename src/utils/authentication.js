@@ -3,6 +3,8 @@ import { loggedIn, loggedOut } from '../actions/actions';
 import { SESSION_COOKIE_NAME } from '../constants/configuration';
 import { setCookie, deleteCookie, getCookie } from './cookie-handler';
 import * as actionTypes from '../actionTypes/actionTypes';
+import { authenticateUser } from '../utils/communication-manager';
+
 
 /**
  * Authenticates an user.
@@ -10,13 +12,14 @@ import * as actionTypes from '../actionTypes/actionTypes';
  * @param {*} provider Provider the user used to login.
  */
 export function authenticate(userID) {
-    let response = {
-        accessToken: "AmazingToken",
-        type: actionTypes.LOGGED_IN
-    }
+  authenticateUser(userID).then(function (response) {
+    setCookie(SESSION_COOKIE_NAME, response.message);
 
-    setCookie(SESSION_COOKIE_NAME, response.accessToken);
-    store.dispatch(loggedIn());
+    response["isLoggedIn"] = "true";
+    store.dispatch(loggedIn(response));
+  }).catch(function (error) {
+    console.log(error);
+  });
 }
 
 /**
@@ -38,6 +41,6 @@ export function updateAuthInfo() {
         accessToken: "AmazingToken",
         type: actionTypes.LOGGED_IN
     }
-    store.dispatch(loggedIn(response));    
+    store.dispatch(loggedIn(response['type']));    
   }
 }

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/actions';
 
 
-class Login extends Component {
+class signInForm extends Component {
 
     constructor(props){
         super(props);
@@ -30,7 +30,6 @@ class Login extends Component {
         const { errors, isValid } = validateInput(this.state);
 
         if(!isValid){
-            //console.log(errors);
             this.setState({ errors });
         }
 
@@ -59,32 +58,30 @@ class Login extends Component {
     render() {
         const { errors, username, password } = this.state;
         return (
-            <div className="row content-middle-page">
-                <div className="content-center">
-                    <form onSubmit={this.onSubmit}>
-                        <h1> Hi Doctor! </h1>
-                        <div className="form-group">
-                            <TextField
-                                name="username"   
-                                value={username} 
-                                errorText={errors.username}
-                                onChange={this.onChange}               
-                                hintText="Insert Username"
-                            />
-                            <TextField
-                                name="password"
-                                onChange={this.onChange} 
-                                errorText={errors.password} 
-                                hintText="Insert Password"
-                            />
-                            <RaisedButton label="Login" primary={true} onClick={this.onSubmit} />
-                        </div>
-                    </form>
-                </div>
+            <div className="content-center">
+                <form onSubmit={this.onSubmit}>
+                    <h1> Hi Doctor! </h1>
+                    <div className="form-group">
+                        <TextField
+                            name="username"   
+                            value={username} 
+                            errorText={errors.username}
+                            onChange={this.onChange}               
+                            hintText="Insert Username"
+                        />
+                        <TextField
+                            name="password"
+                            onChange={this.onChange} 
+                            errorText={errors.password} 
+                            hintText="Insert Password"
+                        />
+                        <RaisedButton label="Login" primary={true} onClick={this.onSubmit} />
+                    </div>
+                </form>
             </div>
         );
     }
 }
 
 
-export default connect(null, {login}) (Login);
+export default connect(null, {login}) (signInForm);

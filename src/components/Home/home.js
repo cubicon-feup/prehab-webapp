@@ -4,17 +4,25 @@ import logo from '../../images/logo.svg';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
-
 class Home extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.handleClick = this.handleClick.bind(this)
+    }
 
     handleClick = () => {
         this.props.history.push("/login");
     };
 
+    componentDidMount() {
+        console.log(this.props.authentication)
+	}
+
 	render() {
 		return (
-			<div class="row">
-                <div class="content-center ">
+			<div className="row">
+                <div className="content-center ">
                     <img src={logo}  width="500px" alt="Amazing"/>
                     <p>This is our Landing Page</p>
                     <RaisedButton label="Login" primary={true} onClick={this.handleClick} />
