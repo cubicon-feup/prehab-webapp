@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { updateAuthInfo, authenticate } from '../../utils/authentication';
+import { updateAuthInfo, authenticate, logout } from '../../utils/authentication';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
 import { login } from '../../actions/actions';
+import store from '../../store/store';
 
 
 class Login extends Component {
@@ -43,10 +44,19 @@ class Login extends Component {
             this.setState({ errors: {} });
             //Trying API request and response
             authenticate(this.state.username);
-            if(this.props.authentication)
-                console.log("User Logged In");
-            this.props.history.push('/main');
+            const { authentication } = store.getState();
+
+            if(authentication['isLoggedIn'] === true)
+            {
+                console.log("Valid");
+                this.props.history.push('/main');
+            }
         }
+    }
+
+    logout = (e) => {
+        e.preventDefault();
+        logout();
     }
 
     componentDidMount() {
@@ -73,6 +83,7 @@ class Login extends Component {
                             />
                             <TextField
                                 name="password"
+                                value={password}
                                 onChange={this.onChange} 
                                 errorText={errors.password} 
                                 hintText="Insert Password"
@@ -87,4 +98,4 @@ class Login extends Component {
 }
 
 
-export default connect(null, {login}) (Login);
+export default Login;
