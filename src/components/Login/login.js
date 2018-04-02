@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { updateAuthInfo, authenticate, logout } from '../../utils/authentication';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
-import { login } from '../../actions/actions';
-import store from '../../store/store';
-
+import { logIn } from "../../actions/authActions";
+import store from "../../store";
 
 class Login extends Component {
 
@@ -15,7 +13,8 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            errors: {}
+            errors: {},
+            message: ''
         }
 
         this.onChange = this.onChange.bind(this);
@@ -31,10 +30,8 @@ class Login extends Component {
         const { errors, isValid } = validateInput(this.state);
 
         if(!isValid){
-            //console.log(errors);
             this.setState({ errors });
         }
-
         return isValid;
     }
 
@@ -42,34 +39,22 @@ class Login extends Component {
         e.preventDefault();
         if(this.isValid()){
             this.setState({ errors: {} });
-            //Trying API request and response
-            authenticate(this.state.username);
-            const { authentication } = store.getState();
+            this.props.logIn(this.state.username, this.state.password);
+            store.subscribe( () => {
+                if(this.props.auth === true)
+                    this.props.history.push('/main');
+            });
 
-            if(authentication['isLoggedIn'] === true)
-            {
-                console.log("Valid");
-                this.props.history.push('/main');
-            }
+
         }
     }
-
-    logout = (e) => {
-        e.preventDefault();
-        logout();
-    }
-
-    componentDidMount() {
-        updateAuthInfo();
-        console.log(this.props.authentication)
-
-	}
 
 
     render() {
         const { errors, username, password } = this.state;
         return (
             <div className="row content-middle-page">
+                <p> {this.state.message} </p>
                 <div className="content-center">
                     <form onSubmit={this.onSubmit}>
                         <h1> Hi Doctor! </h1>
@@ -97,5 +82,19 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.isLoggedIn
+    };
+};
 
-export default Login;
+function mapDispatchToProps(dispatch) {
+    return {
+        logIn: (username, password) =>{
+            dispatch(logIn(username, password));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+

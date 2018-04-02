@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../styles/styles.css';
-import { Route, Switch  } from 'react-router-dom';
+import { BrowserRouter as Router ,Route, Switch  } from 'react-router-dom';
 
 import Home from './Home/home'
 import Login from './Login/login'
@@ -13,17 +13,21 @@ class App extends Component {
     console.log(this.props);
   }
 
+
   render() {
     return (
       <MuiThemeProvider>
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" name="Login" component={Login} />
-            <Route path="/main" name="Main" component={MainWindow} />
-        </Switch>
+          <Router>
+              <Switch>
+                  <Route path="/login" name="login" component={Login}/>
+                  <Route exact path="/" name="home" component={Home}/>
+                  <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
+              </Switch>
+          </Router>
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+
+export default (App);

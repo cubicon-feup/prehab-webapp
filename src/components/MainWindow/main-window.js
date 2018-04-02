@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import store from '../../store/store';
+import { connect } from 'react-redux';
 
 
 class MainWindow extends Component {
@@ -8,23 +8,22 @@ class MainWindow extends Component {
         super(props);
     
         this.state = {
-          Message: '',
+          Message: 'Login Failed',
         }
       }
-    componentWillMount() {
-          this.renderContent();
-      }
 
-    renderContent = () => {
-        const { authentication } = store.getState();
-        if(authentication['isLoggedIn'] === true)
+    componentDidMount()
+    {
+        console.log("Props");
+        console.log(this.props);
+        if(this.props.auth === true)
         {
-            this.setState({ Message: 'Login Success' });
-        } else {
-            this.setState({ Message: 'Login Failed' });
-
+            this.setState({
+                Message: "Login Success"
+            });
         }
-      }
+
+    }
 
 	render() {
 		return (
@@ -34,6 +33,13 @@ class MainWindow extends Component {
 		);
 	}
 }
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.isLoggedIn
+    };
+};
 
-export default MainWindow;
+
+
+export default connect(mapStateToProps, null)(MainWindow);
 
