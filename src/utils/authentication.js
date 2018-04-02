@@ -1,4 +1,4 @@
-import store from '../store/store';
+import store from '../store';
 import { loggedIn, loggedOut } from '../actions/actions';
 import { SESSION_COOKIE_NAME } from '../constants/configuration';
 import { setCookie, deleteCookie, getCookie } from './cookie-handler';
@@ -14,8 +14,6 @@ import {LOGGED_IN} from "../actionTypes/actionTypes";
 export function authenticate(userID) {
     authenticateUser(userID).then(function (response) {
         setCookie(SESSION_COOKIE_NAME, response.message);
-        //console.log("Login");
-        response["isLoggedIn"] = "true";
         store.dispatch(loggedIn({
             type: LOGGED_IN
         }));

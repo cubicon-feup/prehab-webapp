@@ -2,7 +2,7 @@
  * Authenticates an user.
  * @param {*} userID User id.
  */
-export function authenticateUser(userID) {
+export function authenticateUser(username, password) {
 	return new Promise(function (resolve, reject) {
 
 		let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/login/";
@@ -15,9 +15,9 @@ export function authenticateUser(userID) {
 				'Content-Type': 'application/json',
 				'pragma': 'no-cache',
 				'cache-control': 'no-cache'
-			}
-		}
-
+			},
+            body: JSON.stringify({ "username": username, "password": password })
+        }
 		fetch(requestUrl, requestOptions).then(function (response) {
 			if (response.status === 200) {
 				return resolve(response.json());
