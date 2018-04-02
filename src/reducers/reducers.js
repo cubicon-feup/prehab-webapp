@@ -7,7 +7,7 @@ const DEFAULT_AUTHENTICATION_STATE = { isLoggedIn: false, accessToken: undefined
 function authentication(state = DEFAULT_AUTHENTICATION_STATE, action) {
   switch (action.type) {
     case actionTypes.LOGGED_IN:
-      return {
+      return state = {
         isLoggedIn: true
       };
     default:
