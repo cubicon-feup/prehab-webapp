@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PatientTable from './PatientTable';
-import RaisedButton from 'material-ui/RaisedButton';
 import Logout from "../Logout/logout";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 
 class MainWindow extends Component {
@@ -22,7 +23,7 @@ class MainWindow extends Component {
                 <div className="row content-middle-page">
                     <div className="row ">
                         <div className="content-center">
-                            <h1>Login Sucesso</h1>
+                            <h1>Olá Doctor</h1>
                         </div>
                     </div>
                     <div className="row">
@@ -30,7 +31,10 @@ class MainWindow extends Component {
                             <PatientTable/>
                         </div>
                         <div className="col-md-2 content-center btn-to-middle">
-                            <RaisedButton label="Adicionar Paciente" primary={true}/>
+                            <FloatingActionButton style={{marginRight: 20}}>
+                                <ContentAdd />
+                            </FloatingActionButton>
+                            <h3>Adicionar Paciente</h3>
                         </div>
                     </div>
                 </div>
