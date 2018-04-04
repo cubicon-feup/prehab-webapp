@@ -3,8 +3,18 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
-import { logIn } from "../../actions/authActions";
-import store from "../../store";
+import { signIn, logOut } from "../../actions/authActions";
+import { authenticateUser } from "../../utils/communication-manager";
+
+
+
+export function wrongCredentials() {
+    let errors = {
+        username: "Wrong Credential",
+        password: "Wrong Credential"
+    };
+    return {errors};
+}
 
 class Login extends Component {
 
@@ -39,13 +49,16 @@ class Login extends Component {
         e.preventDefault();
         if(this.isValid()){
             this.setState({ errors: {} });
-            this.props.logIn(this.state.username, this.state.password);
-            store.subscribe( () => {
-                if(this.props.auth === true)
+            authenticateUser(this.state.username, this.state.password)
+                .then(suc => {
+                    this.props.signIn(suc.data.jwt);
                     this.props.history.push('/main');
-            });
-
-
+                })
+                .catch(err => {
+                    const { errors } = wrongCredentials();
+                    this.setState({ errors });
+                    this.props.logOut();
+                });
         }
     }
 
@@ -54,8 +67,7 @@ class Login extends Component {
         const { errors, username, password } = this.state;
         return (
             <div className="row content-middle-page">
-                <p> {this.state.message} </p>
-                <div className="content-center">
+                <div className=" row content-center">
                     <form onSubmit={this.onSubmit}>
                         <h1> Hi Doctor! </h1>
                         <div className="form-group">
@@ -90,8 +102,11 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logIn: (username, password) =>{
-            dispatch(logIn(username, password));
+        signIn: (username, password) =>{
+            dispatch(signIn(username, password));
+        },
+        logOut: () => {
+            dispatch(logOut());
         }
     };
 }

@@ -6,8 +6,6 @@
 .content-center
 {
   width: 20em;
-  margin-top: auto;
-  margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -15,6 +13,13 @@
 }
 
 .content-middle-page {
-    margin-top: 25%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
+.btn-to-middle {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}

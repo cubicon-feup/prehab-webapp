@@ -7,7 +7,7 @@ class NavBar extends Component {
 	render() {
 		return (
             <div >
-                <Menu authentication={this.props.authentication} />
+                <Menu />
             </div>
 		);
 	}

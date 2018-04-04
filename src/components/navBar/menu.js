@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import { slide as Menu } from 'react-burger-menu';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
+import MenuItem from 'material-ui/MenuItem';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+
 
 class menu extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
-
   render() {
     return (
-      <Menu>
-        <div className="menu-item">
-            <Link to={'/home'}> Home Page</Link>
-        </div>
-        <div className="menu-item">
-            <Link to={'/login'}> Login Page</Link>
-        </div>
-
-      </Menu>
+        <Toolbar style={{'backgroundColor': '#00bcd4'}}>
+            <ToolbarGroup>
+                <Link to="/main">
+                    <ToolbarTitle text="Prehab" />
+                </Link>
+            </ToolbarGroup>
+            <ToolbarGroup firstChild={true}>
+                <ToolbarSeparator />
+                    <Link to="/login">
+                        <MenuItem primaryText="Login"/>
+                    </Link>
+                    <Link to="/task"><MenuItem primaryText="Task"/></Link>
+                    <Link to="/plan"><MenuItem primaryText="Plan"/></Link>
+            </ToolbarGroup>
+        </Toolbar>
     );
   }
 }
