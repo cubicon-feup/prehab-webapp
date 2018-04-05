@@ -70,7 +70,7 @@ export function getAuthInfo(secret) {
  * @param {*} multi_link Task multimedia Link.
  * @param {*} type Task Type.
  */
-export function createTask(title, description, multi_link, type) {
+export function createTask(title, description, multi_link, type, secret) {
     return new Promise(function (resolve, reject) {
 
         let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
@@ -82,7 +82,8 @@ export function createTask(title, description, multi_link, type) {
                 'Authorization': 'Basic ',
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'jwt': secret
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -103,7 +104,7 @@ export function createTask(title, description, multi_link, type) {
  * Get List of Available Task
  * @param {*} .
  */
-export function getTaskList() {
+export function getTaskList(secret) {
     return new Promise(function (resolve, reject) {
 
         let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
@@ -115,7 +116,8 @@ export function getTaskList() {
                 'Authorization': 'Basic ',
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'jwt': secret
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -129,3 +131,4 @@ export function getTaskList() {
         });
     });
 }
+

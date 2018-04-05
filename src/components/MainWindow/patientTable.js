@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import doctorIcon from "../../images/icons/doctor_icon.svg";
 import {
     Card,
     CardHeader,
     CardMedia
-} from 'material-ui/Card';
+} from "material-ui/Card";
 
 import {
     Table,
@@ -13,38 +13,38 @@ import {
     TableHeaderColumn,
     TableRow,
     TableRowColumn,
-} from 'material-ui/Table';
+} from "material-ui/Table";
 
 const tableData = [
     {
-        id: '125643162',
-        alerts: '2',
-        surgery: '23-05-2018',
-        doctor: 'Magna',
+        id: "125643162",
+        alerts: "2",
+        surgery: "23-05-2018",
+        doctor: "Magna",
     },
     {
-        id: '6453747',
-        alerts: '0',
-        surgery: '25-05-2018',
-        doctor: 'Magna',
+        id: "6453747",
+        alerts: "0",
+        surgery: "25-05-2018",
+        doctor: "Magna",
     },
     {
-        id: '9786070',
-        alerts: '0',
-        surgery: '01-05-2018',
-        doctor: 'Magna',
+        id: "9786070",
+        alerts: "0",
+        surgery: "01-05-2018",
+        doctor: "Magna",
     },
     {
-        id: '73686382',
-        alerts: '5',
-        surgery: '05-04-2018',
-        doctor: 'Magna',
+        id: "73686382",
+        alerts: "5",
+        surgery: "05-04-2018",
+        doctor: "Magna",
     },
     {
-        id: '12312515',
-        alerts: '0',
-        surgery: '25-05-2018',
-        doctor: 'Magna',
+        id: "12312515",
+        alerts: "0",
+        surgery: "25-05-2018",
+        doctor: "Magna",
     },
 ];
 
@@ -92,7 +92,7 @@ export default class PatientTable extends Component {
                                 enableSelectAll={this.state.enableSelectAll}
                             >
                                 <TableRow>
-                                    <TableHeaderColumn colSpan="3" tooltip="Lista de Pacientes" style={{textAlign: 'center'}}>
+                                    <TableHeaderColumn colSpan="3" tooltip="Lista de Pacientes" style={{textAlign: "center"}}>
                                         Lista de Pacientes
                                     </TableHeaderColumn>
                                 </TableRow>

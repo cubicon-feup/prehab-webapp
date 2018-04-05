@@ -1,19 +1,19 @@
-import React, {Component} from 'react';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import React, {Component} from "react";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 
 /*
 const persons = [
-    {value: 0, name: 'Correr'},
-    {value: 1, name: 'Flexões'},
-    {value: 2, name: 'April Tucker'},
-    {value: 3, name: 'Ralph Hubbard'},
-    {value: 4, name: 'Omar Alexander'},
-    {value: 5, name: 'Carlos Abbott'},
-    {value: 6, name: 'Miriam Wagner'},
-    {value: 7, name: 'Bradley Wilkerson'},
-    {value: 8, name: 'Virginia Andrews'},
-    {value: 9, name: 'Kelly Snyder'},
+    {value: 0, name: "Correr"},
+    {value: 1, name: "Flexões"},
+    {value: 2, name: "April Tucker"},
+    {value: 3, name: "Ralph Hubbard"},
+    {value: 4, name: "Omar Alexander"},
+    {value: 5, name: "Carlos Abbott"},
+    {value: 6, name: "Miriam Wagner"},
+    {value: 7, name: "Bradley Wilkerson"},
+    {value: 8, name: "Virginia Andrews"},
+    {value: 9, name: "Kelly Snyder"},
 ];
 */
 /**
@@ -25,8 +25,8 @@ export default class selectActivity extends Component {
         super(props);
         this.state = {
             list: [],
-            values: [],
-            hintText: '',
+            value: '',
+            hintText: "",
         };
     }
 
@@ -38,7 +38,11 @@ export default class selectActivity extends Component {
         });
     }
 
-    handleChange = (event, index, values) => this.setState({values: values});
+    handleChange = (event, index, values) => {
+        this.props.changeField(this.state.list[index].id);
+        this.setState({value: values});
+
+    }
 
 
     menuItems(list) {
@@ -56,8 +60,8 @@ export default class selectActivity extends Component {
             <SelectField
                 multiple={false}
                 hintText={this.state.hintText}
-                value={this.state.values}
-                onChange={this.handleChange}
+                value={this.state.value}
+                onChange={this.handleChange.bind(this)}
             >
                 {this.menuItems(this.state.list)}
             </SelectField>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from "react";
+import TextField from "material-ui/TextField";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
+import Dialog from "material-ui/Dialog";
+import RaisedButton from "material-ui/RaisedButton";
 
 
 import { createTask } from "../../utils/communication-manager";
@@ -16,9 +16,9 @@ class taskForm extends Component {
 
         this.state = {
             task_type: 1,
-            title: '',
-            description: '',
-            multi_link: '',
+            title: "",
+            description: "",
+            multi_link: "",
             errors: {},
             openDialog: false
         }
@@ -50,16 +50,16 @@ class taskForm extends Component {
 
         if(this.isValid()) {
             const {task_type, title, description, multi_link} = this.state;
-            createTask(title, description, multi_link, task_type)
+            createTask(title, description, multi_link, task_type, this.props.token)
                 .then(suc => {
                     //display dialog
                     console.log("Save");
                     this.setState({
                         openDialog: true,
                         task_type: 1,
-                        title: '',
-                        description: '',
-                        multi_link: ''
+                        title: "",
+                        description: "",
+                        multi_link: ""
                     });
 
             }).catch(err => {
@@ -85,7 +85,7 @@ class taskForm extends Component {
         <div >
             <div>
                 <Dialog
-                    contentStyle={{width: '350px',}}
+                    contentStyle={{width: "350px",}}
                     title="Registo Validado"
                     actions={actions}
                     modal={false}
