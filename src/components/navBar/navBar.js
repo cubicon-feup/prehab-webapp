@@ -4,13 +4,13 @@ import Menu from './menu';
 
 class NavBar extends Component {
 
-	render() {
-		return (
+    render() {
+        return (
             <div >
                 <Menu />
             </div>
-		);
-	}
+        );
+    }
 }
 
 export default NavBar;

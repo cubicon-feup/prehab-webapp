@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import PlanForm from './planForm'
+import React, {Component} from "react";
+import PlanForm from "./planForm"
 import {connect} from "react-redux";
 import {getTaskList} from "../../utils/communication-manager";
 import Logout from "../Logout/logout";
@@ -30,16 +30,18 @@ class Plan extends Component {
         }
     }
     componentDidMount() {
-        getTaskList().then(list => {
+        console.log(this.props.token);
+        getTaskList(this.props.token).then(list => {
+            console.log(list);
             this.setState({
                 taskList: list.data
             });
         }).catch(err => {
+            console.log(err);
             this.setState({
                 taskList: undefined
             });
         });
-        this.createActivityPlan();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -62,7 +64,8 @@ class Plan extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth.isLoggedIn
+        auth: state.auth.isLoggedIn,
+        token: state.auth.accessToken
     };
 };
 

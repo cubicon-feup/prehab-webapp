@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import PatientTable from './PatientTable';
+import React, {Component} from "react";
+import { connect } from "react-redux";
+import PatientTable from "./patientTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
+import { Link } from "react-router-dom"
 
 
 class MainWindow extends Component {
@@ -31,9 +32,11 @@ class MainWindow extends Component {
                             <PatientTable/>
                         </div>
                         <div className="col-md-2 content-center btn-to-middle">
-                            <FloatingActionButton style={{marginRight: 20}}>
-                                <ContentAdd />
-                            </FloatingActionButton>
+                            <Link to="/patient">
+                                <FloatingActionButton style={{marginRight: 20}}>
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                            </Link>
                             <h3>Adicionar Paciente</h3>
                         </div>
                     </div>
