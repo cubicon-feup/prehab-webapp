@@ -20,31 +20,31 @@ const tableData = [
         id: "125643162",
         alerts: "2",
         surgery: "23-05-2018",
-        doctor: "Magna",
+        doctor: "Doctorn",
     },
     {
         id: "6453747",
         alerts: "0",
         surgery: "25-05-2018",
-        doctor: "Magna",
+        doctor: "Doctor",
     },
     {
         id: "9786070",
         alerts: "0",
         surgery: "01-05-2018",
-        doctor: "Magna",
+        doctor: "Doctor",
     },
     {
         id: "73686382",
         alerts: "5",
         surgery: "05-04-2018",
-        doctor: "Magna",
+        doctor: "Doctor",
     },
     {
         id: "12312515",
         alerts: "0",
         surgery: "25-05-2018",
-        doctor: "Magna",
+        doctor: "Doctor",
     },
 ];
 

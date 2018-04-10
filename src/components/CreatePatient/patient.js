@@ -2,8 +2,21 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import Logout from "../Logout/logout";
 import PatientForm from "./patientForm";
+import {getDoctorPlan} from "../../utils/communication-manager";
 
 class Patient extends Component {
+
+    componentWillMount(){
+        getDoctorPlan(this.props.token)
+            .then(doctorPlan => {
+                if(doctorPlan.length > 0){
+                    console.log(doctorPlan);
+                }
+            })
+            .catch(err => {
+                console.log("Erro: " + err);
+            });
+    }
 
     createPatient = () => {
         if(this.props.auth !== true) {
@@ -14,7 +27,7 @@ class Patient extends Component {
         else
         {
             return (
-                <PatientForm />
+                <PatientForm token={this.props.token}/>
             )
         }
     }

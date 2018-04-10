@@ -62,6 +62,7 @@ export default class selectActivity extends Component {
                 hintText={this.state.hintText}
                 value={this.state.value}
                 onChange={this.handleChange.bind(this)}
+                fullWidth={true}
             >
                 {this.menuItems(this.state.list)}
             </SelectField>

@@ -43,7 +43,7 @@ class PatientStepper extends Component {
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <StepperForm />
+                return <StepperForm token={this.props.token}/>
             case 1:
                 return 'What is an ad group anyways?';
             case 2:
@@ -74,7 +74,7 @@ class PatientStepper extends Component {
                     {finished ? (
                         <p>
                             <a
-                                href="#"
+
                                 onClick={(event) => {
                                     event.preventDefault();
                                     this.setState({stepIndex: 0, finished: false});
@@ -85,7 +85,7 @@ class PatientStepper extends Component {
                         </p>
                     ) : (
                         <div>
-                            <p>{this.getStepContent(stepIndex)}</p>
+                            <div>{this.getStepContent(stepIndex)}</div>
                             <div style={{marginTop: 12}}>
                                 <FlatButton
                                     label="Back"
