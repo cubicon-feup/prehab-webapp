@@ -7,10 +7,12 @@ class NavBar extends Component {
     render() {
         return (
             <div >
-                <Menu />
+                <Menu/>
             </div>
         );
     }
+
+
 }
 
 export default NavBar;
