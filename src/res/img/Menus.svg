@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3728 1332 54 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2699fb;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        opacity: 0.1;
+      }
+    </style>
+  </defs>
+  <g id="Menus" transform="translate(3358 955)">
+    <rect id="Rectangle_636" data-name="Rectangle 636" class="cls-1" width="54" height="50" rx="4" transform="translate(370 377)"/>
+    <path id="Union_31" data-name="Union 31" class="cls-2" d="M951,3916v-4h4v4Zm-6,0v-4h4v4Zm-6,0v-4h4v4Zm12-6v-4h4v4Zm-6,0v-4h4v4Zm-6,0v-4h4v4Zm12-6v-4h4v4Zm-6,0v-4h4v4Zm-6,0v-4h4v4Z" transform="translate(-550 -3506)"/>
+    <rect id="Rectangle_637" data-name="Rectangle 637" class="cls-3" width="2" height="50" transform="translate(370 377)"/>
+    <rect id="Rectangle_642" data-name="Rectangle 642" class="cls-3" width="2" height="50" transform="translate(422 377)"/>
+  </g>
+</svg>

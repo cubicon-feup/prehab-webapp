@@ -5,6 +5,8 @@ import Logout from "../Logout/logout";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
+import {getPatientList} from "../../utils/communication-manager";
+import "../../styles/pacientes_style.css";
 
 
 class MainWindow extends Component {
@@ -19,17 +21,17 @@ class MainWindow extends Component {
 
 
     MainActivity = () => {
-        if (this.props.auth === true) {
+        if (this.props.auth === true && this.state.patientList !== undefined) {
             return (
                 <div className="row content-middle-page">
                     <div className="row ">
-                        <div className="content-center">
-                            <h1>Olá Doctor</h1>
+                        <div className="doctorName">
+                            <p className="doctorNameLabel">Olá Doctor</p>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-8">
-                            <PatientTable/>
+                            <PatientTable list={this.state.patientList}/>
                         </div>
                         <div className="col-md-2 content-center btn-to-middle">
                             <Link to="/patient">
@@ -58,10 +60,26 @@ class MainWindow extends Component {
             </div>
 		);
 	}
+
+	componentDidMount() {
+            console.log(this.props.token);
+            getPatientList(this.props.token).then(list => {
+                console.log(list);
+                this.setState({
+                    patientList: list.data
+                });
+            }).catch(err => {
+                console.log(err);
+                this.setState({
+                    patientList: undefined
+                });
+            });
+        }
 }
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth.isLoggedIn
+        auth: state.auth.isLoggedIn,
+        token : state.auth.accessToken
     };
 };
 
