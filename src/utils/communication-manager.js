@@ -15,7 +15,8 @@ export function authenticateUser(username, password) {
 				'Authorization': 'Basic ',
 				'Content-Type': 'application/json',
 				'pragma': 'no-cache',
-				'cache-control': 'no-cache'
+				'cache-control': 'no-cache',
+                'platform': 'web'
 			},
             body: JSON.stringify({ "username": username, "password": password })
         }
@@ -47,7 +48,8 @@ export function getAuthInfo(secret) {
                 'Authorization': 'Basic ' + secret,
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'platform': 'web'
             }
         }
 
@@ -83,7 +85,8 @@ export function createTask(title, description, multi_link, type, secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -117,7 +120,8 @@ export function getTaskList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -132,10 +136,97 @@ export function getTaskList(secret) {
     });
 }
 
-export function getPatientList(secret) {
+/**
+ * Creates a New Patient
+ * @param {*} .
+ */
+export function createNewPatient(secret, patient_caracteristics) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/patient/";
+        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/web/register_patient/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "POST",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'platform': 'web'
+            },
+            body: JSON.stringify({
+                "age": patient_caracteristics.age,
+                "height": patient_caracteristics.height,
+                "weight": patient_caracteristics.weight,
+                "sex": patient_caracteristics.sex,
+                "constraints": patient_caracteristics.constraints,
+                "email": patient_caracteristics.email,
+                "task_schedule_plan_id": "1"
+            })
+        }
+
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+/**
+ * Creates a New Plan
+ * @param {*} .
+ */
+export function createNewPlan(secret, planTitle, planWeek, plan) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/full/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "POST",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'platform': 'web'
+            },
+            body: JSON.stringify({
+                "title": planTitle,
+                "number_of_weeks": planWeek,
+                "weeks": plan
+            })
+        }
+
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 201) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+/**
+ * Get Plan
+ * @param {*} .
+ */
+export function getDoctorPlan(secret) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -145,9 +236,11 @@ export function getPatientList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
-            }
+                'jwt': secret,
+                'platform': 'web'
+            },
         }
+
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
