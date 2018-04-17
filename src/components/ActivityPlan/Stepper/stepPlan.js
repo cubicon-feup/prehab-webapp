@@ -91,6 +91,7 @@ class StepPlan extends Component {
                     <div className="row">
                         <div className="col-md-6">
                             <RaisedButton label="Submit" type="submit" primary={true}/>
+                            <br/><br/>
                         </div>
                     </div>
                 </form>

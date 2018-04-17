@@ -55,16 +55,18 @@ class StepperForm extends Component{
             <div>
                 <form onSubmit={this.onSubmit}>
                 <div className="row ">
+                <div className="col-md-12">
                     <TextField
                         name="email"
                         value={email}
                         type="email"
                         errorText={errors.email}
                         onChange={this.onChange}
-                        hintText="Insert email"
+                        hintText="Inserir email"
                         fullWidth={true}
 
                     />
+                </div>
                 </div>
                 <div className="row">
                     <div className="col-md-4">
@@ -86,10 +88,10 @@ class StepperForm extends Component{
                             fullWidth={true}
                             errorText={errors.age}
                             onChange={this.onChange}
-                            hintText="Insert age"
+                            hintText="Inserir idade"
                         />
                     </div>
-                    <div className="col-md-4s">
+                    <div className="col-md-4">
                         <TextField
                             name="height"
                             fullWidth={true}
@@ -102,26 +104,23 @@ class StepperForm extends Component{
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6" />
                     <div className="col-md-6">
                         <SelectField
-                            floatingLabelText="Sexo"
+                            hintText="Sexo"
                             value={sex}
                             fullWidth={true}
-                            onChange={this.handleChange}
-                        >
+                            onChange={this.handleChange}>
                             <MenuItem value="M" primaryText="Masculino" />
                             <MenuItem value="F" primaryText="Feminino" />
                         </SelectField>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6" />
                     <div className="col-md-6">
                         <SelectPatientType changeField={this.onChangePatientType.bind(this)}/>
                     </div>
                 </div>
-                <RaisedButton type="submit" primary={true}>Submit</RaisedButton>
+                <div className="other-content-center">
+                <RaisedButton type="submit" primary={true} label="Criar"/>
+                </div>
                 </form>
             </div>
         );

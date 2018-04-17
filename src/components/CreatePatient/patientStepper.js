@@ -7,6 +7,8 @@ import {
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import StepperForm from "./Stepper/stepperForm";
+import StepperPlan from "./Stepper/stepperPlan";
+import StepperCode from './Stepper/stepperCode';
 
 /**
  * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
@@ -45,9 +47,9 @@ class PatientStepper extends Component {
             case 0:
                 return <StepperForm token={this.props.token}/>
             case 1:
-                return 'What is an ad group anyways?';
+                return <StepperPlan token={this.props.token}/>
             case 2:
-                return 'This is the bit I really care about!';
+                return <StepperCode token={this.props.token}/>;
             default:
                 return 'You\'re a long way from home sonny jim!';
         }
@@ -64,7 +66,7 @@ class PatientStepper extends Component {
                         <StepLabel>Registar Paciente</StepLabel>
                     </Step>
                     <Step>
-                        <StepLabel>Caracteristicas</StepLabel>
+                        <StepLabel>Associar planos</StepLabel>
                     </Step>
                     <Step>
                         <StepLabel>Codigo de Acesso</StepLabel>
@@ -86,15 +88,15 @@ class PatientStepper extends Component {
                     ) : (
                         <div>
                             <div>{this.getStepContent(stepIndex)}</div>
-                            <div style={{marginTop: 12}}>
+                            <div className="other-content-center" style={{marginTop: 12}}>
                                 <FlatButton
-                                    label="Back"
+                                    label="Anterior"
                                     disabled={stepIndex === 0}
                                     onClick={this.handlePrev}
                                     style={{marginRight: 12}}
                                 />
                                 <RaisedButton
-                                    label={stepIndex === 2 ? 'Finish' : 'Next'}
+                                    label={stepIndex === 2 ? 'Terminar' : 'Próximo'}
                                     primary={true}
                                     onClick={this.handleNext}
                                 />

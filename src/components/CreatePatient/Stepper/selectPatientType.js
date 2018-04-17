@@ -45,7 +45,7 @@ class SelectPatientType extends Component {
         return (
             <SelectField
                 multiple={true}
-                hintText="Select a name"
+                hintText="Selecione restrições"
                 value={values}
                 onChange={this.handleChange}
                 fullWidth={true}

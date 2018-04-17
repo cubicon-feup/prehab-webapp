@@ -3,32 +3,36 @@
  * @param {*} username User id.
  * @param {*} password User password.
  */
+
+const URL = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com";
+
 export function authenticateUser(username, password) {
-	return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
 
-		let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/login/";
+        let requestUrl = URL + "/api/login/";
 
-		let requestOptions = {
-			uri: requestUrl,
-			method: "POST",
-			headers: {
-				'Authorization': 'Basic ',
-				'Content-Type': 'application/json',
-				'pragma': 'no-cache',
-				'cache-control': 'no-cache'
-			},
+        let requestOptions = {
+            uri: requestUrl,
+            method: "POST",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'platform': 'web'
+            },
             body: JSON.stringify({ "username": username, "password": password })
         }
-		fetch(requestUrl, requestOptions).then(function (response) {
-			if (response.status === 200) {
-				return resolve(response.json());
-			} else {
-				return reject(Error("An error has occurred! Please try again."));
-			}
-		}, function (error) {
-			return reject(error);
-		});
-	});
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
 }
 
 /**
@@ -38,7 +42,7 @@ export function authenticateUser(username, password) {
 export function getAuthInfo(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "/authentication";
+        let requestUrl = URL + "/authentication";
 
         let requestOptions = {
             uri: requestUrl,
@@ -47,7 +51,8 @@ export function getAuthInfo(secret) {
                 'Authorization': 'Basic ' + secret,
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'platform': 'web'
             }
         }
 
@@ -73,7 +78,7 @@ export function getAuthInfo(secret) {
 export function createTask(title, description, multi_link, type, secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
+        let requestUrl =  URL + "/api/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -83,7 +88,7 @@ export function createTask(title, description, multi_link, type, secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'platform': 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -107,7 +112,7 @@ export function createTask(title, description, multi_link, type, secret) {
 export function getTaskList(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
+        let requestUrl =  URL + "/api/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -117,7 +122,8 @@ export function getTaskList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -139,7 +145,7 @@ export function getTaskList(secret) {
 export function createNewPatient(secret, patient_caracteristics) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/web/register_patient/";
+        let requestUrl = URL +"/api/web/register_patient/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -149,7 +155,8 @@ export function createNewPatient(secret, patient_caracteristics) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({
                 "age": patient_caracteristics.age,
@@ -174,6 +181,39 @@ export function createNewPatient(secret, patient_caracteristics) {
     });
 }
 
+/**
+ * Get patient's code
+ * @param {*} .
+ */
+export function getPatientsCode(secret,id){
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl = URL + "/api/web";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'platform': 'web'
+            },
+        }
+
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 201) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
 
 /**
  * Creates a New Plan
@@ -182,7 +222,7 @@ export function createNewPatient(secret, patient_caracteristics) {
 export function createNewPlan(secret, planTitle, planWeek, plan) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/full/";
+        let requestUrl = URL + "/api/schedule/task/full/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -192,7 +232,8 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({
                 "title": planTitle,
@@ -220,7 +261,7 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
 export function getDoctorPlan(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/full/";
+        let requestUrl = URL + "/api/schedule/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -230,7 +271,8 @@ export function getDoctorPlan(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
         }
 
@@ -245,4 +287,3 @@ export function getDoctorPlan(secret) {
         });
     });
 }
-
