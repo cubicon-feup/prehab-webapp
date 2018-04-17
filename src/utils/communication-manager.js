@@ -15,7 +15,8 @@ export function authenticateUser(username, password) {
 				'Authorization': 'Basic ',
 				'Content-Type': 'application/json',
 				'pragma': 'no-cache',
-				'cache-control': 'no-cache'
+				'cache-control': 'no-cache',
+                'platform': 'web'
 			},
             body: JSON.stringify({ "username": username, "password": password })
         }
@@ -47,7 +48,8 @@ export function getAuthInfo(secret) {
                 'Authorization': 'Basic ' + secret,
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'platform': 'web'
             }
         }
 
@@ -83,7 +85,8 @@ export function createTask(title, description, multi_link, type, secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -117,7 +120,8 @@ export function getTaskList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -149,7 +153,8 @@ export function createNewPatient(secret, patient_caracteristics) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({
                 "age": patient_caracteristics.age,
@@ -192,7 +197,8 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
             body: JSON.stringify({
                 "title": planTitle,
@@ -220,7 +226,7 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
 export function getDoctorPlan(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/full/";
+        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/schedule/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -230,7 +236,8 @@ export function getDoctorPlan(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'platform': 'web'
             },
         }
 
