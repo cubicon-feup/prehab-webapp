@@ -1,14 +1,41 @@
 
-.doctorName{
+.doctorName, .searchBarDiv{
     margin-top: 50px;
     margin-bottom: 74px;
+}
+
+.searchBarDiv{
+    position: absolute;
+    right: 130px;
+    height: 42px;
+}
+
+.searchBar{
+   margin: 0 auto;
+   width: 400px;
+   border: 1px solid #2699FB;
+   border-radius: 50px;
+   background-color: transparent;
+   padding-left: 10px;
+   background: url('../res/img/search.svg') no-repeat right;
+   background-position: right center;
+}
+
+::placeholder{
+    font-size: 14px;
+    color: #2699FB;
+    opacity: 0.5;
+}
+
+.searchBar:focus{
+    outline: none;
 }
 
 .doctorNameLabel{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
     font-size: 22px;
-    text-align: left
+    text-align: left;
 }
 
 .tableHeaderItem, .tableBodyItem{

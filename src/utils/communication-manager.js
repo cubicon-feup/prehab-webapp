@@ -6,7 +6,7 @@
 export function authenticateUser(username, password) {
 	return new Promise(function (resolve, reject) {
 
-		let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/login/";
+		let requestUrl = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com/api/login/";
 
 		let requestOptions = {
 			uri: requestUrl,
@@ -15,7 +15,8 @@ export function authenticateUser(username, password) {
 				'Authorization': 'Basic ',
 				'Content-Type': 'application/json',
 				'pragma': 'no-cache',
-				'cache-control': 'no-cache'
+				'cache-control': 'no-cache',
+				'Platform' : 'web'
 			},
             body: JSON.stringify({ "username": username, "password": password })
         }
@@ -47,7 +48,8 @@ export function getAuthInfo(secret) {
                 'Authorization': 'Basic ' + secret,
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
-                'cache-control': 'no-cache'
+                'cache-control': 'no-cache',
+                'Platform' : 'web'
             }
         }
 
@@ -73,7 +75,7 @@ export function getAuthInfo(secret) {
 export function createTask(title, description, multi_link, type, secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
+        let requestUrl = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com/api/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -83,7 +85,8 @@ export function createTask(title, description, multi_link, type, secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'Platform' : 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -107,7 +110,7 @@ export function createTask(title, description, multi_link, type, secret) {
 export function getTaskList(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/task/";
+        let requestUrl = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com/api/task/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -117,7 +120,8 @@ export function getTaskList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'Platform' : 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -135,7 +139,7 @@ export function getTaskList(secret) {
 export function getPatientList(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = "http://ec2-35-176-153-210.eu-west-2.compute.amazonaws.com/api/patient/";
+        let requestUrl = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com/api/patient/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -145,7 +149,8 @@ export function getPatientList(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-                'jwt': secret
+                'jwt': secret,
+                'Platform' : 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {

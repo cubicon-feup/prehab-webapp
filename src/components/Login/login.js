@@ -51,7 +51,7 @@
                 this.setState({ errors: {} });
                 authenticateUser(this.state.username, this.state.password)
                     .then(suc => {
-                        this.props.signIn(suc.data.jwt);
+                        this.props.signIn(suc.data.jwt, suc.data.role);
                         this.props.history.push("/main");
                     })
                     .catch(err => {

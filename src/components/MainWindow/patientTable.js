@@ -23,7 +23,7 @@ const tableData = [
         id: "125643162",
         alerts: "2",
         surgery: "23-05-2018",
-        doctor: "Magna",
+        doctor: "mani",
     },
     {
         id: "6453747",
@@ -35,7 +35,7 @@ const tableData = [
         id: "9786070",
         alerts: "0",
         surgery: "01-05-2018",
-        doctor: "Magna",
+        doctor: "JOn",
     },
     {
         id: "73686382",
@@ -47,7 +47,7 @@ const tableData = [
         id: "12312515",
         alerts: "0",
         surgery: "25-05-2018",
-        doctor: "Magna",
+        doctor: "JOn",
     },
     {
             id: "6453747",
@@ -59,7 +59,7 @@ const tableData = [
             id: "9786070",
             alerts: "0",
             surgery: "01-05-2018",
-            doctor: "Magna",
+            doctor: "JOn",
         },
         {
             id: "73686382",
@@ -75,11 +75,18 @@ const tableData = [
         },
 ];
 
+function searchingFor(term){
+    return function(x){
+        return x.patient_tag.toLowerCase().includes(term.toLowerCase()) || !term;
+    }
+}
+
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
 export default class PatientTable extends Component {
     state = {
+        term: this.props.term,
         patientList: this.props.list,
         fixedHeader: true,
         fixedFooter: false,
@@ -101,6 +108,12 @@ export default class PatientTable extends Component {
 
     render() {
         console.log(this.state.patientList);
+        console.log(this.props.term);
+        let filteredPatients = this.state.patientList.filter(
+            (row) => {
+                return row.patient_tag.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+            }
+        )
         return (
             <div>
                         <Table
@@ -126,7 +139,7 @@ export default class PatientTable extends Component {
                                 deselectOnClickaway={this.state.deselectOnClickaway}
                                 showRowHover={this.state.showRowHover}
                                 stripedRows={this.state.stripedRows}>
-                                {this.state.patientList.map( (row) => (
+                                {filteredPatients.map( (row) => (
                                     <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
