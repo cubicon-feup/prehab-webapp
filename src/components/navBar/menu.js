@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from "react-router-dom"
 import MenuItem from "material-ui/MenuItem";
@@ -7,6 +8,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui
 import Notifications from "./notification";
 import "../../styles/menu_style.css";
 import Logo from "../../res/img/logo.svg";
+import Dashboard from "../../res/img/dashboard.svg";
 import Patients from "../../res/img/patients.svg";
 
 
@@ -38,26 +40,30 @@ render() {
         </Drawer>*/
 
         <div className = "menuDiv">
+
+            {this.settingsMenu()}
+
             <div className="patients">
-                            <Link to= "/task" style={{ textDecoration: 'none' }}>
-                                <Col xs="12">
-                                    <div>
-                                        <img src={Patients} className="patientsImg alignCenter"></img>
-                                        <p className="patientsLabel">Exercícios</p>
-                                    </div>
-                                </Col>
-                            </Link>
+                <Link to= "/plan" style={{ textDecoration: 'none' }}>
+                    <Col xs="12">
+                        <div>
+                            <img src={Dashboard} className="patientsImg alignCenter"></img>
+                            <p className="patientsLabel">Dashboard</p>
                         </div>
+                    </Col>
+                </Link>
+            </div>
+
             <div className="patients">
-                            <Link to= "/plan" style={{ textDecoration: 'none' }}>
-                                <Col xs="12">
-                                    <div>
-                                        <img src={Patients} className="patientsImg alignCenter"></img>
-                                        <p className="patientsLabel">Planos</p>
-                                    </div>
-                                </Col>
-                            </Link>
+                <Link to= "/plan" style={{ textDecoration: 'none' }}>
+                    <Col xs="12">
+                        <div>
+                            <img src={Patients} className="patientsImg alignCenter"></img>
+                            <p className="patientsLabel">Planos</p>
                         </div>
+                    </Col>
+                </Link>
+            </div>
             <div className="patients">
                 <Link to= "/main" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
@@ -74,5 +80,33 @@ render() {
         </div>
     );
   }
+
+  settingsMenu = () =>{
+  console.log(this.props.auth);
+    if(this.props.auth === true ) {
+       return (
+            <div className="patients">
+                <Link to= "/task" style={{ textDecoration: 'none' }}>
+                        <Col xs="12">
+                              <div>
+                                    <img src={Patients} className="patientsImg alignCenter"></img>
+                                    <p className="patientsLabel">Exercícios</p>
+                               </div>
+                         </Col>
+                  </Link>
+            </div>
+                )
+    }
+  }
 }
-export default menu;
+
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.isLoggedIn,
+        token: state.auth.accessToken
+
+    };
+};
+
+export default connect(mapStateToProps, null)(menu);

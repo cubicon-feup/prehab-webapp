@@ -6,7 +6,8 @@ const authReducer = (state = DEFAULT_AUTHENTICATION_STATE, action) => {
             state = {
                 ...state,
                 isLoggedIn: true,
-                accessToken: action.payload
+                accessToken: action.payload,
+                role: action.role
             };
             break;
         case "LOGOUT":

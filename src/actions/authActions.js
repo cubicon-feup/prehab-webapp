@@ -42,11 +42,20 @@ export function getCookieInfo() {
     }
 }
 
+
+export function signIn(jwt, role) {
+    setCookie(SESSION_COOKIE_NAME, jwt);
+    return  {
+        type: "LOGIN",
+        payload: jwt,
+        role: role
+
 export function signIn(jwt) {
     setCookie(SESSION_COOKIE_NAME, jwt);
     return  {
         type: "LOGIN",
         payload: jwt
+
     }
 }
 

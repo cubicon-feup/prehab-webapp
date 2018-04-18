@@ -5,19 +5,19 @@
 }
 
 .patients{
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
 }
 
 .patientsImg{
-    width:41px;
-    height:41px;
+    width:31px;
+    height:31px;
 }
 
 .patientsLabel{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
-    font-size: 22px;
+    font-size: 20px;
     margin-top: 7px;
 }
 
