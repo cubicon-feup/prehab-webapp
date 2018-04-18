@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const types = [
-    'Diabético',
-    'Hipertenso',
-    'Vegetariano',
-    'Insuficiente Renal',
-    'Desnutrido',
-    'Hepático'
+const patient_type = [
+    { title: "Diabético", id: 1},
+    { title: "Insuficiente Renal", id: 2},
+    { title: "Desnutrido", id: 3},
+    { title: "Vegetariano", id: 4},
+    { title: "Hepático", id: 5},
+    { title: "Hipertenso", id: 6}
 ];
 
 /**
@@ -22,16 +22,20 @@ class SelectPatientType extends Component {
         };
     }
 
-    handleChange = (event, index, values) => this.setState({values});
+    handleChange = (event, index, values) => {
+        //console.log(values);
+        this.props.changeField(values);
+        this.setState({values});
+    }
 
     menuItems(values) {
-        return types.map((types) => (
+        return patient_type.map((types) => (
             <MenuItem
-                key={types}
+                key={types.id}
                 insetChildren={true}
-                checked={values && values.indexOf(types) > -1}
-                value={types}
-                primaryText={types}
+                checked={values && values.indexOf(types.id) > -1}
+                value={types.id}
+                primaryText={types.title}
             />
         ));
     }

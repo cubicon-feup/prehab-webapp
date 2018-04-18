@@ -3,24 +3,62 @@ import PlanForm from "./planForm"
 import {connect} from "react-redux";
 import {getTaskList} from "../../utils/communication-manager";
 import Logout from "../Logout/logout";
+import RaisedButton from "material-ui/RaisedButton";
+
 
 class Plan extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            taskList: undefined
+            taskList: undefined,
+            step_value: 1
         }
 
     }
 
+    create2Stepper = () =>{
+        this.setState({ step_value: 2});
+    }
+
+    create4Stepper = () =>{
+        this.setState({ step_value: 4});
+    }
+
     createActivityPlan = () => {
         if(this.props.auth === true && this.state.taskList !== undefined) {
-            return (
-                <div className="row">
-                    <PlanForm list={this.state.taskList}/>
-                </div>
-            )
+            if(this.state.step_value === 1){
+                return (
+                    <div>
+                        <br />
+                        <div className="row">
+                            <div className="col-md-6 offset-md-4">
+                                <h1>Selecionar tempo do plano</h1>
+                            </div>
+                        </div>
+                        <br />
+                        <div className="row">
+                            <div className="col-md-6 offset-md-6">
+                                <RaisedButton primary={true} onClick={this.create2Stepper} label="2 Semanas" />
+                            </div>
+                        </div>
+                        <br />
+                        <div className="row">
+                            <div className="col-md-6 offset-md-6">
+                                <RaisedButton primary={true} onClick={this.create4Stepper} label="4 Semanas" />
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            else
+            {
+                return(
+                    <div>
+                        <PlanForm steps={this.state.step_value} token={this.props.token} list={this.state.taskList}/>
+                    </div>
+                )
+            }
         }
         else
         {

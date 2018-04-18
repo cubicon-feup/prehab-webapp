@@ -1,141 +1,94 @@
 import React, {Component} from "react";
 import TextField from "material-ui/TextField";
+import PlanStepper from "./Stepper/planStepper";
+import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
-import SelectActiviy from "./selectActivity";
+import {createNewPlan} from "../../utils/communication-manager";
 
 class planForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             planTitle: "",
-            week_selected: 1,
-            week: [
-                { id: "1", title: "1 semana"},
-                { id: "2", title: "2 semana"},
-                { id: "3", title: "3 semana"},
-                { id: "4", title: "4 semana"},
-            ],
-            freq: [
-                { id: "1", title: "1x"},
-                { id: "2", title: "2x"},
-                { id: "3", title: "3x"},
-                { id: "4", title: "4x"},
-                { id: "5", title: "5x"},
-            ],
-            number_of_activities: [{ qt: ""}],
-            activities: [{ id: "", freq: ""}]
+            number_of_weeks: this.props.steps,
+            week: [],
+            openDialog: false,
+            submitMessage: "Erro - Registo de plano falhou"
+
         };
     }
 
+    handleClose = () => {
+        this.setState({openDialog: false});
+    };
 
     handleNameChange = (evt) => {
         this.setState({ planTitle: evt.target.value });
     }
 
-    handleSubmit = (evt) => {
-        evt.preventDefault();
-        //const { name, activity_task } = this.state;
-        console.log(this.state);
+    createSteps = () => {
+        return(
+            <PlanStepper formComplete={this.createNewPlan.bind(this)} list={this.props.list} token={this.props.token} stepNumber={this.props.steps}/>
+        )
     }
 
-    handleAddTask = () => {
-        this.setState({
-            number_of_activities: this.state.number_of_activities.concat([{ qt: "" }]),
-
-            activities: this.state.activities.concat([{ id: "", freq: ""}]),
-        });
-    }
-
-    handleRemoveTask = (idx) => () => {
-        this.setState({
-            number_of_activities: this.state.number_of_activities.filter((s, sidx) => idx !== sidx) ,
-            activities: this.state.activities.filter((s, sidx) => idx !== sidx)
-
-        });
-    }
-
-    onChangeWeek(newWeek){
-        this.setState({
-            week_selected: newWeek
-        });
-    }
-
-    onChangeFreq(idx, newFreq){
-        console.log(newFreq);
-        const freqList = this.state.activities.map((activities, sidx) => {
-            if (idx !== sidx) return activities;
-            return { ...activities, freq: newFreq };
-        });
-
-        this.setState({ activities: freqList });
-    }
-
-    onChangeTask(idx, newTask){
-
-        const taskList = this.state.activities.map((activities, sidx) => {
-            if (idx !== sidx) return activities;
-            return { ...activities, id: newTask };
-        });
-
-        this.setState({ activities: taskList });
+    createNewPlan(completeForm){
+        //console.log(completeForm);
+        createNewPlan(this.props.token, this.state.planTitle, this.props.steps, completeForm)
+            .then(sucess => {
+                this.setState({
+                    openDialog: true,
+                    submitMessage: "Novo plano criado com sucesso"
+                });
+            })
+            .catch(err => {
+                console.log("Erro: "+ err);
+            });
     }
 
 
     render() {
+        const actions = [
+            <RaisedButton
+                label="Ok"
+                primary={true}
+                onClick={this.handleClose}
+            />,
+        ];
+
         return (
             <div className="container">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="row">
-                        <div className="col-md-2" >
-                            <h1>Criar Plano</h1>
-                        </div>
+                <Dialog
+                    contentStyle={{width: "350px",}}
+                    title="Notificação de registo"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.openDialog}
+                    onRequestClose={this.handleClose}
+                >
+                    {this.state.submitMessage}
+                </Dialog>
+                <div className="row">
+                    <div className="col-md-2" >
+                        <h1>Criar Plano</h1>
                     </div>
-                    <div className="row">
-                        <div className="col-md-6 ">
-                            <TextField
-                                name="Activity Plan name"
-                                value={this.state.planTitle}
-                                onChange={this.handleNameChange}
-                                hintText="Insert name"
-                                fullWidth={true}
-                            />
-                        </div>
-                        <div className="col-md-3" >
-                            <SelectActiviy list={this.state.week} changeField={this.onChangeWeek.bind(this)} hintText="Select Week"/>
-                        </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <TextField
+                            name="Activity Plan name"
+                            value={this.state.planTitle}
+                            onChange={this.handleNameChange}
+                            hintText="Insert name"
+                            fullWidth={true}
+                        />
                     </div>
-                        <div className="row">
-                            <div className="col-md-6 ">
-                                <h4>Task</h4>
-                            </div>
-
-                        </div>
-
-                        {this.state.number_of_activities.map((number, idx) => (
-                            <div className="row" key={idx}>
-                                <div className="col-md-3" >
-                                    <SelectActiviy list={this.props.list} changeField={this.onChangeTask.bind(this, idx)} hintText="Select Activity"/>
-                                </div>
-
-                                <div className="col-md-3" >
-                                    <SelectActiviy list={this.state.freq} changeField={this.onChangeFreq.bind(this, idx)} hintText="Select Frequency"/>
-                                </div>
-
-                                <div className="col-md-3" >
-                                    <RaisedButton label="-" primary={true} className="small" onClick={this.handleRemoveTask(idx)} />
-                                </div>
-                            </div>
-                        ))}
-
-                        <div className="row">
-                            <div className="col-md-3">
-                                <RaisedButton label="Add Task" primary={true} onClick={this.handleAddTask} />
-                            </div>
-                            <div className="col-md-3">
-                                <RaisedButton label="Send" onClick={this.handleSubmit} primary={true}/>
-                            </div>
-                        </div>
-                </form>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                    {this.createSteps()}
+                    </div>
+                </div>
             </div>
         )
     }
