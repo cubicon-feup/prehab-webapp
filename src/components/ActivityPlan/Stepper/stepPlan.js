@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import SelectActiviy from "../SelectButton/selectActivity";
+import {formValid} from "../planForm";
 
 class StepPlan extends Component {
     constructor(props) {
@@ -63,18 +64,18 @@ class StepPlan extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-md-6 ">
-                            <h4>Task</h4>
+                            <h4>Actividade</h4>
                         </div>
                     </div>
 
                     {this.state.number_of_activities.map((number, idx) => (
                         <div className="row" key={idx}>
                             <div className="col-md-4" >
-                                <SelectActiviy list={this.props.list} fullWidth={true} changeField={this.onChangeTask.bind(this, idx)} hintText="Select Activity"/>
+                                <SelectActiviy list={this.props.list} fullWidth={true} changeField={this.onChangeTask.bind(this, idx)} hintText="Selecionar Actividade"/>
                             </div>
 
                             <div className="col-md-4" >
-                                <SelectActiviy list={this.state.freq} fullWidth={true} changeField={this.onChangeFreq.bind(this, idx)} hintText="Select Frequency"/>
+                                <SelectActiviy list={this.state.freq} fullWidth={true} changeField={this.onChangeFreq.bind(this, idx)} hintText="Selecionar Frequência "/>
                             </div>
 
                             <div className="col-md-3" >
@@ -90,7 +91,11 @@ class StepPlan extends Component {
                     <br />
                     <div className="row">
                         <div className="col-md-6">
-                            <RaisedButton label="Submit" type="submit" primary={true}/>
+                            <RaisedButton label="Submeter"
+                            type="submit"
+                            primary={true}
+                            //disabled={!this.state.formValid}
+                            />
                         </div>
                     </div>
                 </form>

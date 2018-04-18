@@ -4,6 +4,7 @@ import PlanStepper from "./Stepper/planStepper";
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
 import {createNewPlan} from "../../utils/communication-manager";
+import {FormErrors} from "../../utils/formErrors";
 
 class planForm extends Component {
     constructor(props) {
@@ -13,18 +14,48 @@ class planForm extends Component {
             number_of_weeks: this.props.steps,
             week: [],
             openDialog: false,
-            submitMessage: "Erro - Registo de plano falhou"
+            submitMessage: "Erro - Registo de plano falhou",
+            formErrors: {planTitle: ''},
+            planTitleValid: false,
+            formValid: false
 
         };
     }
 
+    handleUserInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},
+                  () => { this.validateField(name, value) });
+  }
+
+    validateField(fieldName, value) {
+      let fieldValidationErrors = this.state.formErrors;
+      let planTitleValid = this.state.planTitleValid;
+
+  switch(fieldName) {
+    case 'planTitle':
+      planTitleValid = value.length >= 6;
+      fieldValidationErrors.planTitle = planTitleValid ? '' : ' Nome do plano demasiado curto';
+      break;
+    default:
+      break;
+  }
+  this.setState({formErrors: fieldValidationErrors,
+                  planTitleValid: planTitleValid
+                  }, this.validateForm);
+}
+
+validateForm() {
+  this.setState({formValid: this.state.planTitleValid});
+}
+
     handleClose = () => {
         this.setState({openDialog: false});
     };
-
-    handleNameChange = (evt) => {
+  /*  handleNameChange = (evt) => {
         this.setState({ planTitle: evt.target.value });
-    }
+    }*/
 
     createSteps = () => {
         return(
@@ -58,6 +89,9 @@ class planForm extends Component {
 
         return (
             <div className="container">
+            <div className="panel panel-default">
+              <FormErrors formErrors={this.state.formErrors} />
+              </div>
                 <Dialog
                     contentStyle={{width: "350px",}}
                     title="Notificação de registo"
@@ -76,10 +110,10 @@ class planForm extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <TextField
-                            name="Activity Plan name"
+                            name="planTitle"
                             value={this.state.planTitle}
-                            onChange={this.handleNameChange}
-                            hintText="Insert name"
+                            onChange={this.handleUserInput}
+                            hintText="Nome do Plano"
                             fullWidth={true}
                         />
                     </div>
@@ -89,6 +123,7 @@ class planForm extends Component {
                     {this.createSteps()}
                     </div>
                 </div>
+
             </div>
         )
     }
