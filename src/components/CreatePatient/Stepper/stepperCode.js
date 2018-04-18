@@ -24,7 +24,7 @@ class StepperCode extends Component {
         return(
                 <div className="patient-code-box">
                     <div className="alert alert-info">
-                        <h5 class="alert-heading"> Código do Paciente</h5>
+                        <h5 class="alert-heading">Código do paciente</h5>
                         {this.state.code}
                     </div>
                     <br/>

@@ -13,7 +13,7 @@ class PatientForm extends Component{
             <div className="content-middle-page">
                 <Card>
                     <CardHeader
-                        title="Criar Paciente"
+                        title="Criar paciente"
 
                     />
                     <CardMedia>

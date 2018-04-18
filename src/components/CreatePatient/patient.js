@@ -4,6 +4,7 @@ import Logout from "../Logout/logout";
 import PatientForm from "./patientForm";
 import {getDoctorPlan} from "../../utils/communication-manager";
 
+
 class Patient extends Component {
 
     componentWillMount(){

@@ -88,6 +88,7 @@ export function createTask(title, description, multi_link, type, secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
+                'jwt': secret,
                 'platform': 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
@@ -145,7 +146,7 @@ export function getTaskList(secret) {
 export function createNewPatient(secret, patient_caracteristics) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = URL +"/api/web/register_patient/";
+        let requestUrl = URL +"/api/patient/";
 
         let requestOptions = {
             uri: requestUrl,
@@ -159,9 +160,9 @@ export function createNewPatient(secret, patient_caracteristics) {
                 'platform': 'web'
             },
             body: JSON.stringify({
-                "age": patient_caracteristics.age,
-                "height": patient_caracteristics.height,
-                "weight": patient_caracteristics.weight,
+                "age": Number(patient_caracteristics.age),
+                "height": Number(patient_caracteristics.height),
+                "weight": Number(patient_caracteristics.weight),
                 "sex": patient_caracteristics.sex,
                 "constraints": patient_caracteristics.constraints,
                 "email": patient_caracteristics.email,
@@ -181,39 +182,6 @@ export function createNewPatient(secret, patient_caracteristics) {
     });
 }
 
-/**
- * Get patient's code
- * @param {*} .
- */
-export function getPatientsCode(secret,id){
-    return new Promise(function (resolve, reject) {
-
-        let requestUrl = URL + "/api/web";
-
-        let requestOptions = {
-            uri: requestUrl,
-            method: "GET",
-            headers: {
-                'Authorization': 'Basic ',
-                'Content-Type': 'application/json',
-                'pragma': 'no-cache',
-                'cache-control': 'no-cache',
-                'jwt': secret,
-                'platform': 'web'
-            },
-        }
-
-        fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 201) {
-                return resolve(response.json());
-            } else {
-                return reject(Error("An error has occurred! Please try again."));
-            }
-        }, function (error) {
-            return reject(error);
-        });
-    });
-}
 
 /**
  * Creates a New Plan

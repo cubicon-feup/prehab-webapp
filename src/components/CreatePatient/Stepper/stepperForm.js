@@ -5,6 +5,8 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectPatientType from "./selectPatientType";
 import RaisedButton from "material-ui/RaisedButton";
 import {createNewPatient} from "../../../utils/communication-manager";
+import { withFormik } from 'formik';
+import Yup from 'yup';
 
 
 class StepperForm extends Component{
@@ -17,6 +19,7 @@ class StepperForm extends Component{
             weight: "",
             age: "",
             constraints: [],
+            accessCode:"",
             errors: {}
         }
 
@@ -41,6 +44,7 @@ class StepperForm extends Component{
         createNewPatient(this.props.token, this.state)
             .then(response => {
                 console.log(response);
+                this.setState={accessCode: response.data.access_code}
             })
             .catch(err => {
                 console.log("Erro: " + err);
@@ -50,6 +54,22 @@ class StepperForm extends Component{
 
     render() {
         const { errors, email, sex, height, weight, age } = this.state;
+        /**const MyInnerForm = props => {
+          const {
+            email,
+            sex,
+            height,
+            weight,
+            age,
+            touched,
+            errors,
+            dirty,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            handleReset,
+          } = this.state;**/
 
         return (
             <div>
@@ -64,7 +84,6 @@ class StepperForm extends Component{
                         onChange={this.onChange}
                         hintText="Inserir email"
                         fullWidth={true}
-
                     />
                 </div>
                 </div>
@@ -76,7 +95,7 @@ class StepperForm extends Component{
                             type="number"
                             errorText={errors.weight}
                             onChange={this.onChange}
-                            hintText="Inserir Peso"
+                            hintText="Inserir peso"
                             fullWidth={true}
                         />
                     </div>
@@ -99,14 +118,14 @@ class StepperForm extends Component{
                             type="number"
                             errorText={errors.height}
                             onChange={this.onChange}
-                            hintText="Inserir Altura"
+                            hintText="Inserir altura"
                         />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
                         <SelectField
-                            hintText="Sexo"
+                            hintText="Gênero"
                             value={sex}
                             fullWidth={true}
                             onChange={this.handleChange}>

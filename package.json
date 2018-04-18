@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "formik": "^0.11.11",
     "lodash": "^4.17.5",
     "material-ui": "^0.20.0",
     "npm": "^5.8.0",
@@ -20,7 +21,8 @@
     "redux": "^3.7.2",
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.2.0",
-    "validator": "^9.4.1"
+    "validator": "^9.4.1",
+    "yup": "^0.24.1"
   },
   "scripts": {
     "start": "react-scripts start",
