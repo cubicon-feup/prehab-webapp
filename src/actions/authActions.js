@@ -1,8 +1,9 @@
+import {SESSION_COOKIE_NAME} from "../constants/configuration";
+import {deleteCookie, getCookie, setCookie} from "../utils/cookie-handler";
+
+/*
 import { authenticateUser } from "../utils/communication-manager";
 import {setCookie} from "../utils/cookie-handler";
-import {SESSION_COOKIE_NAME} from "../constants/configuration";
-
-
 export function logIn(username, password) {
     return dispatch => {
         authenticateUser(username, password).then(function (response) {
@@ -19,11 +20,39 @@ export function logIn(username, password) {
             });
         });
     }
+*/
+
+/**
+ * Updates the auth info.
+ */
+export function getCookieInfo() {
+    let sessionCookie = getCookie(SESSION_COOKIE_NAME);
+    if (sessionCookie !== null) {
+        return  {
+            type: "LOGIN",
+            payload: sessionCookie
+        }
+    }
+    else
+    {
+        return  {
+            type: "LOGOUT"
+        }
+
+    }
+}
+
+export function signIn(jwt) {
+    setCookie(SESSION_COOKIE_NAME, jwt);
+    return  {
+        type: "LOGIN",
+        payload: jwt
+    }
 }
 
 export function logOut() {
+    deleteCookie(SESSION_COOKIE_NAME);
     return {
-        type: "LOGOUT",
-        payload: false
-    };
+        type: "LOGOUT"
+    }
 }

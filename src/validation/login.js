@@ -18,3 +18,5 @@ export default function validateInput(data) {
         isValid: isEmpty(errors)
     }
 }
+
+

@@ -4,13 +4,15 @@ import Menu from './menu';
 
 class NavBar extends Component {
 
-	render() {
-		return (
+    render() {
+        return (
             <div >
-                <Menu authentication={this.props.authentication} />
+                <Menu/>
             </div>
-		);
-	}
+        );
+    }
+
+
 }
 
 export default NavBar;

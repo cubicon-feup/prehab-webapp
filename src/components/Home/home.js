@@ -122,3 +122,29 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+
+
+
+                </div>
+            </div>
+		);
+	}
+}
+
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.isLoggedIn
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        logIn: (username, password) =>{
+            dispatch(logIn(username, password));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
