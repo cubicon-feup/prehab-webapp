@@ -23,7 +23,7 @@ class Task extends Component {
                 <Logout />
             )
         }
-    }
+    };
 
     render() {
         return (

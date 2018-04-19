@@ -66,7 +66,7 @@ class Plan extends Component {
                 <Logout />
             )
         }
-    }
+    };
     componentDidMount() {
         //console.log(this.props.token);
         this.taskList(this.props.token);

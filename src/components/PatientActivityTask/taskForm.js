@@ -21,7 +21,7 @@ class taskForm extends Component {
             multi_link: "",
             errors: {},
             openDialog: false
-        }
+        };
         this.onChange = this.onChange.bind(this);
     }
 
@@ -34,7 +34,7 @@ class taskForm extends Component {
     onChange = (e) => {
         e.preventDefault();
         this.setState( { [e.target.name]: e.target.value} )
-    }
+    };
 
     isValid() {
         const { errors, isValid } = validaTask(this.state);
@@ -67,7 +67,7 @@ class taskForm extends Component {
                 wrongCredentials();
             });
         }
-    }
+    };
 
 
     render() {

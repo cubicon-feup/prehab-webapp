@@ -116,7 +116,7 @@ class PatientTable extends Component {
             (row) => {
                 return row.patient_tag.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
             }
-        )
+        );
         return (
             <div>
 

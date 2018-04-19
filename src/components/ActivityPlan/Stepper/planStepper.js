@@ -28,15 +28,15 @@ class PlanStepper extends Component {
     createSteps = (number_of_steps) => {
         //let steps = []
         console.log("Steps: " + number_of_steps);
-        let children = []
+        let children = [];
         for (let i = 0; i < number_of_steps; i++) {
             //Inner loop to create children
             children.push(<Step key={i}><StepLabel>Semana {i+1}</StepLabel></Step>)
         }
-        children.push(<Step key={number_of_steps}><StepLabel>Submeter</StepLabel></Step>)
+        children.push(<Step key={number_of_steps}><StepLabel>Submeter</StepLabel></Step>);
         //steps.push(<Stepper activeStep={1}>{children}</Stepper>)
         return children
-    }
+    };
 
     handleNext = () => {
         const {stepIndex} = this.state;
@@ -72,9 +72,9 @@ class PlanStepper extends Component {
         {
             switch (stepIndex) {
                 case 0:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>;
                 case 1:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)}  list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)}  list={this.props.list}/>;
                 default: return 'wrong'
             }
         }
@@ -82,13 +82,13 @@ class PlanStepper extends Component {
         {
             switch (stepIndex) {
                 case 0:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>;
                 case 1:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>;
                 case 2:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>;
                 case 3:
-                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>
+                    return <StepPlan key={stepIndex} onFormSubmit={this.getFormData.bind(this)} list={this.props.list}/>;
                 default: return 'wrong'
             }
         }
@@ -103,7 +103,7 @@ class PlanStepper extends Component {
     submitForm = () =>{
         console.log(this.state.week_plan);
         this.props.formComplete(this.state.week_plan);
-    }
+    };
 
     render() {
         const {stepIndex} = this.state;

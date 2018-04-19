@@ -42,7 +42,7 @@ export default class selectActivity extends Component {
         this.props.changeField(this.state.list[index].id);
         this.setState({value: values});
 
-    }
+    };
 
 
     menuItems(list) {
