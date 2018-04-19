@@ -1,20 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="1136 1553 31 31">
-<defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36.229 1433.002 35.543 40.622">
+  <defs>
     <style>
       .cls-1 {
-        fill: #fe005c;
-      }
-
-      .cls-2 {
-        fill: #fff;
-        font-size: 19px;
-        font-family: Arial-BoldMT, Arial;
-        font-weight: 700;
+        fill: #2699fb;
       }
     </style>
   </defs>
-  <g id="Group_52" data-name="Group 52" transform="translate(-583 1284)">
-    <circle id="Ellipse_45" data-name="Ellipse 45" class="cls-1" cx="15.5" cy="15.5" r="15.5" transform="translate(1719 269)"/>
-    <text id="_" data-name="!" class="cls-2" transform="translate(1731.4 289.875)"><tspan x="0" y="0">!</tspan></text>
-  </g>
+  <path id="Menu" class="cls-1" d="M-6160,35.543V30.465h25.39v5.079Zm0-15.232V15.232h40.622v5.079Zm0-15.232V0h40.622V5.079Z" transform="translate(36.229 -4686.376) rotate(-90)"/>
 </svg>

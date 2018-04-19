@@ -52,6 +52,7 @@
                 authenticateUser(this.state.username, this.state.password)
                     .then(suc => {
 
+
                         this.props.signIn(suc.data.jwt, suc.data.role);
 
                         this.props.signIn(suc.data.jwt);

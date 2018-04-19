@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
 import Alert from "../../res/img/alert.svg"
-
 import {
     Card,
     CardHeader,
@@ -23,19 +22,25 @@ const tableData = [
         id: "125643162",
         alerts: "2",
         surgery: "23-05-2018",
+
         doctor: "mani",
+
     },
     {
         id: "6453747",
         alerts: "0",
         surgery: "25-05-2018",
+
         doctor: "Magna",
+
     },
     {
         id: "9786070",
         alerts: "0",
         surgery: "01-05-2018",
+
         doctor: "JOn",
+
     },
     {
         id: "73686382",
@@ -47,6 +52,7 @@ const tableData = [
         id: "12312515",
         alerts: "0",
         surgery: "25-05-2018",
+
         doctor: "JOn",
     },
     {
@@ -80,6 +86,7 @@ function searchingFor(term){
         return x.patient_tag.toLowerCase().includes(term.toLowerCase()) || !term;
     }
 }
+
 
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
@@ -116,6 +123,7 @@ export default class PatientTable extends Component {
         )
         return (
             <div>
+
                         <Table
                             fixedHeader={this.state.fixedHeader}
                             fixedFooter={this.state.fixedFooter}
@@ -151,7 +159,6 @@ export default class PatientTable extends Component {
                                 ))}
                             </TableBody>
                         </Table>
-
             </div>
         );
     }

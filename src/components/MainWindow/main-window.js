@@ -14,6 +14,7 @@ class MainWindow extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             patientList: undefined,
             term: '',
         }
@@ -22,6 +23,7 @@ class MainWindow extends Component {
 
 
     MainActivity = () => {
+
         let props = {
             list: this.state.patientList,
             term: this.state.term,
@@ -41,11 +43,14 @@ class MainWindow extends Component {
                                    value={this.state.term}
                                    onChange={this.filterList.bind(this)}
                             />
+
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-8">
+
                             <PatientTable {...props}/>
+
                         </div>
                         <div className="col-md-2 content-center btn-to-middle">
                             <Link to="/patient">
@@ -64,7 +69,7 @@ class MainWindow extends Component {
                 <Logout/>
             )
         }
-    }
+    };
 
     filterList(event) {
         this.setState({term: event.target.value});
@@ -91,7 +96,7 @@ class MainWindow extends Component {
     }
 
 
-    patientList(token, role) {
+    patientList(token, role){
         getPatientList(token).then(list => {
             console.log(list);
             this.setState({
@@ -112,6 +117,7 @@ const mapStateToProps = (state) => {
         auth: state.auth.isLoggedIn,
         token: state.auth.accessToken,
         role: state.auth.role
+
     };
 };
 

@@ -7,6 +7,9 @@ import {
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import StepperForm from "./Stepper/stepperForm";
+import StepperPlan from "./Stepper/stepperPlan";
+import StepperCode from './Stepper/stepperCode';
+
 
 /**
  * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
@@ -40,14 +43,20 @@ class PatientStepper extends Component {
         }
     };
 
+
+    handleFinish = () => {
+        console.log("Finish");
+    }
+
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <StepperForm />
+                return <StepperForm token={this.props.token}/>
             case 1:
-                return 'What is an ad group anyways?';
-            case 2:
-                return 'This is the bit I really care about!';
+                return <StepperCode token={this.props.token}/>
+            /**case 2:
+                return <StepperPlan token={this.props.token}/>;**/
+
             default:
                 return 'You\'re a long way from home sonny jim!';
         }
@@ -64,17 +73,16 @@ class PatientStepper extends Component {
                         <StepLabel>Registar Paciente</StepLabel>
                     </Step>
                     <Step>
-                        <StepLabel>Caracteristicas</StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel>Codigo de Acesso</StepLabel>
+
+                        <StepLabel>Código de acesso</StepLabel>
+
                     </Step>
                 </Stepper>
                 <div style={contentStyle}>
                     {finished ? (
                         <p>
                             <a
-                                href="#"
+
                                 onClick={(event) => {
                                     event.preventDefault();
                                     this.setState({stepIndex: 0, finished: false});
@@ -85,18 +93,32 @@ class PatientStepper extends Component {
                         </p>
                     ) : (
                         <div>
-                            <p>{this.getStepContent(stepIndex)}</p>
-                            <div style={{marginTop: 12}}>
-                                <FlatButton
-                                    label="Back"
+
+                            <div>{this.getStepContent(stepIndex)}</div>
+                            <div className="other-content-center" style={{marginTop: 12}}>
+                                <RaisedButton
+                                    label="Anterior"
+                                    primary={true}
+
                                     disabled={stepIndex === 0}
                                     onClick={this.handlePrev}
                                     style={{marginRight: 12}}
                                 />
                                 <RaisedButton
-                                    label={stepIndex === 2 ? 'Finish' : 'Next'}
+
+                                    label="Próximo"
                                     primary={true}
+                                    disabled={stepIndex === 1}
                                     onClick={this.handleNext}
+                                    style={{marginRight: 12}}
+                                />
+                                <RaisedButton
+                                    label="Concluir"
+                                    disabled={stepIndex!=1}
+                                    primary={true}
+                                    onClick={this.handleFinish}
+                                    style={{marginRight: 12}}
+
                                 />
                             </div>
                         </div>
@@ -107,4 +129,6 @@ class PatientStepper extends Component {
     }
 }
 
+
 export default PatientStepper;
+

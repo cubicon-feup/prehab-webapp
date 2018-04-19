@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import validateInput from '../../validation/login';
 import {connect} from 'react-redux';
-import {logIn} from "../../actions/authActions";
+import {signIn} from "../../actions/authActions";
 import store from "../../store";
 import {Link} from 'react-router-dom'
 
@@ -42,7 +42,7 @@ class Home extends Component {
         e.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}});
-            this.props.logIn(this.state.username, this.state.password);
+            this.props.signIn(this.state.username, this.state.password);
             store.subscribe(() => {
                 if (this.props.auth === true)
                     this.props.history.push('/main');
@@ -50,7 +50,7 @@ class Home extends Component {
 
 
         }
-    };
+    }
 
     render() {
         const {errors, username, password} = this.state;
@@ -58,7 +58,8 @@ class Home extends Component {
             <div className="row">
                 <div className="content-center " style={{color: " #7AC4FF", width: '700px'}}>
                     <img src={logo} width="150px" alt="Amazing" style={{marginTop: 100}}/>
-                    <p>Bem vindo ao Prehab </p>
+                    <p></p>
+                    <p>Bemvindo ao Prehab </p>
                     <p>Monitorização e controlo da condição de saúde de pacientes numa fase pre-operatório</p>
                     <p> {this.state.message} </p>
                     <div className="content-center" style={{width: '600px'}}>
@@ -83,6 +84,7 @@ class Home extends Component {
 
                                 />
 
+                                <p></p>
                                 <RaisedButton label="Entrar"
                                               buttonStyle={{borderRadius: 25}}
                                               style={{borderRadius: 25}}
@@ -97,6 +99,7 @@ class Home extends Component {
                     </div>
                 </div>
             </div>
+
         );
     }
 }
@@ -110,22 +113,15 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logIn: (username, password) => {
-            dispatch(logIn(username, password));
+        signIn: (username, password) => {
+            dispatch(signIn(username, password));
         }
     };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
-//
-//
-//
-//                 </div>
-//             </div>
-// 		);
-// 	}
-// }
+
 //
 //
 // const mapStateToProps = (state) => {
