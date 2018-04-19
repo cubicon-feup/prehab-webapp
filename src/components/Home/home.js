@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
-import { logIn } from "../../actions/authActions";
+import { signIn } from "../../actions/authActions";
 import store from "../../store";
 import { Link } from 'react-router-dom'
 
@@ -42,7 +42,7 @@ class Home extends Component {
           e.preventDefault();
           if(this.isValid()){
               this.setState({ errors: {} });
-              this.props.logIn(this.state.username, this.state.password);
+              this.props.signIn(this.state.username, this.state.password);
               store.subscribe( () => {
                   if(this.props.auth === true)
                       this.props.history.push('/main');
@@ -115,34 +115,8 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        logIn: (username, password) =>{
-            dispatch(logIn(username, password));
-        }
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-
-
-
-                </div>
-            </div>
-		);
-	}
-}
-
-
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth.isLoggedIn
-    };
-};
-
-function mapDispatchToProps(dispatch) {
-    return {
-        logIn: (username, password) =>{
-            dispatch(logIn(username, password));
+        signIn: (username, password) =>{
+            dispatch(signIn(username, password));
         }
     };
 }
