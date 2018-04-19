@@ -4,11 +4,10 @@ import {
     Stepper,
     StepLabel,
 } from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+//import RaisedButton from 'material-ui/RaisedButton';
 import StepperForm from "./Stepper/stepperForm";
-import StepperPlan from "./Stepper/stepperPlan";
 import StepperCode from './Stepper/stepperCode';
+import {createNewPatient} from "../../utils/communication-manager";
 
 
 /**
@@ -23,37 +22,33 @@ class PatientStepper extends Component {
         this.state = {
             finished: false,
             stepIndex: 0,
+            accessCode: ''
         };
     }
 
 
 
-    handleNext = () => {
-        const {stepIndex} = this.state;
-        this.setState({
-            stepIndex: stepIndex + 1,
-            finished: stepIndex >= 2,
-        });
-    };
-
-    handlePrev = () => {
-        const {stepIndex} = this.state;
-        if (stepIndex > 0) {
-            this.setState({stepIndex: stepIndex - 1});
-        }
-    };
-
-
-    handleFinish = () => {
-        console.log("Finish");
-    };
+	patientFormSubmit = (form) => {
+		createNewPatient(this.props.token, form)
+			.then(response => {
+				const {stepIndex} = this.state;
+				console.log(response);
+				this.setState({
+                    accessCode: response.data.access_code,
+					stepIndex: stepIndex + 1,
+				});
+			})
+			.catch(err => {
+				console.log("Erro: " + err);
+			});
+    }
 
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <StepperForm token={this.props.token}/>;
+                return <StepperForm token={this.props.token} patientFormSubmit={this.patientFormSubmit.bind(this)}/>
             case 1:
-                return <StepperCode token={this.props.token}/>;
+                return <StepperCode token={this.props.token} accessCode={this.state.accessCode}/>
             /**case 2:
                 return <StepperPlan token={this.props.token}/>;**/
 
@@ -63,7 +58,7 @@ class PatientStepper extends Component {
     }
 
     render() {
-        const {finished, stepIndex} = this.state;
+        const {stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
 
         return (
@@ -79,50 +74,8 @@ class PatientStepper extends Component {
                     </Step>
                 </Stepper>
                 <div style={contentStyle}>
-                    {finished ? (
-                        <p>
-                            <a
+                    <div>{this.getStepContent(stepIndex)}</div>
 
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    this.setState({stepIndex: 0, finished: false});
-                                }}
-                            >
-                                Click here
-                            </a> to reset the example.
-                        </p>
-                    ) : (
-                        <div>
-
-                            <div>{this.getStepContent(stepIndex)}</div>
-                            <div className="other-content-center" style={{marginTop: 12}}>
-                                <RaisedButton
-                                    label="Anterior"
-                                    primary={true}
-
-                                    disabled={stepIndex === 0}
-                                    onClick={this.handlePrev}
-                                    style={{marginRight: 12}}
-                                />
-                                <RaisedButton
-
-                                    label="Próximo"
-                                    primary={true}
-                                    disabled={stepIndex === 1}
-                                    onClick={this.handleNext}
-                                    style={{marginRight: 12}}
-                                />
-                                <RaisedButton
-                                    label="Concluir"
-                                    disabled={stepIndex!=1}
-                                    primary={true}
-                                    onClick={this.handleFinish}
-                                    style={{marginRight: 12}}
-
-                                />
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         );

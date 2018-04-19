@@ -1,9 +1,6 @@
 import React, {Component} from "react";
-import TextField from "material-ui/TextField";
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from "material-ui/RaisedButton";
-import {getPatientsCode} from "../../../utils/communication-manager";
+
+//import {getPatientsCode} from "../../../utils/communication-manager";
 
 class StepperCode extends Component {
 
@@ -17,7 +14,7 @@ class StepperCode extends Component {
     componentDidMount() {
         //var patientsCode = getPatientsCode();
         //this.setState({code: patientsCode});
-        this.setState({code: 896722});
+        this.setState({code: this.props.accessCode});
     }
 
     render() {

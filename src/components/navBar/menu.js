@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { Container, Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import { Link } from "react-router-dom"
-import MenuItem from "material-ui/MenuItem";
-import Drawer from "material-ui/Drawer";
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
-import Notifications from "./notification";
+//import MenuItem from "material-ui/MenuItem";
+//import Drawer from "material-ui/Drawer";
+//import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
+//import Notifications from "./notification";
 import "../../styles/menu_style.css";
 import Logo from "../../res/img/logo.svg";
 import Dashboard from "../../res/img/dashboard.svg";
@@ -48,7 +48,7 @@ render() {
                 <Link to= "/plan" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
-                            <img src={Dashboard} className="patientsImg alignCenter"></img>
+                            <img src={Dashboard} alt="dashboard" className="patientsImg alignCenter" />
                             <p className="patientsLabel">Dashboard</p>
                         </div>
                     </Col>
@@ -59,7 +59,7 @@ render() {
                 <Link to= "/plan" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
-                            <img src={Patients} className="patientsImg alignCenter"></img>
+                            <img src={Patients} alt="plan" className="patientsImg alignCenter" />
                             <p className="patientsLabel">Planos</p>
                         </div>
                     </Col>
@@ -69,14 +69,14 @@ render() {
                 <Link to= "/main" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
-                            <img src={Patients} className="patientsImg alignCenter"></img>
+                            <img src={Patients} alt="main" className="patientsImg alignCenter" />
                             <p className="patientsLabel">Pacientes</p>
                         </div>
                     </Col>
                 </Link>
             </div>
 
-           <div className="logo"><img src={Logo} className="logoImg alignCenter"></img></div>
+           <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
 
         </div>
     );
@@ -90,7 +90,7 @@ render() {
                 <Link to= "/task" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
                               <div>
-                                    <img src={Patients} className="patientsImg alignCenter"></img>
+                                    <img src={Patients} alt="exercicio" className="patientsImg alignCenter" />
                                     <p className="patientsLabel">Exercícios</p>
                                </div>
                          </Col>

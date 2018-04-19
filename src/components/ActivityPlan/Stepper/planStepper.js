@@ -5,9 +5,7 @@ import {
     StepLabel,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import StepPlan from './stepPlan';
-import {createNewPlan} from "../../../utils/communication-manager";
 
 /**
  * Horizontal steppers are ideal when the contents of one step depend on an earlier step.

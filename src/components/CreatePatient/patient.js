@@ -40,11 +40,9 @@ class Patient extends Component {
     render() {
         return (
             <div className="row" >
-                <div className="col-md-2" />
-                <div className="col-md-8" >
+                <div className="col-md-12" >
                     {this.createPatient()}
                 </div>
-                <div className="col-md-2" />
             </div>
         );
     }

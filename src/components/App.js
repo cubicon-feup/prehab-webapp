@@ -12,7 +12,7 @@ import Task from "./PatientActivityTask/task";
 import Plan from "./ActivityPlan/plan";
 import NavBar from "./navBar/navBar";
 import Patient from "./CreatePatient/patient";
-import { Container, Row, Col } from 'reactstrap';
+import {  Row } from 'reactstrap';
 
 class App extends Component {
 
@@ -35,7 +35,7 @@ class App extends Component {
                 return(
                 <Row>
                     <div className="menuOuterDiv"><NavBar/></div>
-                    <div className = "greyBackground">
+                    <div className="container">
                         <Switch>
                              <Route exact path="/" name="home" component={Home}/>
                              <Route path="/login" name="login" component={Login}/>
