@@ -87,7 +87,7 @@ function searchingFor(term){
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
-export default class PatientTable extends Component {
+class PatientTable extends Component {
     state = {
         term: this.props.term,
         patientList: this.props.list,
@@ -160,3 +160,6 @@ export default class PatientTable extends Component {
         );
     }
 }
+
+
+export default PatientTable;
