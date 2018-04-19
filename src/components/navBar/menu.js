@@ -7,9 +7,9 @@ import { Link } from "react-router-dom"
 //import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from "material-ui/Toolbar";
 //import Notifications from "./notification";
 import "../../styles/menu_style.css";
-import Logo from "../../res/img/logo.svg";
-import Dashboard from "../../res/img/dashboard.svg";
-import Patients from "../../res/img/patients.svg";
+import Logo from "../../images/icons/logo.svg";
+import Dashboard from "../../images/icons/dashboard.svg";
+import Patients from "../../images/icons/patients.svg";
 
 
 class menu extends Component {

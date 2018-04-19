@@ -1,0 +1,15 @@
+language: node_js
+
+node_js:
+  - 8
+  - 9
+
+script:
+  - npm run build
+
+deploy:
+ provider: heroku
+ api_key:
+   secure: $HEROKU_AUTH_TOKEN
+ app: prehab
+ skip_cleanup: true

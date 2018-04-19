@@ -19,7 +19,7 @@ class StepperForm extends Component{
             accessCode:"",
 
             errors: {}
-        }
+        };
 
         this.onChange = this.onChange.bind(this);
     }
@@ -27,14 +27,14 @@ class StepperForm extends Component{
     onChange = (e) => {
         e.preventDefault();
         this.setState( { [e.target.name]: e.target.value} )
-    }
+    };
 
     handleChange = (event, index, value) => this.setState({sex: value});
 
 
     onChangePatientType = (newType) => {
         this.setState({ constraints: newType });
-    }
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -42,7 +42,7 @@ class StepperForm extends Component{
         console.log(this.props.token);
         this.props.patientFormSubmit(this.state);
 
-    }
+    };
 
 
     render() {

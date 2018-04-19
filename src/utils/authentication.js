@@ -9,7 +9,6 @@ import {LOGGED_IN} from "../actionTypes/actionTypes";
 /**
  * Authenticates an user.
  * @param {*} userID User id.
- * @param {*} provider Provider the user used to login.
  */
 export function authenticate(userID) {
     authenticateUser(userID).then(function (response) {

@@ -41,14 +41,14 @@ class PatientStepper extends Component {
 			.catch(err => {
 				console.log("Erro: " + err);
 			});
-    }
+    };
 
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <StepperForm token={this.props.token} patientFormSubmit={this.patientFormSubmit.bind(this)}/>
+                return <StepperForm token={this.props.token} patientFormSubmit={this.patientFormSubmit.bind(this)}/>;
             case 1:
-                return <StepperCode token={this.props.token} accessCode={this.state.accessCode}/>
+                return <StepperCode token={this.props.token} accessCode={this.state.accessCode}/>;
             /**case 2:
                 return <StepperPlan token={this.props.token}/>;**/
 

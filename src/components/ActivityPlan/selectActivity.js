@@ -30,7 +30,7 @@ export default class selectActivity extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         this.setState({
             list: this.props.list,

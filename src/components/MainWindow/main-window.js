@@ -26,11 +26,11 @@ class MainWindow extends Component {
     MainActivity = () => {
         let myStyle = {
 		    marginTop: '15%'
-	    }
+	    };
         let props = {
             list:this.state.patientList,
             term:this.state.term,
-        }
+        };
         let role = this.props.role;
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
@@ -81,7 +81,7 @@ class MainWindow extends Component {
                 <Logout/>
             )
         }
-    }
+    };
 
 
     filterList (event) {

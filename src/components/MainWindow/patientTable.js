@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
-import Alert from "../../res/img/alert.svg"
+import Alert from "../../images/icons/alert.svg"
 
 
 import {

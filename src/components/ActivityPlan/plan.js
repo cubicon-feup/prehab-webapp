@@ -19,11 +19,11 @@ class Plan extends Component {
 
     create2Stepper = () =>{
         this.setState({ step_value: 2});
-    }
+    };
 
     create4Stepper = () =>{
         this.setState({ step_value: 4});
-    }
+    };
 
     createActivityPlan = () => {
         if(this.props.auth === true && this.state.taskList !== undefined) {

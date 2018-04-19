@@ -24,18 +24,20 @@ class planForm extends Component {
 
     handleNameChange = (evt) => {
         this.setState({ planTitle: evt.target.value });
-    }
+    };
 
     createSteps = () => {
         return(
             <PlanStepper formComplete={this.createNewPlan.bind(this)} list={this.props.list} token={this.props.token} stepNumber={this.props.steps}/>
         )
-    }
+    };
 
     createNewPlan(completeForm){
         //console.log(completeForm);
         createNewPlan(this.props.token, this.state.planTitle, this.props.steps, completeForm)
-            .then(sucess => {
+            .then(success => {
+                console.log(success);
+
                 this.setState({
                     openDialog: true,
                     submitMessage: "Novo plano criado com sucesso"

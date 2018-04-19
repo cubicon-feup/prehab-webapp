@@ -13,14 +13,14 @@ import {authenticateUser} from "../../utils/communication-manager";
 class Home extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			username: '',
 			password: '',
 			errors: {},
 			message: '',
 			role: 'doctor'
-		}
+		};
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
@@ -29,7 +29,7 @@ class Home extends Component {
 	onChange = (e) => {
 		e.preventDefault();
 		this.setState( { [e.target.name]: e.target.value} )
-	}
+	};
 
 	isValid() {
 		const { errors, isValid } = validateInput(this.state);
@@ -56,7 +56,7 @@ class Home extends Component {
 					this.props.logOut();
 				});
 		}
-	}
+	};
 
 	render() {
 		const { errors, username, password } = this.state;
