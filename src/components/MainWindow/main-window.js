@@ -1,20 +1,17 @@
 import React, {Component} from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import PatientTable from "./patientTable";
 import Logout from "../Logout/logout";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import SearchBar from 'material-ui-search-bar';
 import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 
 
-
-
 class MainWindow extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             patientList: undefined,
@@ -24,13 +21,12 @@ class MainWindow extends Component {
     }
 
 
-
     MainActivity = () => {
         let props = {
-            list:this.state.patientList,
-            term:this.state.term,
-        }
-        var role = this.props.role;
+            list: this.state.patientList,
+            term: this.state.term,
+        };
+        let role = this.props.role;
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
             return (
@@ -39,11 +35,11 @@ class MainWindow extends Component {
                         <div className="doctorName">
                             <p className="doctorNameLabel">Olá {role}</p>
                         </div>
-                        <div className = "searchBarDiv">
-                            <input className = "searchBar"
-                                placeholder = "Pesquisar"
-                                value = {this.state.term}
-                                onChange = {this.filterList.bind(this)}
+                        <div className="searchBarDiv">
+                            <input className="searchBar"
+                                   placeholder="Pesquisar"
+                                   value={this.state.term}
+                                   onChange={this.filterList.bind(this)}
                             />
                         </div>
                     </div>
@@ -54,7 +50,7 @@ class MainWindow extends Component {
                         <div className="col-md-2 content-center btn-to-middle">
                             <Link to="/patient">
                                 <FloatingActionButton style={{marginRight: 20}}>
-                                    <ContentAdd />
+                                    <ContentAdd/>
                                 </FloatingActionButton>
                             </Link>
                             <h3>Adicionar Paciente</h3>
@@ -63,14 +59,14 @@ class MainWindow extends Component {
                 </div>
             )
         }
-        else if(this.props.auth === false) {
+        else if (this.props.auth === false) {
             return (
                 <Logout/>
             )
         }
     }
 
-    filterList (event) {
+    filterList(event) {
         this.setState({term: event.target.value});
     }
 
@@ -86,36 +82,35 @@ class MainWindow extends Component {
 
     }
 
-	render() {
-		return (
-            <div >
+    render() {
+        return (
+            <div>
                 {this.MainActivity()}
             </div>
-		);
-	}
+        );
+    }
 
 
-
-    patientList(token, role){
+    patientList(token, role) {
         getPatientList(token).then(list => {
-                    console.log(list);
-                    this.setState({
-                        patientList: list.data
-                    });
+            console.log(list);
+            this.setState({
+                patientList: list.data
+            });
 
-                }).catch(err => {
-                    console.log(err);
-                    this.setState({
-                        patientList: undefined
-                    });
-                });
+        }).catch(err => {
+            console.log(err);
+            this.setState({
+                patientList: undefined
+            });
+        });
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         auth: state.auth.isLoggedIn,
-        token : state.auth.accessToken,
+        token: state.auth.accessToken,
         role: state.auth.role
     };
 };
