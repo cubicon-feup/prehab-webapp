@@ -25,7 +25,7 @@
                 password: "",
                 errors: {},
                 message: ""
-            }
+            };
 
             this.onChange = this.onChange.bind(this);
             this.onSubmit = this.onSubmit.bind(this);
@@ -34,7 +34,7 @@
         onChange = (e) => {
             e.preventDefault();
             this.setState( { [e.target.name]: e.target.value} )
-        }
+        };
 
         isValid() {
             const { errors, isValid } = validateInput(this.state);
@@ -65,7 +65,7 @@
                         this.props.logOut();
                     });
             }
-        }
+        };
 
 
         render() {

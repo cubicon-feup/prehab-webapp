@@ -22,7 +22,7 @@ export function authenticateUser(username, password) {
                 'platform': 'web'
             },
             body: JSON.stringify({ "username": username, "password": password })
-        }
+        };
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
@@ -54,7 +54,7 @@ export function getAuthInfo(secret) {
                 'cache-control': 'no-cache',
                 'platform': 'web'
             }
-        }
+        };
 
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
@@ -90,7 +90,7 @@ export function createTask(title, description, multi_link, type, secret) {
                 'platform': 'web'
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
-        }
+        };
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 201) {
                 return resolve(response.json());
@@ -123,7 +123,7 @@ export function getTaskList(secret) {
                 'platform': 'web'
 
             }
-        }
+        };
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
@@ -152,7 +152,7 @@ export function getPatientList(secret) {
                 'jwt': secret,
                 'Platform' : 'web'
             }
-        }
+        };
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
@@ -196,7 +196,7 @@ export function createNewPatient(secret, patient_caracteristics) {
                 "email": patient_caracteristics.email,
                 "task_schedule_plan_id": "1"
             })
-        }
+        };
 
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
@@ -236,7 +236,7 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
                 "number_of_weeks": planWeek,
                 "weeks": plan
             })
-        }
+        };
 
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 201) {
@@ -270,7 +270,7 @@ export function getDoctorPlan(secret) {
                 'jwt': secret,
                 'platform': 'web'
             },
-        }
+        };
 
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {

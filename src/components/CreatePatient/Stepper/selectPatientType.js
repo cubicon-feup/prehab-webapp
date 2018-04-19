@@ -28,7 +28,7 @@ class SelectPatientType extends Component {
         //console.log(values);
         this.props.changeField(values);
         this.setState({values});
-    }
+    };
 
     menuItems(values) {
         return patient_type.map((types) => (

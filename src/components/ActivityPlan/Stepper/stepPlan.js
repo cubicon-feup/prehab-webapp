@@ -21,14 +21,14 @@ class StepPlan extends Component {
     handleSubmit = (evt) => {
         evt.preventDefault();
         this.props.onFormSubmit(this.state.activities);
-    }
+    };
 
     handleAddTask = () => {
         this.setState({
             number_of_activities: this.state.number_of_activities.concat([{ qt: "" }]),
             activities: this.state.activities.concat([{ task_id: "", times_per_week: ""}]),
         });
-    }
+    };
 
     handleRemoveTask = (idx) => () => {
         this.setState({
@@ -36,7 +36,7 @@ class StepPlan extends Component {
             activities: this.state.activities.filter((s, sidx) => idx !== sidx)
 
         });
-    }
+    };
 
     onChangeFreq(idx, newFreq){
         const freqList = this.state.activities.map((activities, sidx) => {

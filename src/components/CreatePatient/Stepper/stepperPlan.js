@@ -11,7 +11,7 @@ class StepperPlan extends Component {
         this.state = {
             task: "",
             nutrition:""
-        }
+        };
 
         this.onChange = this.onChange.bind(this);
     }
@@ -19,7 +19,7 @@ class StepperPlan extends Component {
     onChange = (e) => {
             e.preventDefault();
             this.setState( { [e.target.name]: e.target.value} )
-    }
+    };
 
 
     render(){

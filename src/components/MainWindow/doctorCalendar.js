@@ -4,9 +4,9 @@ import Calendar from "react-calendar";
 class doctorCalendar extends Component {
     state = {
         date: new Date(),
-    }
+    };
 
-    onChange = date => this.setState({ date })
+    onChange = date => this.setState({ date });
 
     render() {
         return (

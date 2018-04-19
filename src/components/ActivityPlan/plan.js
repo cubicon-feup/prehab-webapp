@@ -28,7 +28,7 @@ class Plan extends Component {
                 <Logout />
             )
         }
-    }
+    };
     componentDidMount() {
         console.log(this.props.token);
         getTaskList(this.props.token).then(list => {

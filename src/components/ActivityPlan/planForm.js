@@ -30,13 +30,13 @@ class planForm extends Component {
 
     handleNameChange = (evt) => {
         this.setState({ planTitle: evt.target.value });
-    }
+    };
 
     handleSubmit = (evt) => {
         evt.preventDefault();
         //const { name, activity_task } = this.state;
         console.log(this.state);
-    }
+    };
 
     handleAddTask = () => {
         this.setState({
@@ -44,7 +44,7 @@ class planForm extends Component {
 
             activities: this.state.activities.concat([{ id: "", freq: ""}]),
         });
-    }
+    };
 
     handleRemoveTask = (idx) => () => {
         this.setState({
@@ -52,7 +52,7 @@ class planForm extends Component {
             activities: this.state.activities.filter((s, sidx) => idx !== sidx)
 
         });
-    }
+    };
 
     onChangeWeek(newWeek){
         this.setState({

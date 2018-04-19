@@ -11,33 +11,10 @@ import {Link} from 'react-router-dom'
 
 class Home extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            password: '',
-            errors: {},
-            message: ''
-        };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-
     onChange = (e) => {
         e.preventDefault();
         this.setState({[e.target.name]: e.target.value})
     };
-
-    isValid() {
-        const {errors, isValid} = validateInput(this.state);
-
-        if (!isValid) {
-            this.setState({errors});
-        }
-        return isValid;
-    }
-
     onSubmit = (e) => {
         e.preventDefault();
         if (this.isValid()) {
@@ -50,6 +27,27 @@ class Home extends Component {
 
 
         }
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            errors: {},
+            message: ''
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    isValid() {
+        const {errors, isValid} = validateInput(this.state);
+
+        if (!isValid) {
+            this.setState({errors});
+        }
+        return isValid;
     }
 
     render() {
@@ -58,8 +56,8 @@ class Home extends Component {
             <div className="row">
                 <div className="content-center " style={{color: " #7AC4FF", width: '700px'}}>
                     <img src={logo} width="150px" alt="Amazing" style={{marginTop: 100}}/>
-                    <p></p>
-                    <p>Bemvindo ao Prehab </p>
+                    <br/>
+                    <p>Bem vindo ao Prehab </p>
                     <p>Monitorização e controlo da condição de saúde de pacientes numa fase pre-operatório</p>
                     <p> {this.state.message} </p>
                     <div className="content-center" style={{width: '600px'}}>
@@ -84,7 +82,8 @@ class Home extends Component {
 
                                 />
 
-                                <p></p>
+                                <br/>
+
                                 <RaisedButton label="Entrar"
                                               buttonStyle={{borderRadius: 25}}
                                               style={{borderRadius: 25}}

@@ -35,7 +35,7 @@ class Patient extends Component {
 
             )
         }
-    }
+    };
 
     render() {
         return (

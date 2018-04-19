@@ -46,14 +46,14 @@ class PatientStepper extends Component {
 
     handleFinish = () => {
         console.log("Finish");
-    }
+    };
 
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return <StepperForm token={this.props.token}/>
+                return <StepperForm token={this.props.token}/>;
             case 1:
-                return <StepperCode token={this.props.token}/>
+                return <StepperCode token={this.props.token}/>;
             /**case 2:
                 return <StepperPlan token={this.props.token}/>;**/
 
