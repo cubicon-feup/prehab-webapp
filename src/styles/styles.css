@@ -13,7 +13,23 @@
 }
 
 .content-middle-page {
-    margin-top: 2%;
+    margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.btn-to-middle {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.other-content-center {
+    text-align:center;
+}
+
+.patient-code-box {
+    text-align:center;
+    align: center;
+}
+
