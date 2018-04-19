@@ -10,12 +10,10 @@ class Task extends Component {
         if(this.props.auth === true) {
             return (
                 <div className="row">
-                    <div className="col-md-4" />
-                    <div className="col-md-4">
+                    <div className="col-md-12">
                         <h1>Criar Task</h1>
                         <TaskForm token={this.props.token}/>
                     </div>
-                    <div className="col-md-4" />
                 </div>
             )
         }

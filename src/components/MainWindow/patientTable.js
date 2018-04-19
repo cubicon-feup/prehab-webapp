@@ -1,12 +1,8 @@
 import React, {Component} from "react";
-import doctorIcon from "../../images/icons/doctor_icon.svg";
+//import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
 import Alert from "../../res/img/alert.svg"
-import {
-    Card,
-    CardHeader,
-    CardMedia
-} from "material-ui/Card";
+
 
 import {
     Table,
@@ -16,7 +12,7 @@ import {
     TableRow,
     TableRowColumn,
 } from "material-ui/Table";
-
+/*
 const tableData = [
     {
         id: "125643162",
@@ -86,7 +82,7 @@ function searchingFor(term){
         return x.patient_tag.toLowerCase().includes(term.toLowerCase()) || !term;
     }
 }
-
+*/
 
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
@@ -128,7 +124,8 @@ export default class PatientTable extends Component {
                             fixedHeader={this.state.fixedHeader}
                             fixedFooter={this.state.fixedFooter}
                             selectable={this.state.selectable}
-                            multiSelectable={this.state.multiSelectable}>
+                            multiSelectable={this.state.multiSelectable}
+                            >
                             <TableHeader
                                 displaySelectAll={this.state.showCheckboxes}
                                 adjustForCheckbox={this.state.showCheckboxes}
@@ -153,7 +150,7 @@ export default class PatientTable extends Component {
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} className="alertImg"></img></div></TableRowColumn>
+                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
                                     </TableRow>
                                 ))}

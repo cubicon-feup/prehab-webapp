@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PatientTable from "./patientTable";
 import Logout from "../Logout/logout";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import SearchBar from 'material-ui-search-bar';
+//import SearchBar from 'material-ui-search-bar';
 import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
 import {getPatientList} from "../../utils/communication-manager";
@@ -23,24 +23,24 @@ class MainWindow extends Component {
 
     }
 
-
-
     MainActivity = () => {
-
+        let myStyle = {
+		    marginTop: '15%'
+	    }
         let props = {
             list:this.state.patientList,
             term:this.state.term,
         }
-        var role = this.props.role;
+        let role = this.props.role;
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
             return (
-                <div className="row content-middle-page">
+                <div className="row">
                     <div className="row ">
-                        <div className="doctorName">
+                        <div className="doctorName col-md-4">
                             <p className="doctorNameLabel">Olá {role}</p>
                         </div>
-                        <div className = "searchBarDiv">
+                        <div className = "searchBarDiv col-md-8 text-right">
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
@@ -50,18 +50,25 @@ class MainWindow extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-8">
-
+                        <div className="col-md-9 text-left">
                             <PatientTable {...props}/>
-
                         </div>
-                        <div className="col-md-2 content-center btn-to-middle">
-                            <Link to="/patient">
-                                <FloatingActionButton style={{marginRight: 20}}>
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                            </Link>
-                            <h3>Adicionar Paciente</h3>
+                        <div className="col-md-3 text-right " style={myStyle}>
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+	                                <Link to="/patient">
+		                                <FloatingActionButton style={{marginRight: 20}}>
+			                                <ContentAdd />
+		                                </FloatingActionButton>
+	                                </Link>
+                                </div>
+                            </div>
+	                        <div className="row">
+		                        <div className="col-md-12 text-center">
+			                        <h3>Adicionar Paciente</h3>
+		                        </div>
+	                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -88,9 +95,7 @@ class MainWindow extends Component {
     }
 
     componentDidMount() {
-
         this.patientList(this.props.token);
-
     }
 
 
@@ -105,7 +110,7 @@ class MainWindow extends Component {
 
 
 
-    patientList(token, role){
+    patientList(token){
         getPatientList(token).then(list => {
                     console.log(list);
                     this.setState({

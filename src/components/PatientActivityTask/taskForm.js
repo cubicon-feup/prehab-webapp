@@ -102,7 +102,7 @@ class taskForm extends Component {
                         value={title}
                         errorText={errors.title}
                         onChange={this.onChange}
-                        hintText="Insert Title"
+                        hintText="Inserir Titulo"
                         fullWidth={true}
                     />
                 </div>
@@ -112,7 +112,7 @@ class taskForm extends Component {
                         value={description}
                         errorText={errors.description}
                         onChange={this.onChange}
-                        hintText="Insert description"
+                        hintText="Inserir descrição"
                         fullWidth={true}
                     />
                 </div>
@@ -122,14 +122,14 @@ class taskForm extends Component {
                         value={multi_link}
                         errorText={errors.multi_link}
                         onChange={this.onChange}
-                        hintText="Insert Multimedia Link"
+                        hintText="Inserir link multimédia"
                         fullWidth={true}
                     />
                 </div>
                 <div className="form-group">
                     <SelectField
                         name="task_type"
-                        floatingLabelText="Tipo"
+                        floatingLabelText="Escolher tipo de exercicio"
                         value={task_type}
                         onChange={this.handleChange}
                         fullWidth={true}
@@ -140,7 +140,7 @@ class taskForm extends Component {
                     </SelectField>
                 </div>
                 <br/>
-                <RaisedButton type="submit" primary={true}>Submit</RaisedButton>
+                <RaisedButton type="submit" primary={true} label="Submeter" />
             </form>
         </div>
         );

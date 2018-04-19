@@ -4,10 +4,6 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import SelectPatientType from "./selectPatientType";
 import RaisedButton from "material-ui/RaisedButton";
-import {createNewPatient} from "../../../utils/communication-manager";
-import { withFormik } from 'formik';
-import Yup from 'yup';
-
 
 
 class StepperForm extends Component{
@@ -44,14 +40,8 @@ class StepperForm extends Component{
         e.preventDefault();
         console.log(this.state);
         console.log(this.props.token);
-        createNewPatient(this.props.token, this.state)
-            .then(response => {
-                console.log(response);
-                this.setState={accessCode: response.data.access_code}
-            })
-            .catch(err => {
-                console.log("Erro: " + err);
-            });
+        this.props.patientFormSubmit(this.state);
+
     }
 
 
@@ -150,7 +140,7 @@ class StepperForm extends Component{
                     </div>
                 </div>
                 <div className="other-content-center">
-                <RaisedButton type="submit" primary={true} label="Criar"/>
+                    <RaisedButton type="submit" primary={true} label="Criar"/>
                 </div>
                 </form>
 

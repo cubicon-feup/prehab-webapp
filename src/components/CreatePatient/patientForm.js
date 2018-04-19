@@ -19,7 +19,6 @@ class PatientForm extends Component{
                     />
                     <CardMedia>
                         <PatientStepper token={this.props.token}/>
-
                         <br />
                         <br />
                     </CardMedia>
