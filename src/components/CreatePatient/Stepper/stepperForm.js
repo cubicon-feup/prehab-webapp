@@ -9,6 +9,7 @@ import { withFormik } from 'formik';
 import Yup from 'yup';
 
 
+
 class StepperForm extends Component{
     constructor(props){
         super(props);
@@ -20,6 +21,7 @@ class StepperForm extends Component{
             age: "",
             constraints: [],
             accessCode:"",
+
             errors: {}
         }
 
@@ -32,6 +34,7 @@ class StepperForm extends Component{
     }
 
     handleChange = (event, index, value) => this.setState({sex: value});
+
 
     onChangePatientType = (newType) => {
         this.setState({ constraints: newType });
@@ -76,6 +79,7 @@ class StepperForm extends Component{
                 <form onSubmit={this.onSubmit}>
                 <div className="row ">
                 <div className="col-md-12">
+
                     <TextField
                         name="email"
                         value={email}
@@ -87,6 +91,7 @@ class StepperForm extends Component{
                     />
                 </div>
                 </div>
+
                 <div className="row">
                     <div className="col-md-4">
                         <TextField
@@ -95,7 +100,9 @@ class StepperForm extends Component{
                             type="number"
                             errorText={errors.weight}
                             onChange={this.onChange}
+
                             hintText="Inserir peso"
+
                             fullWidth={true}
                         />
                     </div>
@@ -107,10 +114,12 @@ class StepperForm extends Component{
                             fullWidth={true}
                             errorText={errors.age}
                             onChange={this.onChange}
+
                             hintText="Inserir idade"
                         />
                     </div>
                     <div className="col-md-4">
+
                         <TextField
                             name="height"
                             fullWidth={true}
@@ -118,11 +127,14 @@ class StepperForm extends Component{
                             type="number"
                             errorText={errors.height}
                             onChange={this.onChange}
+
                             hintText="Inserir altura"
+
                         />
                     </div>
                 </div>
                 <div className="row">
+
                     <div className="col-md-6">
                         <SelectField
                             hintText="Gênero"
@@ -141,9 +153,12 @@ class StepperForm extends Component{
                 <RaisedButton type="submit" primary={true} label="Criar"/>
                 </div>
                 </form>
+
             </div>
         );
     }
 }
 
+
 export default StepperForm;
+

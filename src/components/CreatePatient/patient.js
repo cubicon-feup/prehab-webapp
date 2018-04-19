@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import Logout from "../Logout/logout";
 import PatientForm from "./patientForm";
+
 import {getDoctorPlan} from "../../utils/communication-manager";
 
 
@@ -19,6 +20,7 @@ class Patient extends Component {
             });
     }
 
+
     createPatient = () => {
         if(this.props.auth !== true) {
             return (
@@ -28,7 +30,9 @@ class Patient extends Component {
         else
         {
             return (
+
                 <PatientForm token={this.props.token}/>
+
             )
         }
     }

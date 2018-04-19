@@ -1,0 +1,42 @@
+.menuDiv{
+    background-color : #ffffff;
+    height: 100vh;
+    position : relative;
+}
+
+.patients{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.patientsImg{
+    width:31px;
+    height:31px;
+}
+
+.patientsLabel{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 20px;
+    margin-top: 7px;
+}
+
+.logo{
+    position: absolute;
+    align: center;
+    bottom : 132px;
+    width: 100%;
+    height: auto;
+}
+
+.logoImg{
+    width: 83px;
+    height:74px;
+}
+
+.alignCenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+

@@ -7,7 +7,8 @@ class NavBar extends Component {
     render() {
         return (
             <div >
-                <Menu />
+
+                <Menu/>
             </div>
         );
     }

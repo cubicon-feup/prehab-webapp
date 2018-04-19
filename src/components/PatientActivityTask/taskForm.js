@@ -149,3 +149,10 @@ class taskForm extends Component {
 
 
 export default taskForm;
+
+/*<select name="task_type" value={task_type} onChange={this.onChange}>
+                            <option value="1" default>Respiratório</option>
+                            <option value="2">Endurance</option>
+                            <option value="3">Resistencia</option>
+                        </select>*/
+

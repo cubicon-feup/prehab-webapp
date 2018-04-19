@@ -13,11 +13,13 @@ class PatientForm extends Component{
             <div className="content-middle-page">
                 <Card>
                     <CardHeader
+
                         title="Criar paciente"
 
                     />
                     <CardMedia>
                         <PatientStepper token={this.props.token}/>
+
                         <br />
                         <br />
                     </CardMedia>

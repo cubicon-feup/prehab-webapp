@@ -9,6 +9,7 @@ const patient_type = [
     { title: "Vegetariano", id: 4},
     { title: "Hepático", id: 5},
     { title: "Hipertenso", id: 6}
+
 ];
 
 /**
@@ -21,6 +22,7 @@ class SelectPatientType extends Component {
             values: []
         };
     }
+
 
     handleChange = (event, index, values) => {
         //console.log(values);
@@ -36,6 +38,7 @@ class SelectPatientType extends Component {
                 checked={values && values.indexOf(types.id) > -1}
                 value={types.id}
                 primaryText={types.title}
+
             />
         ));
     }
@@ -45,7 +48,9 @@ class SelectPatientType extends Component {
         return (
             <SelectField
                 multiple={true}
+
                 hintText="Selecionar restrições"
+
                 value={values}
                 onChange={this.handleChange}
                 fullWidth={true}

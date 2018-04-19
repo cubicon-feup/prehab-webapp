@@ -42,8 +42,8 @@ export function authenticateUser(username, password) {
 export function getAuthInfo(secret) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = URL + "/authentication";
 
+        let requestUrl = URL + "/authentication";
         let requestOptions = {
             uri: requestUrl,
             method: "GET",
@@ -77,9 +77,7 @@ export function getAuthInfo(secret) {
  */
 export function createTask(title, description, multi_link, type, secret) {
     return new Promise(function (resolve, reject) {
-
         let requestUrl =  URL + "/api/task/";
-
         let requestOptions = {
             uri: requestUrl,
             method: "POST",
@@ -112,9 +110,7 @@ export function createTask(title, description, multi_link, type, secret) {
  */
 export function getTaskList(secret) {
     return new Promise(function (resolve, reject) {
-
         let requestUrl =  URL + "/api/task/";
-
         let requestOptions = {
             uri: requestUrl,
             method: "GET",
@@ -125,6 +121,36 @@ export function getTaskList(secret) {
                 'cache-control': 'no-cache',
                 'jwt': secret,
                 'platform': 'web'
+
+            }
+        }
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+export function getPatientList(secret) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl =  URL + "/api/patient/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
             }
         }
         fetch(requestUrl, requestOptions).then(function (response) {
@@ -146,7 +172,9 @@ export function getTaskList(secret) {
 export function createNewPatient(secret, patient_caracteristics) {
     return new Promise(function (resolve, reject) {
 
+
         let requestUrl = URL +"/api/patient/";
+
 
         let requestOptions = {
             uri: requestUrl,
@@ -255,3 +283,4 @@ export function getDoctorPlan(secret) {
         });
     });
 }
+
