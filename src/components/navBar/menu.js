@@ -32,6 +32,7 @@ render() {
                         <Notifications />
                     </Link>
             </ToolbarGroup>
+
         </Toolbar>*/
 
         /*<Drawer docked = {true} width={300}>
@@ -110,3 +111,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null)(menu);
+

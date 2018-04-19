@@ -4,7 +4,6 @@
  * @param {*} password User password.
  */
 
-
 const URL = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com";
 
 export function authenticateUser(username, password) {
@@ -34,7 +33,6 @@ export function authenticateUser(username, password) {
             return reject(error);
         });
     });
-
 }
 
 /**
@@ -46,8 +44,6 @@ export function getAuthInfo(secret) {
 
 
         let requestUrl = URL + "/authentication";
-
-
         let requestOptions = {
             uri: requestUrl,
             method: "GET",
@@ -56,9 +52,7 @@ export function getAuthInfo(secret) {
                 'Content-Type': 'application/json',
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
-
                 'platform': 'web'
-
             }
         }
 
@@ -83,11 +77,7 @@ export function getAuthInfo(secret) {
  */
 export function createTask(title, description, multi_link, type, secret) {
     return new Promise(function (resolve, reject) {
-
-
         let requestUrl =  URL + "/api/task/";
-
-
         let requestOptions = {
             uri: requestUrl,
             method: "POST",
@@ -97,9 +87,7 @@ export function createTask(title, description, multi_link, type, secret) {
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
                 'jwt': secret,
-
                 'platform': 'web'
-
             },
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         }
@@ -122,11 +110,7 @@ export function createTask(title, description, multi_link, type, secret) {
  */
 export function getTaskList(secret) {
     return new Promise(function (resolve, reject) {
-
-
         let requestUrl =  URL + "/api/task/";
-
-
         let requestOptions = {
             uri: requestUrl,
             method: "GET",
@@ -136,7 +120,6 @@ export function getTaskList(secret) {
                 'pragma': 'no-cache',
                 'cache-control': 'no-cache',
                 'jwt': secret,
-
                 'platform': 'web'
 
             }
@@ -182,7 +165,6 @@ export function getPatientList(secret) {
     });
 }
 
-
 /**
  * Creates a New Patient
  * @param {*} .
@@ -190,12 +172,13 @@ export function getPatientList(secret) {
 export function createNewPatient(secret, patient_caracteristics) {
     return new Promise(function (resolve, reject) {
 
-        let requestUrl = URL +"/api/web/register_patient/";
+
+        let requestUrl = URL +"/api/patient/";
+
 
         let requestOptions = {
             uri: requestUrl,
             method: "POST",
-
             headers: {
                 'Authorization': 'Basic ',
                 'Content-Type': 'application/json',
@@ -205,9 +188,9 @@ export function createNewPatient(secret, patient_caracteristics) {
                 'platform': 'web'
             },
             body: JSON.stringify({
-                "age": patient_caracteristics.age,
-                "height": patient_caracteristics.height,
-                "weight": patient_caracteristics.weight,
+                "age": Number(patient_caracteristics.age),
+                "height": Number(patient_caracteristics.height),
+                "weight": Number(patient_caracteristics.weight),
                 "sex": patient_caracteristics.sex,
                 "constraints": patient_caracteristics.constraints,
                 "email": patient_caracteristics.email,
@@ -288,6 +271,7 @@ export function getDoctorPlan(secret) {
                 'platform': 'web'
             },
         }
+
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
