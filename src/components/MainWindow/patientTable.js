@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
-import Alert from "../../images/icons/alert.svg"
+import Alert from "../../images/icons/alert.svg";
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import PatientAlert from '../PatientsAlert/alerts';
 
 
 import {
@@ -100,6 +103,7 @@ class PatientTable extends Component {
         enableSelectAll: false,
         deselectOnClickaway: false,
         showCheckboxes: false,
+        open: false,
       };
 
 
@@ -109,7 +113,23 @@ class PatientTable extends Component {
         });
     };
 
+     handleOpen = () => {
+        this.setState({open: true});
+     };
+
+      handleClose = () => {
+        this.setState({open: false});
+     };
+
     render() {
+        const actions = [
+          <FlatButton
+            label="Ok"
+            primary={true}
+            onClick={this.handleClose}
+          />,
+        ];
+
         console.log(this.state.patientList);
         console.log(this.props.term);
         let filteredPatients = this.state.patientList.filter(
@@ -150,7 +170,16 @@ class PatientTable extends Component {
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
+                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg" onClick={this.handleOpen}/>
+                                            <Dialog
+                                              title="Alertas do paciente"
+                                              actions={actions}
+                                              modal={false}
+                                              open={this.state.open}
+                                              onRequestClose={this.handleClose}>
+                                                <PatientAlert/>
+                                            </Dialog>
+                                        </div></TableRowColumn>
                                         <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
                                     </TableRow>
                                 ))}

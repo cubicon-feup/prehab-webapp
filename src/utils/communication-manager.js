@@ -4,7 +4,7 @@
  * @param {*} password User password.
  */
 
-const URL = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com";
+const URL = "http://ec2-35-176-204-5.eu-west-2.compute.amazonaws.com:8000";
 
 export function authenticateUser(username, password) {
     return new Promise(function (resolve, reject) {
