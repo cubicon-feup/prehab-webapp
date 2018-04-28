@@ -65,7 +65,7 @@ class Home extends Component {
 				<div className="content-center " style={{color: " #7AC4FF", width:'700px'}} >
 					<img src={logo} width="150px" alt="Amazing"  style={{ marginTop:100}}/>
 					<p> </p>
-					<p>Bemvindo ao Prehab </p>
+					<p>Bem-vindo ao Prehab </p>
 					<p>Monitorização e controlo da condição de saúde de pacientes numa fase pre-operatório</p>
 					<p> {this.state.message} </p>
 					<div className="content-center" style={{width:'600px'}}>
