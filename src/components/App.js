@@ -37,6 +37,7 @@ class App extends Component {
                     <div className="menuOuterDiv"><NavBar/></div>
                     <div className="container">
                         <Switch>
+                            <Route exact path="/" name="login" component={Login}/>
                             <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
                             <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
                             <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
@@ -51,6 +52,7 @@ class App extends Component {
                     <div className="container">
                         <Switch>
                             <Route exact path="/" name="home" component={Home}/>
+                            <Route exact path="/" name="login" component={Login}/>
                         </Switch>
                     </div>
                 </Row>
