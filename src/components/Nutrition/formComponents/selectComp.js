@@ -5,24 +5,30 @@ import Select from 'react-select';
 class SpecialSelect extends React.Component {
 	handleChange = value => {
 		// this is going to call setFieldValue and manually update values.topcis
-		this.props.onChange('topics', value);
+		if(this.props.id === "Tipo")
+			this.props.onChange('nutritionType', value);
+		else
+			this.props.onChange('topics', value);
 	};
 
 	handleBlur = () => {
 		// this is going to call setFieldTouched and manually update touched.topcis
-		this.props.onBlur('topics', true);
+		if(this.props.id === "Tipo")
+			this.props.onBlur('nutritionType', true);
+		else
+			this.props.onBlur('topics', true);
 	};
 
 	render() {
 		return (
 			<div style={{ margin: '1rem 0' }}>
 				<label htmlFor="color">
-					Restrições
+					{this.props.id}
 				</label>
 				<Select
-					id="color"
+					id={this.props.id}
 					options={this.props.options}
-					multi={true}
+					multi={this.props.multi}
 					onChange={this.handleChange}
 					onBlur={this.handleBlur}
 					value={this.props.value}

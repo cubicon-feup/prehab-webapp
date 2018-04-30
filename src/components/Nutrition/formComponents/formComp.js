@@ -1,6 +1,6 @@
 import Yup from "yup";
 import SpecialSelect from "./selectComp";
-import { withFormik } from 'formik';
+import { withFormik, Field, Form } from 'formik';
 import React, { Component } from "react";
 
 import {foodIcon} from "../../../images/foodIcon.svg";
@@ -39,24 +39,25 @@ export const formikEnhancer = withFormik({
 					value: Yup.string().required(),
 				})
 			),
-		type: Yup.string()
-			.required('Escolher Tipo!'),
+		nutritionType: Yup.string()
+			.required('Escolher tipo!'),
 	}),
-	mapPropsToValues: props => ({
-		title: '',
-		topics: SelectOptions,
-		type: typeOptions,
-		description: EditorState.createEmpty()
+	mapPropsToValues: ({title, topics, nutritionType, description}) => ({
+		title: title || '',
+		topics: topics || SelectOptions,
+		nutritionType: '',
+		description: description || EditorState.createEmpty()
 	}),
 
 	handleSubmit: (values, { setSubmitting }) => {
 		const payload = {
 			...values,
 			topics: values.topics.map(t => t.value),
-			description: values.description
+			description: values.description,
+			nutritionType: values.nutritionType
 		};
 		setTimeout(() => {
-			alert(JSON.stringify(payload, null, 2));
+			alert("Request to DB... Under Development");
 			setSubmitting(false);
 		}, 1000);
 	},
@@ -72,13 +73,7 @@ class FormTest extends Component {
 		this.state = {
 			editorState: EditorState.createEmpty(),
 			title: '',
-			restrictions: [],
-			type: ''
 		};
-	}
-
-	handleChange = (type) => {
-		this.setState({ type });
 	}
 
 	onEditorStateChange = (editorState) => {
@@ -88,35 +83,35 @@ class FormTest extends Component {
 		});
 	};
 
+	componentDidMount(){
+		console.log(this.props);
+	}
 
 	render() {
 		const {
 			values,
-			touched,
-			dirty,
 			errors,
-			handleChange,
-			handleBlur,
-			handleSubmit,
-			handleReset,
+			touched,
+			isSubmitting,
 			setFieldValue,
 			setFieldTouched,
-			isSubmitting,
+			handleReset,
+			handleChange,
+			dirty
 		} = this.props;
-		const { editorState, type } = this.state;
+		const { editorState } = this.state;
+
 
 		return (
-			<form onSubmit={handleSubmit}>
+			<Form >
 				<label htmlFor="title" style={{ display: 'block' }}>
 					Titulo
 				</label>
-				<input
-					id="title"
+				<Field
+					name="title"
 					placeholder="Inserir Titulo"
 					type="text"
 					value={values.title}
-					onChange={handleChange}
-					onBlur={handleBlur}
 				/>
 				{errors.title &&
 				touched.title && (
@@ -125,31 +120,24 @@ class FormTest extends Component {
 					</div>
 				)}
 
-				<div style={{ margin: '1rem 0' }}>
-					<label htmlFor="color">
-						Tipo de Refeição
-					</label>
-					<Select
-						name="type"
-						options={typeOptions}
-						multi={false}
-						onChange={this.handleChange}
-						value={type}
-
-					/>
-					{errors.type &&
-					touched.type && (
-						<div style={{ color: 'red', marginTop: '.5rem' }}>
-							{errors.type}
-						</div>
-					)}
-				</div>
+				<SpecialSelect
+					id="Tipo"
+					value={values.nutritionType}
+					onChange={setFieldValue}
+					onBlur={setFieldTouched}
+					error={errors.nutritionType}
+					multi={false}
+					touched={touched.nutritionType}
+					options={typeOptions}
+				/>
 
 				<SpecialSelect
+					id="Restrições"
 					value={values.topics}
 					onChange={setFieldValue}
 					onBlur={setFieldTouched}
 					error={errors.topics}
+					multi={true}
 					touched={touched.topics}
 					options={SelectOptions}
 				/>
@@ -180,7 +168,7 @@ class FormTest extends Component {
 				<button type="submit" disabled={isSubmitting}>
 					Submit
 				</button>
-			</form>
+			</Form>
 		);
 	}
 };
