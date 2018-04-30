@@ -4,7 +4,7 @@
  * @param {*} password User password.
  */
 
-const URL = "http://ec2-18-130-0-119.eu-west-2.compute.amazonaws.com";
+const URL = "http://prehab.cubicon.xyz:8000";
 
 export function authenticateUser(username, password) {
     return new Promise(function (resolve, reject) {
@@ -282,5 +282,39 @@ export function getDoctorPlan(secret) {
             return reject(error);
         });
     });
+}
+
+export function sendNutrition(token, title, restrictions, type, description) {
+	return new Promise(function (resolve, reject) {
+
+		let requestUrl = URL + "/api/nutrition/";
+
+		let requestOptions = {
+			uri: requestUrl,
+			method: "POST",
+			headers: {
+				'Authorization': 'Basic ',
+				'Content-Type': 'application/json',
+				'pragma': 'no-cache',
+				'cache-control': 'no-cache',
+				'platform': 'web',
+                'jwt': token
+			},
+			body: JSON.stringify({ "title": title,
+                "restrictions": restrictions,
+                "type": type,
+                "description": description
+            })
+		};
+		fetch(requestUrl, requestOptions).then(function (response) {
+			if (response.status === 200) {
+				return resolve(response.json());
+			} else {
+				return reject(Error("An error has occurred! Please try again."));
+			}
+		}, function (error) {
+			return reject(error);
+		});
+	});
 }
 

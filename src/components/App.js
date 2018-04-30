@@ -12,6 +12,7 @@ import Task from "./PatientActivityTask/task";
 import Plan from "./ActivityPlan/plan";
 import NavBar from "./navBar/navBar";
 import Patient from "./CreatePatient/patient";
+import Nutrition from "./Nutrition/nutrition";
 import {  Row } from 'reactstrap';
 
 class App extends Component {
@@ -39,7 +40,8 @@ class App extends Component {
                         <Switch>
                              <Route exact path="/" name="home" component={Home}/>
                              <Route path="/login" name="login" component={Login}/>
-                             <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
+                             <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
+	                         <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
                              <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
                              <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
                              <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
