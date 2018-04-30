@@ -45,11 +45,11 @@ render() {
             {this.settingsMenu()}
 
             <div className="patients">
-                <Link to= "/plan" style={{ textDecoration: 'none' }}>
+                <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
                             <img src={Dashboard} alt="dashboard" className="patientsImg alignCenter" />
-                            <p className="patientsLabel">Dashboard</p>
+                            <p className="patientsLabel">Prehabs</p>
                         </div>
                     </Col>
                 </Link>
@@ -87,11 +87,11 @@ render() {
     if(this.props.auth === true ) {
        return (
             <div className="patients">
-                <Link to= "/task" style={{ textDecoration: 'none' }}>
+                <Link to= "/settings" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
                               <div>
-                                    <img src={Patients} alt="exercicio" className="patientsImg alignCenter" />
-                                    <p className="patientsLabel">Exercícios</p>
+                                    <img src={Patients} alt="definições" className="patientsImg alignCenter" />
+                                    <p className="patientsLabel">Definições</p>
                                </div>
                          </Col>
                   </Link>
