@@ -9,7 +9,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 import { EditorState, convertToRaw } from 'draft-js';
-import Select from 'react-select';
 
 
 const SelectOptions = [
@@ -50,12 +49,12 @@ export const formikEnhancer = withFormik({
 	}),
 
 	handleSubmit: (values, { setSubmitting }) => {
-		const payload = {
+		/*const payload = {
 			...values,
 			topics: values.topics.map(t => t.value),
 			description: values.description,
 			nutritionType: values.nutritionType
-		};
+		};*/
 		setTimeout(() => {
 			alert("Request to DB... Under Development");
 			setSubmitting(false);
@@ -96,7 +95,6 @@ class FormTest extends Component {
 			setFieldValue,
 			setFieldTouched,
 			handleReset,
-			handleChange,
 			dirty
 		} = this.props;
 		const { editorState } = this.state;

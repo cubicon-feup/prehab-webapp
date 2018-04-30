@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import { getCookieInfo } from "../actions/authActions";
 
 import Home from "./Home/home";
-import Login from "./Login/login";
 import MainWindow from "./MainWindow/main-window";
 import Task from "./PatientActivityTask/task";
 import Plan from "./ActivityPlan/plan";
@@ -39,7 +38,6 @@ class App extends Component {
                     <div className="container">
                         <Switch>
                              <Route exact path="/" name="home" component={Home}/>
-                             <Route path="/login" name="login" component={Login}/>
                              <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
 	                         <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
                              <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
