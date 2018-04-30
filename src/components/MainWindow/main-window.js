@@ -16,7 +16,6 @@ class MainWindow extends Component {
     constructor(props){
         super(props);
         this.state = {
-
             patientList: undefined,
             term: '',
         }

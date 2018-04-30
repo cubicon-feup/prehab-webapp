@@ -67,6 +67,7 @@ class Plan extends Component {
             )
         }
     };
+    
     componentDidMount() {
         //console.log(this.props.token);
         this.taskList(this.props.token);
