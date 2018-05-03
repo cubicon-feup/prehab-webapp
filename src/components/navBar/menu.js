@@ -66,6 +66,16 @@ render() {
                         </Col>
                 </Link>
             </div>
+	        <div className="patients">
+		        <Link to= "/nutrition" style={{ textDecoration: 'none' }}>
+			        <Col xs="12">
+				        <div>
+					        <img src={Patients} alt="exercicio" className="patientsImg alignCenter" />
+					        <p className="patientsLabel">Nutrition</p>
+				        </div>
+			        </Col>
+		        </Link>
+	        </div>
             <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
         </div>
     )
