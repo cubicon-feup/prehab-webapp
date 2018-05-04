@@ -119,7 +119,7 @@ class DoctorTable extends Component {
         console.log(this.state.doctorList);
         this.state.filteredList = this.state.doctorList.filter(
             (row) => {
-                return row.email.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+                return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
             }
         );
 

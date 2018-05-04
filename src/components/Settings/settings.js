@@ -86,6 +86,20 @@ class Settings extends Component {
 			                        <h3>Adicionar Médico</h3>
 		                        </div>
 	                        </div>
+	                        <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <Link to="/nutrition">
+                                        <FloatingActionButton style={{marginRight: 20}}>
+                                            <ContentAdd />
+                                        </FloatingActionButton>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <h3>Nutrição</h3>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -165,4 +179,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, null)(Settings);
-
