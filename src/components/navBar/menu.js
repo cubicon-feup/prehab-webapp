@@ -15,35 +15,15 @@ import Patients from "../../images/icons/patients.svg";
 class menu extends Component {
 render() {
     return (
-        /*<Toolbar style={{"backgroundColor": "#00bcd4"}}>
-            <ToolbarGroup>
-                <Link to="/main">
-                    <ToolbarTitle text="Prehab" />
-                </Link>
-            </ToolbarGroup>
-            <ToolbarGroup firstChild={true}>
-                <ToolbarSeparator />
-                    <Link to="/login">
-                        <MenuItem primaryText="Login"/>
-                    </Link>
-                    <Link to="/task"><MenuItem primaryText="Task"/></Link>
-                    <Link to="/plan"><MenuItem primaryText="Plan"/></Link>
-                    <Link to="/notifications">
-                        <Notifications />
-                    </Link>
-            </ToolbarGroup>
+        this.settingsMenu()
+    );
+  }
 
-        </Toolbar>*/
-
-        /*<Drawer docked = {true} width={300}>
-                <Link to="/task"><MenuItem primaryText="Task"/></Link>
-                <Link to="/plan"><MenuItem primaryText="Plan"/></Link>
-        </Drawer>*/
-
+  settingsMenu = () =>{
+    console.log(this.props.auth);
+    if(this.props.auth === true ) {
+       return (
         <div className = "menuDiv">
-
-            {this.settingsMenu()}
-
             <div className="patients">
                 <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
@@ -65,8 +45,9 @@ render() {
                     </Col>
                 </Link>
             </div>
+            
             <div className="patients">
-                <Link to= "/main" style={{ textDecoration: 'none' }}>
+                <Link to= "/patient" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
                             <img src={Patients} alt="main" className="patientsImg alignCenter" />
@@ -75,17 +56,6 @@ render() {
                     </Col>
                 </Link>
             </div>
-
-           <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
-
-        </div>
-    );
-  }
-
-  settingsMenu = () =>{
-  console.log(this.props.auth);
-    if(this.props.auth === true ) {
-       return (
             <div className="patients">
                 <Link to= "/settings" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
@@ -96,7 +66,11 @@ render() {
                          </Col>
                   </Link>
             </div>
-                )
+            <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
+        </div>
+    )
+    }else{
+        return null
     }
   }
 }
