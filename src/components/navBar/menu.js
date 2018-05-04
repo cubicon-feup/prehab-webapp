@@ -25,11 +25,11 @@ render() {
        return (
         <div className = "menuDiv">
             <div className="patients">
-                <Link to= "/main" style={{ textDecoration: 'none' }}>
+                <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
                             <img src={Dashboard} alt="dashboard" className="patientsImg alignCenter" />
-                            <p className="patientsLabel">Dashboard</p>
+                            <p className="patientsLabel">Prehabs</p>
                         </div>
                     </Col>
                 </Link>
@@ -57,14 +57,14 @@ render() {
                 </Link>
             </div>
             <div className="patients">
-                <Link to= "/task" style={{ textDecoration: 'none' }}>
+                <Link to= "/settings" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
-                            <div>
-                                    <img src={Patients} alt="exercicio" className="patientsImg alignCenter" />
-                                    <p className="patientsLabel">Exercícios</p>
-                            </div>
-                        </Col>
-                </Link>
+                              <div>
+                                    <img src={Patients} alt="definições" className="patientsImg alignCenter" />
+                                    <p className="patientsLabel">Definições</p>
+                               </div>
+                         </Col>
+                  </Link>
             </div>
             <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
         </div>
