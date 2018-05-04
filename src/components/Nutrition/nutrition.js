@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import NutritionForm from "./nutritionForm";
+import {connect} from "react-redux";
 
 
 class Nutrition extends Component {
@@ -12,7 +13,7 @@ class Nutrition extends Component {
 						<h1>Nutrição</h1>
 					</div>
 					<div className="col-md-12">
-						<NutritionForm/>
+						<NutritionForm token={this.props.token}/>
 					</div>
 				</div>
 			</div>
@@ -20,4 +21,11 @@ class Nutrition extends Component {
 	}
 }
 
-export default Nutrition;
+const mapStateToProps = (state) => {
+	return {
+		auth: state.auth.isLoggedIn,
+		token: state.auth.accessToken
+	};
+};
+
+export default connect(mapStateToProps, null)(Nutrition);
