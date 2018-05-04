@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
+import "../../styles/newDoctor_style.css";
 
 class DoctorForm extends Component{
 
@@ -34,19 +35,20 @@ class DoctorForm extends Component{
 
             <div>
                 <form onSubmit={this.onSubmit}>
-                <div className="row ">
-                    <div className="col-md-12">
-                        <TextField
-                            name="name"
-                            value={name}
-                            type="name"
-                            errorText={errors.name}
-                            onChange={this.onChange}
-                            hintText="Inserir nome"
-                            fullWidth={true}
-                        />
+                    <div className="row ">
+                        <div className="col-md-12">
+                            <TextField
+                                name="name"
+                                value={name}
+                                type="name"
+                                errorText={errors.name}
+                                onChange={this.onChange}
+                                hintText="Inserir nome"
+                                fullWidth={true}
+                                className="formInput"
+                            />
+                        </div>
                     </div>
-                </div>
                     <div className="row ">
                         <div className="col-md-12">
                             <TextField

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {createNewDoctor} from "../../utils/communication-manager";
 import DoctorForm from "./doctorForm";
 import { connect } from "react-redux";
+import "../../styles/newDoctor_style.css";
 
 class NewDoctor extends Component{
 
@@ -23,6 +24,9 @@ class NewDoctor extends Component{
     render(){
         return (
             <div>
+                <div className="registoLabel">
+                    Registo de Médico
+                </div>
                 <DoctorForm doctorFormSubmit={this.doctorFormSubmit.bind(this)}/>
             </div>
         );

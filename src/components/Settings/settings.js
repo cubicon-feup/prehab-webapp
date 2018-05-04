@@ -115,11 +115,15 @@ class Settings extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.doctorList(nextProps.token);
+        this.setState({
+            doctorSelected : false
+        });
 
     }
 
     componentDidMount() {
         this.doctorList(this.props.token);
+
     }
 
 
