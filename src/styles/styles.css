@@ -33,3 +33,7 @@
     align: center;
 }
 
+body{
+    overflow-x: hidden!important;
+}
+

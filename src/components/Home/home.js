@@ -40,6 +40,12 @@ class Home extends Component {
 		return isValid;
 	}
 
+	_handleKeyPress = (e) => {
+		if (e.key === 'Enter') {
+		  this.onSubmit(e);
+		}
+	}
+
 	onSubmit = (e) => {
 		e.preventDefault();
 		if(this.isValid()){
@@ -81,13 +87,15 @@ class Home extends Component {
 										fullWidth="true"
 										errorText={errors.username}
 										onChange={this.onChange}
+										onKeyPress={this._handleKeyPress}
 										hintText="Inserir Nome de Utilizador"
 									/>
 									<TextField
 										name="password"
 										fullWidth="true"
-
+										type="password"
 										value={password}
+										onKeyPress={this._handleKeyPress}
 										onChange={this.onChange}
 										errorText={errors.password}
 										hintText="Inserir Password"
@@ -101,7 +109,6 @@ class Home extends Component {
 												borderColor= {'#7AC4FF'}
 												backgroundColor={"#FFFFFF"}
 												labelColor={'#7AC4FF'}
-
 												onClick={this.onSubmit} />
 								</div>
 							</form>
