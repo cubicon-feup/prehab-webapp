@@ -136,6 +136,138 @@ export function getTaskList(secret) {
     });
 }
 
+
+export function getDoctorList(secret) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl =  URL + "/api/doctor/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+export function getDoctorById(id, secret) {
+    return new Promise(function (resolve, reject) {
+
+        console.log(id);
+
+        let requestUrl =  URL + "/api/doctor/"+id;
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+export function createNewDoctor(secret, doctor_caracteristics) {
+    return new Promise(function (resolve, reject) {
+
+
+        let requestUrl = URL +"/api/doctor/";
+
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "POST",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'platform': 'web'
+            },
+            body: JSON.stringify({
+                "name":doctor_caracteristics.name,
+                "email": doctor_caracteristics.email,
+                "username" : doctor_caracteristics.username,
+                "password" : doctor_caracteristics.password
+            })
+        };
+
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+export function getPrehabList(secret) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl =  URL + "/api/prehab/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
 export function getPatientList(secret) {
     return new Promise(function (resolve, reject) {
 
