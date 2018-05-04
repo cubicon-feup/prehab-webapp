@@ -53,23 +53,7 @@ class Prehab extends Component {
                         <div className="col-md-9 text-left">
                             <PrehabTable {...props}/>
                         </div>
-                        <div className="col-md-3 text-right " style={myStyle}>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-	                                <Link to="/patient">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
-	                                </Link>
-                                </div>
-                            </div>
-	                        <div className="row">
-		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Paciente</h3>
-		                        </div>
-	                        </div>
 
-                        </div>
                     </div>
                 </div>
             )
@@ -138,4 +122,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, null)(Prehab);
-

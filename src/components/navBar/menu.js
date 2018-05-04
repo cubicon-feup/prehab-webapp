@@ -15,14 +15,6 @@ import Patients from "../../images/icons/patients.svg";
 class menu extends Component {
 render() {
     return (
-        this.settingsMenu()
-    );
-  }
-
-  settingsMenu = () =>{
-    console.log(this.props.auth);
-    if(this.props.auth === true ) {
-       return (
         <div className = "menuDiv">
             <div className="patients">
                 <Link to= "/prehab" style={{ textDecoration: 'none' }}>
@@ -45,9 +37,9 @@ render() {
                     </Col>
                 </Link>
             </div>
-            
+
             <div className="patients">
-                <Link to= "/patient" style={{ textDecoration: 'none' }}>
+                <Link to= "/main" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
                             <img src={Patients} alt="main" className="patientsImg alignCenter" />
@@ -56,6 +48,20 @@ render() {
                     </Col>
                 </Link>
             </div>
+            {this.settingsMenu()}
+
+            <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
+         </div>
+
+    );
+  }
+
+  settingsMenu = () =>{
+    console.log(this.props.role);
+
+    if(this.props.auth === true ) {
+       return (
+
             <div className="patients">
                 <Link to= "/settings" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
@@ -66,18 +72,8 @@ render() {
                          </Col>
                   </Link>
             </div>
-	        <div className="patients">
-		        <Link to= "/nutrition" style={{ textDecoration: 'none' }}>
-			        <Col xs="12">
-				        <div>
-					        <img src={Patients} alt="exercicio" className="patientsImg alignCenter" />
-					        <p className="patientsLabel">Nutrition</p>
-				        </div>
-			        </Col>
-		        </Link>
-	        </div>
-            <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
-        </div>
+
+
     )
     }else{
         return null
@@ -89,8 +85,8 @@ render() {
 const mapStateToProps = (state) => {
     return {
         auth: state.auth.isLoggedIn,
-        token: state.auth.accessToken
-
+        token: state.auth.accessToken,
+        role: state.auth.role
     };
 };
 
