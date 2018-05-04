@@ -4,6 +4,7 @@ import Select from 'react-select';
 
 class SpecialSelect extends React.Component {
 	handleChange = value => {
+
 		// this is going to call setFieldValue and manually update values.topcis
 		if(this.props.id === "Tipo")
 			this.props.onChange('nutritionType', value);

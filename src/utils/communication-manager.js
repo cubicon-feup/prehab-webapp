@@ -419,7 +419,7 @@ export function getDoctorPlan(secret) {
 export function sendNutrition(token, title, restrictions, type, description) {
 	return new Promise(function (resolve, reject) {
 
-		let requestUrl = URL + "/api/nutrition/";
+		let requestUrl = URL + "/api/meal/";
 
 		let requestOptions = {
 			uri: requestUrl,
@@ -432,14 +432,15 @@ export function sendNutrition(token, title, restrictions, type, description) {
 				'platform': 'web',
                 'jwt': token
 			},
-			body: JSON.stringify({ "title": title,
-                "restrictions": restrictions,
-                "type": type,
+			body: JSON.stringify({
+                "title": title,
+                "constraint_types": restrictions,
+                "meal_type_id": type,
                 "description": description
             })
 		};
 		fetch(requestUrl, requestOptions).then(function (response) {
-			if (response.status === 200) {
+			if (response.status === 201) {
 				return resolve(response.json());
 			} else {
 				return reject(Error("An error has occurred! Please try again."));

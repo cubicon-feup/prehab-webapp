@@ -1,6 +1,6 @@
 import Yup from "yup";
 import SpecialSelect from "./selectComp";
-import { withFormik, Field, Form } from 'formik';
+import {  Field, Form, Formik } from 'formik';
 import React, { Component } from "react";
 
 import {foodIcon} from "../../../images/foodIcon.svg";
@@ -9,15 +9,19 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 import { EditorState, convertToRaw } from 'draft-js';
+import {sendNutrition} from "../../../utils/communication-manager";
 
+
+import Dialog from "material-ui/Dialog";
+import RaisedButton from "material-ui/RaisedButton";
 
 const SelectOptions = [
 	{ value: 1, label: "Diabético"},
-	{ value: 2, label: "Insuficiente Renal"},
-	{ value: 3, label: "Desnutrido"},
-	{ value: 4, label: "Vegetariano"},
-	{ value: 5, label: "Hepático"},
-	{ value: 6, label: "Hipertenso"}
+	//{ value: 2, label: "Insuficiente Renal"},
+	{ value: 2, label: "Desnutrido"},
+	{ value: 3, label: "Vegetariano"},
+	{ value: 4, label: "Hepático"},
+	{ value: 5, label: "Hipertenso"}
 ];
 
 const typeOptions = [
@@ -26,149 +30,186 @@ const typeOptions = [
 	{ value: 3, label: "Lanche"}
 ];
 
-export const formikEnhancer = withFormik({
-	validationSchema: Yup.object().shape({
-		title: Yup.string()
-			.required('Preencher titulo!'),
-		topics: Yup.array()
-			.min(1, 'Escolher Restrição')
-			.of(
-				Yup.object().shape({
-					label: Yup.string().required(),
-					value: Yup.string().required(),
-				})
-			),
-		nutritionType: Yup.string()
-			.required('Escolher tipo!'),
-	}),
-	mapPropsToValues: ({title, topics, nutritionType, description}) => ({
-		title: title || '',
-		topics: topics || SelectOptions,
-		nutritionType: '',
-		description: description || EditorState.createEmpty()
-	}),
-
-	handleSubmit: (values, { setSubmitting }) => {
-		/*const payload = {
-			...values,
-			topics: values.topics.map(t => t.value),
-			description: values.description,
-			nutritionType: values.nutritionType
-		};*/
-		setTimeout(() => {
-			alert("Request to DB... Under Development");
-			setSubmitting(false);
-		}, 1000);
-	},
-
-	displayName: 'MyForm',
-});
-
-
-class FormTest extends Component {
+class MyAmazingForm extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
 			editorState: EditorState.createEmpty(),
-			title: '',
+			topics: [],
+			type: "",
+			allText: "",
+			openDialog: false,
+			dialogMessage: "",
 		};
 	}
 
 	onEditorStateChange = (editorState) => {
-		this.props.setFieldValue('description', convertToRaw(editorState.getCurrentContent()));
+		//this.props.setFieldValue('description', convertToRaw(editorState.getCurrentContent()));
 		this.setState({
 			editorState,
+			allText: convertToRaw(editorState.getCurrentContent())
 		});
 	};
 
-	componentDidMount(){
-		console.log(this.props);
-	}
+	handleClose = () => {
+		this.setState({openDialog: false});
+	};
+
 
 	render() {
-		const {
-			values,
-			errors,
-			touched,
-			isSubmitting,
-			setFieldValue,
-			setFieldTouched,
-			handleReset,
-			dirty
-		} = this.props;
-		const { editorState } = this.state;
-
-
+		const { editorState, openDialog } = this.state;
+		const actions = [
+			<RaisedButton
+				label="Ok"
+				primary={true}
+				onClick={this.handleClose}
+			/>,
+		];
 		return (
-			<Form >
-				<label htmlFor="title" style={{ display: 'block' }}>
-					Titulo
-				</label>
-				<Field
-					name="title"
-					placeholder="Inserir Titulo"
-					type="text"
-					value={values.title}
-				/>
-				{errors.title &&
-				touched.title && (
-					<div style={{ color: 'red', marginTop: '.5rem' }}>
-						{errors.title}
-					</div>
-				)}
+			<div>
+				<div>
+					<Dialog
+						contentStyle={{width: "350px",}}
+						title="Registo de Nutrição"
+						actions={actions}
+						modal={false}
+						open={openDialog}
+						onRequestClose={this.handleClose}
+					>
+						{this.state.dialogMessage}
+					</Dialog>
+				</div>
+			<Formik
+				validationSchema= { Yup.object().shape({
+					title: Yup.string()
+						.required('Preencher titulo!'),
+					topics: Yup.array()
+						.min(1, 'Escolher Restrição')
+						.of(
+							Yup.object().shape({
+								label: Yup.string().required(),
+								value: Yup.string().required(),
+							})
+						),
+					nutritionType: Yup.string()
+					.required('Escolher tipo!'),
+				})}
+				initialValues={{
+					title: '',
+					topics: SelectOptions,
+					nutritionType: '',
+					description: EditorState.createEmpty()
+				}}
+				onSubmit={(values, actions) => {
+					// this could also easily use props or other
+					// local state to alter the behavior if needed
+					// this.props.sendValuesToServer(values)
 
-				<SpecialSelect
-					id="Tipo"
-					value={values.nutritionType}
-					onChange={setFieldValue}
-					onBlur={setFieldTouched}
-					error={errors.nutritionType}
-					multi={false}
-					touched={touched.nutritionType}
-					options={typeOptions}
-				/>
+					console.log(values);
 
-				<SpecialSelect
-					id="Restrições"
-					value={values.topics}
-					onChange={setFieldValue}
-					onBlur={setFieldTouched}
-					error={errors.topics}
-					multi={true}
-					touched={touched.topics}
-					options={SelectOptions}
-				/>
+					let allText = "";
 
-				<Card>
-					<CardHeader
-						title="Descrição de nutrientes"
-						avatar={foodIcon}
-					/>
-					<CardText>
-						<Editor
-							editorState={editorState}
-							wrapperClassName="demo-wrapper"
-							editorClassName="demo-editor"
-							onEditorStateChange={this.onEditorStateChange}
+					this.state.allText.blocks.forEach(function(val,index) {
+						allText += val.text + "\n";
+					})
+
+					let restrictions = [];
+					values.topics.forEach(function(topic, index){
+						restrictions.push(topic.value);
+					})
+
+					console.log(this.props.token);
+					console.log(values.title);
+					console.log(restrictions);
+					console.log(allText);
+					console.log(values.nutritionType);
+
+					sendNutrition(this.props.token, values.title, restrictions, values.nutritionType.value, allText).then(
+						success => {
+							this.setState({
+								dialogMessage: "Registo com Sucesso",
+								openDialog: true,
+							});
+							actions.setSubmitting(false)
+						})
+						.catch( err => {
+							this.setState({
+								dialogMessage: "Erro no registo",
+								openDialog: true,
+							});
+							console.log("Err: " + err);
+							actions.setSubmitting(false)
+						});
+
+					/*setTimeout(() => {
+						alert(JSON.stringify(values, null, 2))
+						actions.setSubmitting(false)
+					}, 1000)*/
+				}}
+				render={({ values, touched, errors, dirty, isSubmitting, setFieldValue, setFieldTouched, handleReset }) => (
+					<Form >
+						<label htmlFor="title" style={{ display: 'block' }}>
+							Titulo
+						</label>
+						<Field
+							name="title"
+							placeholder="Inserir Titulo"
+							type="text"
+							value={values.title}
 						/>
-					</CardText>
-				</Card>
+						{errors.title &&
+						touched.title && (
+							<div style={{ color: 'red', marginTop: '.5rem' }}>
+								{errors.title}
+							</div>
+						)}
 
-				<button
-					type="button"
-					className="outline"
-					onClick={handleReset}
-					disabled={!dirty || isSubmitting}
-				>
-					Reset
-				</button>
-				<button type="submit" disabled={isSubmitting}>
-					Submit
-				</button>
-			</Form>
-		);
+						<SpecialSelect
+							id="Tipo"
+							value={values.nutritionType}
+							onChange={setFieldValue}
+							onBlur={setFieldTouched}
+							error={errors.nutritionType}
+							multi={false}
+							touched={touched.nutritionType}
+							options={typeOptions}
+						/>
+
+						<SpecialSelect
+							id="Restrições"
+							value={values.topics}
+							onChange={setFieldValue}
+							onBlur={setFieldTouched}
+							error={errors.topics}
+							multi={true}
+							touched={touched.topics}
+							options={SelectOptions}
+						/>
+
+						<Card>
+							<CardHeader
+								title="Descrição de nutrientes"
+								avatar={foodIcon}
+							/>
+							<CardText>
+								<Editor
+									editorState={editorState}
+									wrapperClassName="demo-wrapper"
+									editorClassName="demo-editor"
+									onEditorStateChange={this.onEditorStateChange}
+								/>
+							</CardText>
+						</Card>
+						<button type="submit" disabled={isSubmitting}>
+							Submit
+						</button>
+					</Form>
+				)}
+			/>
+			</div>
+		)
 	}
-};
+}
 
-export const MyAmazingForm = formikEnhancer(FormTest);
+export default MyAmazingForm;
