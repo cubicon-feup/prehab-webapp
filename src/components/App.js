@@ -33,7 +33,7 @@ class App extends Component {
     createMenu = () => {
         return (
             <Row>
-                <div className="menuOuterDiv"><NavBar/></div>
+                <NavBar/>
                 <div className="container">
                     <Switch>
                         <Route exact path="/" name="home" component={Home}/>

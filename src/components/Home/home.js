@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from '../../images/logo.png';
 // import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+
 import TextField from 'material-ui/TextField';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
@@ -91,6 +92,7 @@ class Home extends Component {
 										hintText="Inserir Nome de Utilizador"
 									/>
 									<TextField
+										inputStyle={inputStyle}
 										name="password"
 										fullWidth="true"
 										type="password"
@@ -99,17 +101,13 @@ class Home extends Component {
 										onChange={this.onChange}
 										errorText={errors.password}
 										hintText="Inserir Password"
-
 									/>
 
 									<p> </p>
-									<RaisedButton label="Entrar"
-												buttonStyle={{ borderRadius: 25 }}
-												style={{ borderRadius: 25 }}
-												borderColor= {'#7AC4FF'}
-												backgroundColor={"#FFFFFF"}
-												labelColor={'#7AC4FF'}
-												onClick={this.onSubmit} />
+									<div style={divStyle}
+										onClick={this.onSubmit}>
+										Entrar																			
+									</div>
 								</div>
 							</form>
 							<Link to="/forgetPassword" style={{color: '#7AC4FF'}} activeStyle={{color: 'red'}}>Esqueceu-se da Password?</Link>
@@ -121,6 +119,27 @@ class Home extends Component {
 	}
 }
 
+const divStyle = {
+	borderColor: '#BCE0FD',
+	borderWidth: 1,
+	borderStyle:"solid",
+	paddingTop:5,
+	paddingBottom:5,
+	paddingLeft:20,
+	paddingRight:20,
+	borderRadius:100,
+	cursor: "pointer",
+	display:"table",
+	margin: "auto",
+  };
+
+  
+const inputStyle = {
+	borderBottomColor: '#BCE0FD',
+	borderBottomWidth: 1,
+	borderBottomStyle:"solid",
+	
+  };
 
 const mapStateToProps = (state) => {
 	return {
@@ -138,6 +157,7 @@ function mapDispatchToProps(dispatch) {
 		}
 	};
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
