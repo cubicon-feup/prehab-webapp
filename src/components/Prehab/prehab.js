@@ -2,10 +2,6 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-//import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
 import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 
@@ -24,9 +20,6 @@ class Prehab extends Component {
     }
 
     MainActivity = () => {
-        let myStyle = {
-		    marginTop: '15%'
-	    };
         let props = {
             list:this.state.prehabList,
             term:this.state.term,

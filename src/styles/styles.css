@@ -35,5 +35,10 @@
 
 body{
     overflow-x: hidden!important;
+    background: #dddd;
+}
+
+.container {
+    padding:0;
 }
 
