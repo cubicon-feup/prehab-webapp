@@ -10,6 +10,7 @@ import User from "../../images/icons/user.svg";
 
 class menu extends Component {
 render() {
+    if(this.props.auth === true ) {
     return (
         <div className = "menuDiv">
             <div className="patients">
@@ -55,19 +56,6 @@ render() {
                     </Col>
                 </Link>
             </div>
-            {this.settingsMenu()}
-
-            <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
-         </div>
-
-    );
-  }
-
-  settingsMenu = () =>{
-    console.log(this.props.role);
-
-    if(this.props.auth === true ) {
-       return (
 
             <div className="patients">
                 <Link to= "/settings" style={{ textDecoration: 'none' }}>
@@ -80,8 +68,10 @@ render() {
                   </Link>
             </div>
 
+            <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
+         </div>
 
-    )
+    );
     }else{
         return null
     }
