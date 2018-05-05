@@ -25,7 +25,6 @@ render() {
 
             <div className="patients">
                 <Link to= "/main" style={{ textDecoration: 'none' }}>
-                <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
                             <img src={Dashboard} alt="dashboard" className="patientsImg alignCenter" />

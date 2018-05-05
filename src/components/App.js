@@ -38,38 +38,23 @@ class App extends Component {
     createMenu = () => {
         return (
             <Row>
-                <NavBar/>
+                <div className="menuOuterDiv"><NavBar/></div>
                 <div className="container">
                     <Switch>
                         <Route exact path="/" name="home" component={Home}/>
+                        <Route path="/login" name="login" component={Login}/>
                         <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
                         <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/settings" name="Settings" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
                         <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
                         <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/newDoctor" name="Doctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
-                        <Redirect to="/main" />
+                        //<Redirect to="/main" />
                     </Switch>
                 </div>
             </Row>
-        return(
-        <Row>
-            <div className="menuOuterDiv"><NavBar/></div>
-            <div className="container">
-                <Switch>
-                     <Route exact path="/" name="home" component={Home}/>
-                     <Route path="/login" name="login" component={Login}/>
-                     <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/settings" name="Settings" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/newDoctor" name="Doctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
-                     //<Redirect to="/main" />
-                 </Switch>
-             </div>
-         </Row>
         )
     }
 
