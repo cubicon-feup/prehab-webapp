@@ -132,9 +132,6 @@ const divStyle = {
 
   
 const inputStyle = {
-	borderBottomColor: '#BCE0FD',
-	borderBottomWidth: 1,
-	borderBottomStyle:"solid",
 	
   };
 
