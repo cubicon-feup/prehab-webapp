@@ -12,7 +12,6 @@
 
 .searchBar{
    margin: 0 auto;
-   width: 400px;
    border: 1px solid #2699FB;
    border-radius: 50px;
    background-color: transparent;
@@ -65,8 +64,6 @@
 
 .tableBodyRow, .tableHeaderRow{
     height: 90px !important;
-    shadowColor: 'transparent';
-
 }
 
 .tableBodyRow{
