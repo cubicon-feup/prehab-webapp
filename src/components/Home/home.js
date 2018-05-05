@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import logo from '../../images/logo.png';
-// import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-
 import TextField from 'material-ui/TextField';
 import validateInput from '../../validation/login';
 import { connect } from 'react-redux';
