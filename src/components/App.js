@@ -18,6 +18,7 @@ import Prehab from "./Prehab/prehab";
 import Nutrition from "./Nutrition/nutrition";
 import {  Row } from 'reactstrap';
 import Login from "./Login/login";
+import Logout from "./Logout/logout";
 
 class App extends Component {
 
@@ -51,6 +52,7 @@ class App extends Component {
                         <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newDoctor" name="Doctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/logout" name="logout" component={Logout}/>
                         <Redirect to="/main" />
                     </Switch>
                 </div>
