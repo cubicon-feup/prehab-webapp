@@ -12,7 +12,7 @@ import Task from "./PatientActivityTask/task";
 import Plan from "./ActivityPlan/plan";
 import NavBar from "./navBar/navBar";
 import Patient from "./CreatePatient/patient";
-import {  Row } from 'reactstrap';
+import {Row} from "reactstrap";
 
 class App extends Component {
 

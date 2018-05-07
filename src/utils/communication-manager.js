@@ -4,7 +4,7 @@
  * @param {*} password User password.
  */
 
-const URL = "http://ec2-35-176-204-5.eu-west-2.compute.amazonaws.com:8000";
+const URL = "http://prehab.cubicon.xyz:8000";
 
 export function authenticateUser(username, password) {
     return new Promise(function (resolve, reject) {
@@ -165,6 +165,36 @@ export function getPatientList(secret) {
     });
 }
 
+
+//Get Patient's alert list
+export function getPatientsAlertList(secret, user) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl =  URL + "/api/patient/schedule/task/" + user;
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
 /**
  * Creates a New Patient
  * @param {*} .

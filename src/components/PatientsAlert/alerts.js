@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import {connect} from 'react-redux';
+import Axios from 'axios';
+import {getPatientsAlertList} from "../../utils/communication-manager";
 
 class Alerts extends Component{
 
@@ -25,12 +28,35 @@ class Alerts extends Component{
         };
     }
 
+//    patientList(token, patientId){
+//        getPatientList(token, patientId).then(list => {
+//                    console.log(list);
+//                    this.setState({
+//                        patientList: list.data
+//                    });
+//
+//                }).catch(err => {
+//                    console.log(err);
+//                    this.setState({
+//                        patientList: undefined
+//                    });
+//                });
+//    }
+
+    ComponentDidMount(){
+        var chosenPatient= this.props.patient_tag;
+        console.log(chosenPatient);
+    }
+
     handleClick = () =>{
         this.setState({seen:true});
         console.log(this.state.alerts);
     }
 
     render(){
+        var patient= this.props.patient;
+        console.log(patient);
+        console.log(this.state.alerts);
         let filteredAlerts = this.state.alerts.filter(
             (row) => {
                 return row.id !== -1;
@@ -50,4 +76,10 @@ class Alerts extends Component{
     }
 
 }
-export default Alerts;
+
+function mapStateToProps(state){
+  return{
+    patient: state.activePatient
+  }
+}
+export default connect(mapStateToProps)(Alerts);

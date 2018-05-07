@@ -21,6 +21,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "^1.1.1",
     "react-sidebar": "^2.3.2",
+    "react-strap": "0.0.1",
     "reactstrap": "^5.0.0",
     "redux": "^3.7.2",
     "redux-persist": "^5.9.1",
