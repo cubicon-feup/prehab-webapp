@@ -17,7 +17,7 @@ class ButtonLogout extends Component {
     sessionStorage.clear();
       this.props.logOut();
 
-      this.props.history.push("/logout");
+      this.props.history.push("/");
 
         };
 
@@ -49,4 +49,4 @@ class ButtonLogout extends Component {
   }
 
 
-  export default connect(mapStateToProps, mapDispatchToProps)(ButtonLogout);
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonLogout);
