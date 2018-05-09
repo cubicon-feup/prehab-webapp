@@ -1,9 +1,6 @@
 import React, {Component} from "react";
-//import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
-import Alert from "../../images/icons/alert.svg"
 import {getDoctorById} from "../../utils/communication-manager";
-import {withRouter} from "react-router-dom";
 
 import {
     Table,
@@ -13,81 +10,7 @@ import {
     TableRow,
     TableRowColumn,
 } from "material-ui/Table";
-/*
-const tableData = [
-    {
-        id: "125643162",git
-        alerts: "2",
-        surgery: "23-05-2018",
 
-        doctor: "mani",
-
-    },
-    {
-        id: "6453747",
-        alerts: "0",
-        surgery: "25-05-2018",
-
-        doctor: "Magna",
-
-    },
-    {
-        id: "9786070",
-        alerts: "0",
-        surgery: "01-05-2018",
-
-        doctor: "JOn",
-
-    },
-    {
-        id: "73686382",
-        alerts: "5",
-        surgery: "05-04-2018",
-        doctor: "Magna",
-    },
-    {
-        id: "12312515",
-        alerts: "0",
-        surgery: "25-05-2018",
-
-        doctor: "JOn",
-    },
-    {
-            id: "6453747",
-            alerts: "0",
-            surgery: "25-05-2018",
-            doctor: "Magna",
-        },
-        {
-            id: "9786070",
-            alerts: "0",
-            surgery: "01-05-2018",
-            doctor: "JOn",
-        },
-        {
-            id: "73686382",
-            alerts: "5",
-            surgery: "05-04-2018",
-            doctor: "Magna",
-        },
-        {
-            id: "12312515",
-            alerts: "0",
-            surgery: "25-05-2018",
-            doctor: "Magna",
-        },
-];
-
-function searchingFor(term){
-    return function(x){
-        return x.patient_tag.toLowerCase().includes(term.toLowerCase()) || !term;
-    }
-}
-*/
-
-/**
- * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
- */
 class DoctorTable extends Component {
     state = {
         filteredList: undefined,
@@ -115,14 +38,15 @@ class DoctorTable extends Component {
 
 
     render() {
-
         console.log(this.state.doctorList);
-        this.state.filteredList = this.state.doctorList.filter(
-            (row) => {
-                return row.email.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
-            }
-        );
-
+        this.setState({
+            filteredList:this.state.doctorList.filter(
+                (row) => {
+                    return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+                }
+               
+            )
+        });
 
         return (
             <div>
@@ -172,9 +96,6 @@ class DoctorTable extends Component {
 
             }).catch(err => {
                 console.log(err);
-                /*this.setState({
-                    doctorList: undefined
-                });*/
             });
         };
 }

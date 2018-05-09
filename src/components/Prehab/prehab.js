@@ -2,10 +2,6 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-//import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
 import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 
@@ -24,9 +20,6 @@ class Prehab extends Component {
     }
 
     MainActivity = () => {
-        let myStyle = {
-		    marginTop: '15%'
-	    };
         let props = {
             list:this.state.prehabList,
             term:this.state.term,
@@ -53,23 +46,7 @@ class Prehab extends Component {
                         <div className="col-md-9 text-left">
                             <PrehabTable {...props}/>
                         </div>
-                        <div className="col-md-3 text-right " style={myStyle}>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-	                                <Link to="/patient">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
-	                                </Link>
-                                </div>
-                            </div>
-	                        <div className="row">
-		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Paciente</h3>
-		                        </div>
-	                        </div>
 
-                        </div>
                     </div>
                 </div>
             )
@@ -138,4 +115,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, null)(Prehab);
-

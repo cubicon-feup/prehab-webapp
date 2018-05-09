@@ -9,9 +9,6 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
-import Home from "../Home/home";
-import { BrowserRouter as Router ,Route, Switch  } from "react-router-dom";
-
 
 
 class Settings extends Component {
@@ -86,6 +83,20 @@ class Settings extends Component {
 			                        <h3>Adicionar Médico</h3>
 		                        </div>
 	                        </div>
+	                        <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <Link to="/nutrition">
+                                        <FloatingActionButton style={{marginRight: 20}}>
+                                            <ContentAdd />
+                                        </FloatingActionButton>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <h3>Nutrição</h3>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -165,4 +176,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, null)(Settings);
-

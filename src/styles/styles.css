@@ -30,10 +30,18 @@
 
 .patient-code-box {
     text-align:center;
-    align: center;
 }
 
 body{
     overflow-x: hidden!important;
+    background: #f6f6f6 !important;
+}
+
+.menuOuterDiv{
+    background: #fff!important;
+}
+
+.container {
+    padding:0;
 }
 

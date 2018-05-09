@@ -17,7 +17,6 @@ import RaisedButton from "material-ui/RaisedButton";
 
 const SelectOptions = [
 	{ value: 1, label: "Diabético"},
-	//{ value: 2, label: "Insuficiente Renal"},
 	{ value: 2, label: "Desnutrido"},
 	{ value: 3, label: "Vegetariano"},
 	{ value: 4, label: "Hepático"},
