@@ -68,7 +68,7 @@ render() {
                   </Link>
             </div>
             <div className="patients">
-                            <Link to= "/logout" style={{ textDecoration: 'none' }}>
+                            <Link to= "/buttonlogout" style={{ textDecoration: 'none' }}>
                                     <Col xs="12">
                                             <p className="patientsLabel">Sair</p>
                                      </Col>

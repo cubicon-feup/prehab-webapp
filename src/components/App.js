@@ -19,7 +19,7 @@ import Nutrition from "./Nutrition/nutrition";
 import {  Row } from 'reactstrap';
 import Login from "./Login/login";
 import Logout from "./Logout/logout";
-
+import ButtonLogout from "./Logout/buttonlogout";
 class App extends Component {
 
     componentDidMount(){
@@ -53,6 +53,8 @@ class App extends Component {
                         <Route path="/newDoctor" name="Doctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
                         <Route path="/logout" name="logout" component={Logout}/>
+                        <Route path="/buttonlogout" name="buttonlogout" component={ButtonLogout}/>
+
                         <Redirect to="/main" />
                     </Switch>
                 </div>
