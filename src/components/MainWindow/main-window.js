@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import PatientTable from "./patientTable";
-import Logout from "../Logout/logout";
 import { Link } from "react-router-dom"
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
@@ -71,7 +70,7 @@ class MainWindow extends Component {
         else if(this.props.auth === false) {
 
             return (
-                <Logout/>
+                <h1> </h1>
             )
         }
     };
@@ -143,4 +142,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, null)(MainWindow);
-
