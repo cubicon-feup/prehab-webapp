@@ -21,6 +21,11 @@
     margin-top: 7px;
 }
 
+.doctorsImg{
+    width:42px;
+    height:42px;
+}
+
 .logo{
     position: absolute;
     align: center;

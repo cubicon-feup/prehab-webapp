@@ -10,6 +10,10 @@ import "../../styles/menu_style.css";
 import Logo from "../../images/icons/logo.svg";
 import Dashboard from "../../images/icons/dashboard.svg";
 import Patients from "../../images/icons/patients.svg";
+import Doctors from "../../images/icons/doctors.svg";
+import Nutrition from "../../images/icons/nutrition.svg";
+import Tasks from "../../images/icons/tasks.svg";
+import Prehabs from "../../images/icons/prehabs.svg";
 
 
 class menu extends Component {
@@ -20,19 +24,8 @@ render() {
                 <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                     <Col xs="12">
                         <div>
-                            <img src={Dashboard} alt="dashboard" className="patientsImg alignCenter" />
+                            <img src={Prehabs} alt="dashboard" className="doctorsImg alignCenter" />
                             <p className="patientsLabel">Prehabs</p>
-                        </div>
-                    </Col>
-                </Link>
-            </div>
-
-            <div className="patients">
-                <Link to= "/plan" style={{ textDecoration: 'none' }}>
-                    <Col xs="12">
-                        <div>
-                            <img src={Patients} alt="plan" className="patientsImg alignCenter" />
-                            <p className="patientsLabel">Planos</p>
                         </div>
                     </Col>
                 </Link>
@@ -48,7 +41,19 @@ render() {
                     </Col>
                 </Link>
             </div>
+
             {this.settingsMenu()}
+
+            <div className="patients">
+                <Link to= "/plan" style={{ textDecoration: 'none' }}>
+                    <Col xs="12">
+                        <div>
+                            <img src={Tasks} alt="plan" className="doctorsImg alignCenter" />
+                            <p className="patientsLabel">Planos</p>
+                        </div>
+                    </Col>
+                </Link>
+            </div>
 
             <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
          </div>
@@ -60,21 +65,30 @@ render() {
     console.log(this.props.role);
 
     if(this.props.auth === true ) {
-       return (
-
-            <div className="patients">
-                <Link to= "/settings" style={{ textDecoration: 'none' }}>
+        return (
+            <div>
+                <div className="patients">
+                    <Link to= "/doctor" style={{ textDecoration: 'none' }}>
                         <Col xs="12">
-                              <div>
-                                    <img src={Patients} alt="definições" className="patientsImg alignCenter" />
-                                    <p className="patientsLabel">Definições</p>
-                               </div>
-                         </Col>
-                  </Link>
+                            <div>
+                                <img src={Doctors} alt="definições" className="doctorsImg alignCenter" />
+                                <p className="patientsLabel">Médicos</p>
+                            </div>
+                        </Col>
+                    </Link>
+                </div>
+                <div className="patients">
+                    <Link to= "/nutrition" style={{ textDecoration: 'none' }}>
+                        <Col xs="12">
+                            <div>
+                                <img src={Nutrition} alt="definições" className="doctorsImg alignCenter" />
+                                <p className="patientsLabel">Ementas</p>
+                            </div>
+                        </Col>
+                    </Link>
+                </div>
             </div>
-
-
-    )
+        )
     }else{
         return null
     }
