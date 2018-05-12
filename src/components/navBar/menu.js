@@ -14,6 +14,8 @@ import Patients from "../../images/icons/patients.svg";
 
 class menu extends Component {
 render() {
+
+    if(this.props.auth){
     return (
         <div className = "menuDiv">
             <div className="patients">
@@ -54,6 +56,9 @@ render() {
          </div>
 
     );
+    }else{
+        return null;
+    }
   }
 
   settingsMenu = () =>{
