@@ -68,10 +68,10 @@ class Settings extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-9 text-left">
+                        <div className="col-md-8 text-left">
                             <DoctorTable action={this.handler.bind(this)} {...props} />
                         </div>
-                        <div className="col-md-3 text-right " style={myStyle}>
+                        <div className="col-md-4 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
 	                                <Link to="/newDoctor">
@@ -88,6 +88,20 @@ class Settings extends Component {
 	                        </div>
 	                        <div className="row">
                                 <div className="col-md-12 text-center">
+                                    <Link to="/task">
+                                        <FloatingActionButton style={{marginRight: 20}}>
+                                            <ContentAdd />
+                                        </FloatingActionButton>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <h3>Criar Tarefas</h3>
+                                </div>
+                            </div>
+	                        <div className="row">
+                                <div className="col-md-12 text-center">
                                     <Link to="/nutrition">
                                         <FloatingActionButton style={{marginRight: 20}}>
                                             <ContentAdd />
@@ -97,7 +111,7 @@ class Settings extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-                                    <h3>Nutrição</h3>
+                                    <h3>Criar Plano Nutricional</h3>
                                 </div>
                             </div>
 
