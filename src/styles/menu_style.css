@@ -2,6 +2,7 @@
     background-color : #ffffff;
     height: 100vh;
     position : relative;
+    padding: 0 25px;
 }
 
 .patients{
@@ -12,20 +13,28 @@
 .patientsImg{
     width:31px;
     height:31px;
+    
+}
+
+.userImg{
+    width:65px;
+    height:65px;
+    border:1px #000 solid;
+    border-radius: 100px;
+    padding:10px;
 }
 
 .patientsLabel{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
-    font-size: 20px;
+    font-size: 12px;
     margin-top: 7px;
 }
 
 .logo{
-    position: absolute;
-    align: center;
-    bottom : 132px;
-    width: 100%;
+    position: fixed;
+    bottom: 25px;
+    left: 20px;
     height: auto;
 }
 

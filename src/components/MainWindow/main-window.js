@@ -2,9 +2,6 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PatientTable from "./patientTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-//import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
@@ -24,7 +21,7 @@ class MainWindow extends Component {
 
     MainActivity = () => {
         let myStyle = {
-		    marginTop: '15%'
+		    marginTop: '90px'
 	    };
         let props = {
             list:this.state.patientList,
@@ -36,16 +33,15 @@ class MainWindow extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-4">
-                            <p className="doctorNameLabel">Olá {role}</p>
+                        <div className="doctorName col-md-12">
+                            <p className="doctorNameLabel">Olá Doutora Maria Santos{role}</p>
                         </div>
-                        <div className = "searchBarDiv col-md-8 text-right">
+                        <div className = "searchBarDiv col-md-5 text-right">
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
                                 onChange = {this.filterList.bind(this)}
                             />
-
                         </div>
                     </div>
                     <div className="row">
@@ -55,16 +51,14 @@ class MainWindow extends Component {
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-	                                <Link to="/patient">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
+	                                <Link to="/patient" style={{textDecoration: 'none' }}>
+		                                <div style={divAddPatientStyle}>+</div>
 	                                </Link>
                                 </div>
                             </div>
 	                        <div className="row">
 		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Paciente</h3>
+			                        <p className="addPatientLabel">Novo Paciente</p>
 		                        </div>
 	                        </div>
 
@@ -107,8 +101,6 @@ class MainWindow extends Component {
 	}
 
 
-
-
     patientList(token){
         getPatientList(token).then(list => {
                     console.log(list);
@@ -124,6 +116,21 @@ class MainWindow extends Component {
                 });
     }
 }
+
+const divAddPatientStyle = {
+    backgroundColor:"#F1F9FF",
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:10,
+    paddingRight:10,
+    borderRadius:100,
+    cursor: "pointer",
+    display:"table",
+    margin: "auto",
+    fontSize:20,
+    width: 50,
+    height: 50,
+  };
 
 const mapStateToProps = (state) => {
     return {
