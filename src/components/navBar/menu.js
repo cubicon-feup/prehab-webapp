@@ -67,7 +67,13 @@ render() {
                          </Col>
                   </Link>
             </div>
-
+            <div className="patients">
+                            <Link to= "/logout" style={{ textDecoration: 'none' }}>
+                                    <Col xs="12">
+                                            <p className="patientsLabel">Sair</p>
+                                     </Col>
+                              </Link>
+                </div>
             <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
          </div>
 
@@ -88,4 +94,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, null)(menu);
-
