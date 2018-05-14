@@ -36,6 +36,7 @@ class App extends Component {
     }
 
     createMenu = () => {
+
         return (
             <Row>
                 <div className="menuOuterDiv"><NavBar/></div>
@@ -57,6 +58,7 @@ class App extends Component {
                     </Switch>
                 </div>
             </Row>
+
         )
     }
 
