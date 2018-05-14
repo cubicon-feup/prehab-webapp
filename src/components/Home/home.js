@@ -103,7 +103,7 @@ class Home extends Component {
 									<p> </p>
 									<div style={divStyle}
 										onClick={this.onSubmit}>
-										Entrar																			
+										Entrar
 									</div>
 								</div>
 							</form>
@@ -130,9 +130,9 @@ const divStyle = {
 	margin: "auto",
   };
 
-  
+
 const inputStyle = {
-	
+
   };
 
 const mapStateToProps = (state) => {
@@ -154,5 +154,3 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-

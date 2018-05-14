@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "../../styles/pacientes_style.css";
+import "../../styles/settings_style.css";
 import {getDoctorById} from "../../utils/communication-manager";
 
 import {
@@ -39,14 +39,15 @@ class DoctorTable extends Component {
 
     render() {
         console.log(this.state.doctorList);
-        this.setState({
-            filteredList:this.state.doctorList.filter(
-                (row) => {
-                    return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
-                }
-               
-            )
-        });
+
+
+
+        let filteredList = this.state.doctorList.filter(
+                    (row) => {
+                        return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+                    }
+                );
+
 
         return (
             <div>
@@ -71,7 +72,7 @@ class DoctorTable extends Component {
                         deselectOnClickaway={this.state.deselectOnClickaway}
                         showRowHover={this.state.showRowHover}
                         stripedRows={this.state.stripedRows}>
-                        {this.state.filteredList.map( (row) => (
+                        {filteredList.map( (row) => (
                             <TableRow key={row.id} className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.name}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.role_name}</div></TableRowColumn>

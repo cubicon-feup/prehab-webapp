@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import "../../styles/newDoctor_style.css";
+import validateInput from '../../validation/newDoctor';
 
 class DoctorForm extends Component{
 
@@ -20,9 +21,20 @@ class DoctorForm extends Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.props.doctorFormSubmit(this.state);
+        if(this.isValid()){
+            console.log(this.state);
+            this.props.doctorFormSubmit(this.state);
+        }
     };
+
+    isValid() {
+        const { errors, isValid } = validateInput(this.state);
+
+        if(!isValid){
+            this.setState({ errors });
+        }
+        return isValid;
+    }
 
     onChange = (e) => {
         e.preventDefault();
@@ -40,7 +52,6 @@ class DoctorForm extends Component{
                             <TextField
                                 name="name"
                                 value={name}
-                                type="name"
                                 errorText={errors.name}
                                 onChange={this.onChange}
                                 hintText="Inserir nome"
@@ -54,7 +65,6 @@ class DoctorForm extends Component{
                             <TextField
                                 name="email"
                                 value={email}
-                                type="email"
                                 errorText={errors.email}
                                 onChange={this.onChange}
                                 hintText="Inserir email"
@@ -67,7 +77,6 @@ class DoctorForm extends Component{
                             <TextField
                                 name="username"
                                 value={username}
-                                type="username"
                                 errorText={errors.username}
                                 onChange={this.onChange}
                                 hintText="Inserir username"
