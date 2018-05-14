@@ -14,7 +14,7 @@ class NewDoctor extends Component{
         this.state = {
 
             openDialog: false,
-            submitMessage: "Erro - Registo de plano falhou"
+            submitMessage: "Ocurreu um erro na Criação"
 
         };
 

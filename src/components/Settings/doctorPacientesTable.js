@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/doctorInfo_style.css";
-import Alert from "../../images/icons/alert.svg"
 
 
 import {
@@ -146,11 +145,11 @@ class PatientTable extends Component {
                         {filteredPatients.map( (row) => (
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
-                                //<TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
+
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                //<TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
-                                //<TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
+
+
                             </TableRow>
                         ))}
                     </TableBody>
