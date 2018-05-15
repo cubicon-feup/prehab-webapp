@@ -44,7 +44,7 @@ class menu extends Component {
                     </div>
                     
                     <div className="patients">
-                        <Link to= "/main" style={{ textDecoration: 'none' }}>
+                        <Link to= "/patient" style={{ textDecoration: 'none' }}>
                             <Col xs="12">
                                 <div>
                                     <img src={Patients} alt="main" className="patientsImg alignCenter" />

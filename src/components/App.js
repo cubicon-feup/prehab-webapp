@@ -7,12 +7,12 @@ import {connect} from "react-redux";
 import { getCookieInfo } from "../actions/authActions";
 
 import Home from "./Home/home";
-import MainWindow from "./MainWindow/main-window";
+import Patient from "./MainWindow/patient";
 import Task from "./PatientActivityTask/task";
 import Plan from "./ActivityPlan/plan";
 import NewPlan from "./ActivityPlan/newPlan";
 import NavBar from "./navBar/navBar";
-import Patient from "./CreatePatient/patient";
+import NewPatient from "./CreatePatient/newPatient";
 import Settings from "./Settings/settings";
 import NewDoctor from "./Settings/newDoctor";
 import Prehab from "./Prehab/prehab";
@@ -50,8 +50,8 @@ class App extends Component {
                         <Route path="/newPlan" name="newPlan" render={(props) => (<NewPlan auth={this.props.auth} {...props}/>)}/>
                         <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
                         <Route path="/doctor" name="Doctor" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/newPatient" name="newPatient" render={(props) => (<NewPatient auth={this.props.auth} {...props}/>)}/>
                         <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
-                        <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
                         <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newDoctor" name="newDoctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition auth={this.props.auth} {...props}/>)}/>
