@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
 import "../../styles/pacientes_style.css";
-import Alert from "../../images/icons/alert.svg"
 
 
 import {
@@ -90,7 +89,7 @@ function searchingFor(term){
 class PatientTable extends Component {
     state = {
         term: this.props.term,
-        patientList: this.props.list,
+        taskList: this.props.list,
         fixedHeader: true,
         fixedFooter: false,
         stripedRows: false,
@@ -100,7 +99,7 @@ class PatientTable extends Component {
         enableSelectAll: false,
         deselectOnClickaway: false,
         showCheckboxes: false,
-      };
+    };
 
 
     handleToggle = (event, toggled) => {
@@ -110,13 +109,8 @@ class PatientTable extends Component {
     };
 
     render() {
-        console.log(this.state.patientList);
+        console.log(this.state.taskList);
         console.log(this.props.term);
-        let filteredPatients = this.state.patientList.filter(
-            (row) => {
-                return row.patient_tag.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
-            }
-        );
         return (
             <div>
                 <Table
@@ -131,11 +125,8 @@ class PatientTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}>
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Cirurgia</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Idade</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Sexo">Sexo</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderLastItem" tooltip="Médicos Associados">Médicos</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Tarefa</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Descrição</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -143,14 +134,11 @@ class PatientTable extends Component {
                         deselectOnClickaway={this.state.deselectOnClickaway}
                         showRowHover={this.state.showRowHover}
                         stripedRows={this.state.stripedRows}>
-                        {filteredPatients.map( (row) => (
+                        {this.state.taskList.map( (row) => (
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.id}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.title}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.description}</div></TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>

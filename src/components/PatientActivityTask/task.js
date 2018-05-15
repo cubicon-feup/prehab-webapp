@@ -11,7 +11,7 @@ class Task extends Component {
             return (
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Criar Task</h1>
+                        <h1>Criar Tarefa</h1>
                         <TaskForm token={this.props.token}/>
                     </div>
                 </div>

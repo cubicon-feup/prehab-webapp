@@ -55,7 +55,7 @@ class PrehabTable extends Component {
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Data da cirurgia">Cirurgia</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Semanas">Nº de Semanas</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Data Inicio do Plano">Inicio Plano</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Data prevista para Fim do Plano">Fim Plano Previsto</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Data prevista para Fim do Plano">Fim Plano</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody

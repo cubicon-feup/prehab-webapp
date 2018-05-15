@@ -129,7 +129,7 @@ const divAddPatientStyle = {
     fontSize:20,
     width: 50,
     height: 50,
-  };
+};
 
 const mapStateToProps = (state) => {
     return {
