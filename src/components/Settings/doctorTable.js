@@ -13,7 +13,7 @@ import {
 
 class DoctorTable extends Component {
     state = {
-        filteredList: undefined,
+        filteredList: this.props.list,
         token: this.props.token,
         term: this.props.term,
         doctorList: this.props.list,
@@ -47,6 +47,12 @@ class DoctorTable extends Component {
                         return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
                     }
                 );
+
+        if(this.state.filteredList.length !== filteredList.length){
+            this.setState({
+                filteredList: filteredList,
+            });
+        }
 
 
         return (
