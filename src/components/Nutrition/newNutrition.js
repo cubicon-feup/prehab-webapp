@@ -10,7 +10,7 @@ class NewNutrition extends Component {
 			<div>
 				<div className="row">
 					<div className="col-md-12">
-						<h1>Nova Ementa</h1>
+						<h1>Nutrição</h1>
 					</div>
 					<div className="col-md-12">
 						<NutritionForm token={this.props.token}/>

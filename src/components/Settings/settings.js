@@ -3,12 +3,10 @@ import { connect } from "react-redux";
 import DoctorTable from "./doctorTable";
 import DoctorInfo from "./doctorInfo";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
 //import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
-import "../../styles/pacientes_style.css";
+import "../../styles/settings_style.css";
 
 
 class Settings extends Component {
@@ -65,22 +63,20 @@ class Settings extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-9 text-left">
+                        <div className="col-md-8 text-left">
                             <DoctorTable action={this.handler.bind(this)} {...props} />
                         </div>
-                        <div className="col-md-3 text-right " style={myStyle}>
+                        <div className="col-md-4 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-	                                <Link to="/newDoctor">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
+	                                <Link to="/newDoctor" style={{textDecoration: 'none' }}>
+		                                <div className="botaoMais">+</div>
 	                                </Link>
                                 </div>
                             </div>
 	                        <div className="row">
 		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Médico</h3>
+			                         <p className="addPatientLabel">Adicionar Médico</p>
 		                        </div>
 	                        </div>
                         </div>

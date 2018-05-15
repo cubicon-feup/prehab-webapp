@@ -20,7 +20,7 @@ import NewNutrition from "./Nutrition/newNutrition";
 import Nutrition from "./Nutrition/nutrition";
 import {  Row } from 'reactstrap';
 import Login from "./Login/login";
-
+import Logout from "./Logout/logout";
 class App extends Component {
 
     componentDidMount(){
@@ -39,27 +39,28 @@ class App extends Component {
 
     createMenu = () => {
         return(
-        <Row>
-            <div className="menuOuterDiv"><NavBar/></div>
-            <div className="container">
-                <Switch>
-                     <Route exact path="/" name="home" component={Home}/>
-                     <Route path="/login" name="login" component={Login}/>
-                     <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/newPlan" name="newPlan" render={(props) => (<NewPlan auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/doctor" name="Doctor" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/newDoctor" name="newDoctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition auth={this.props.auth} {...props}/>)}/>
-                     <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
-                     //<Redirect to="/prehab" />
-                 </Switch>
-             </div>
-         </Row>
-        )
+            <Row>
+                <div className="menuOuterDiv"><NavBar/></div>
+                <div className="container">
+                    <Switch>
+                        <Route exact path="/" name="home" component={Home}/>
+                        <Route path="/login" name="login" component={Login}/>
+                        <Route path="/logout" name="logout" component={Logout}/>
+                        <Route path="/task" name="Task" render={(props) => (<Task auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/newPlan" name="newPlan" render={(props) => (<NewPlan auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/plan" name="Plan" render={(props) => (<Plan auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/doctor" name="Doctor" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/main" name="mainWindow" render={(props) => (<MainWindow auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/newDoctor" name="newDoctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
+                        //<Redirect to="/prehab" />
+                    </Switch>
+                </div>
+            </Row>
+        );
     }
 
 }

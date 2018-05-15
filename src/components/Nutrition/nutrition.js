@@ -55,19 +55,16 @@ class Nutrition extends Component {
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-	                                <Link to="/newNutrition">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
-	                                </Link>
+                                    <Link to="/newNutrition" style={{textDecoration: 'none' }}>
+                                        <div style={divAddPatientStyle}>+</div>
+                                    </Link>
                                 </div>
                             </div>
-	                        <div className="row">
-		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Ementa</h3>
-		                        </div>
-	                        </div>
-
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <p className="addPatientLabel">Criar Plano Nutricional</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -137,3 +134,17 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, null)(Nutrition);
 
+const divAddPatientStyle = {
+    backgroundColor:"#F1F9FF",
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:10,
+    paddingRight:10,
+    borderRadius:100,
+    cursor: "pointer",
+    display:"table",
+    margin: "auto",
+    fontSize:20,
+    width: 50,
+    height: 50,
+};

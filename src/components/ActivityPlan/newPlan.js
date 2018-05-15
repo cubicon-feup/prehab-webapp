@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PlanForm from "./planForm"
 import {connect} from "react-redux";
 import {getTaskList} from "../../utils/communication-manager";
-import Logout from "../Logout/logout";
 import RaisedButton from "material-ui/RaisedButton";
 
 
@@ -63,11 +62,11 @@ class NewPlan extends Component {
         else
         {
             return (
-                <Logout />
+              <h1> </h1>
             )
         }
     };
-    
+
     componentDidMount() {
         //console.log(this.props.token);
         this.taskList(this.props.token);

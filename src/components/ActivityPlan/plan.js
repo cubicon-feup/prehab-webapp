@@ -5,10 +5,13 @@ import Logout from "../Logout/logout";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 //import SearchBar from 'material-ui-search-bar';
 import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 
+import PlanForm from "./planForm";
+import {getTaskList} from "../../utils/communication-manager";
+import RaisedButton from "material-ui/RaisedButton";
 
 
 class Plan extends Component {
@@ -55,19 +58,18 @@ class Plan extends Component {
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-	                                <Link to="/newPlan">
-		                                <FloatingActionButton style={{marginRight: 20}}>
-			                                <ContentAdd />
-		                                </FloatingActionButton>
+	                                <Link to="/newPlan" style={{textDecoration: 'none' }}>
+		                                <div style={divAddPatientStyle}>+</div>
 	                                </Link>
                                 </div>
                             </div>
 	                        <div className="row">
 		                        <div className="col-md-12 text-center">
-			                        <h3>Adicionar Plano</h3>
+			                        <p className="addPatientLabel">Adicionar Plano</p>
 		                        </div>
 	                        </div>
 
+                            {this.settingsMenu()}
                         </div>
                     </div>
                 </div>
@@ -77,14 +79,44 @@ class Plan extends Component {
         else if(this.props.auth === false) {
 
             return (
-                <Logout/>
+              <h1> </h1>
             )
         }
     };
 
+    settingsMenu = () => {
+        console.log(this.props.role);
+
+        if  (this.props.auth === true ) {
+            return (
+                <div className="patients">
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <Link to="/task" style={{textDecoration: 'none' }}>
+                                <div style={divAddPatientStyle}>+</div>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <p className="addPatientLabel">Adicionar Tarefa</p>
+                        </div>
+                    </div>   
+                </div>     
+            );
+        } else{
+            return null
+        }
+    }
+
 
     filterList (event) {
         this.setState({term: event.target.value});
+    }
+
+    componentDidMount() {
+        //console.log(this.props.token);
+        this.taskList(this.props.token);
     }
 
 
@@ -137,3 +169,17 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, null)(Plan);
 
+const divAddPatientStyle = {
+    backgroundColor:"#F1F9FF",
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:10,
+    paddingRight:10,
+    borderRadius:100,
+    cursor: "pointer",
+    display:"table",
+    margin: "auto",
+    fontSize:20,
+    width: 50,
+    height: 50,
+};
