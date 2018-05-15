@@ -119,43 +119,42 @@ class PatientTable extends Component {
         );
         return (
             <div>
-
-                        <Table
-                            fixedHeader={this.state.fixedHeader}
-                            fixedFooter={this.state.fixedFooter}
-                            selectable={this.state.selectable}
-                            multiSelectable={this.state.multiSelectable}
-                            >
-                            <TableHeader
-                                displaySelectAll={this.state.showCheckboxes}
-                                adjustForCheckbox={this.state.showCheckboxes}
-                                enableSelectAll={this.state.enableSelectAll}>
-                                <TableRow className = "tableHeaderRow">
-                                    <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                                    <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Cirurgia</TableHeaderColumn>
-                                    <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Idade</TableHeaderColumn>
-                                    <TableHeaderColumn className ="tableHeaderItem" tooltip="Sexo">Sexo</TableHeaderColumn>
-                                    <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
-                                    <TableHeaderColumn className ="tableHeaderLastItem" tooltip="Médicos Associados">Médicos</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody
-                                displayRowCheckbox={this.state.showCheckboxes}
-                                deselectOnClickaway={this.state.deselectOnClickaway}
-                                showRowHover={this.state.showRowHover}
-                                stripedRows={this.state.stripedRows}>
-                                {filteredPatients.map( (row) => (
-                                    <TableRow className = "tableBodyRow" style={{border:'none'}}>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
-                                        <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                <Table
+                    fixedHeader={this.state.fixedHeader}
+                    fixedFooter={this.state.fixedFooter}
+                    selectable={this.state.selectable}
+                    multiSelectable={this.state.multiSelectable}
+                    >
+                    <TableHeader
+                        displaySelectAll={this.state.showCheckboxes}
+                        adjustForCheckbox={this.state.showCheckboxes}
+                        enableSelectAll={this.state.enableSelectAll}>
+                        <TableRow className = "tableHeaderRow">
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Cirurgia</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Idade</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Sexo">Sexo</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderLastItem" tooltip="Médicos Associados">Médicos</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody
+                        displayRowCheckbox={this.state.showCheckboxes}
+                        deselectOnClickaway={this.state.deselectOnClickaway}
+                        showRowHover={this.state.showRowHover}
+                        stripedRows={this.state.stripedRows}>
+                        {filteredPatients.map( (row) => (
+                            <TableRow className = "tableBodyRow" style={{border:'none'}}>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </div>
         );
     }

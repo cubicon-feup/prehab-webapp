@@ -8,7 +8,7 @@ class NewDoctor extends Component{
 
     constructor(props){
         super(props);
-
+        this.state = {}
     }
 
     doctorFormSubmit = (form) => {

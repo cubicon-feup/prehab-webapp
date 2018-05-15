@@ -2,10 +2,6 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-//import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
 import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 
@@ -25,7 +21,7 @@ class Prehab extends Component {
 
     MainActivity = () => {
         let myStyle = {
-		    marginTop: '15%'
+		    marginTop: '90px'
 	    };
         let props = {
             list:this.state.prehabList,
@@ -37,10 +33,10 @@ class Prehab extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-4">
-                            <p className="doctorNameLabel">Olá {role}</p>
+                        <div className="doctorName col-md-12">
+                            <p className="doctorNameLabel">Olá Doutora Maria Santos{role}</p>
                         </div>
-                        <div className = "searchBarDiv col-md-8 text-right">
+                        <div className = "searchBarDiv col-md-5 text-right">
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
@@ -50,10 +46,12 @@ class Prehab extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-9 text-left">
+                    <div className="col-md-9 text-left">
                             <PrehabTable {...props}/>
                         </div>
+                        <div className="col-md-3 text-right" style={myStyle}>
 
+                        </div>
                     </div>
                 </div>
             )

@@ -9,9 +9,6 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
-import Home from "../Home/home";
-import { BrowserRouter as Router ,Route, Switch  } from "react-router-dom";
-
 
 
 class Settings extends Component {
