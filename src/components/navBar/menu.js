@@ -90,7 +90,7 @@ class menu extends Component {
     settingsMenu = () => {
         console.log(this.props.role);
 
-        if  (this.props.auth === true ) {
+        if  (this.props.auth === true && this.props.role === "Admin") {
             return (
                 <div className="patients">
                     <div className="patients">
