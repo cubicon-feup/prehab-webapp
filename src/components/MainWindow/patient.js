@@ -7,7 +7,7 @@ import "../../styles/pacientes_style.css";
 
 
 
-class MainWindow extends Component {
+class Patient extends Component {
 
     constructor(props){
         super(props);
@@ -50,7 +50,7 @@ class MainWindow extends Component {
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
                                 <div className="col-md-12 text-center">
-	                                <Link to="/patient" style={{textDecoration: 'none' }}>
+	                                <Link to="/newPatient" style={{textDecoration: 'none' }}>
 		                                <div style={divAddPatientStyle}>+</div>
 	                                </Link>
                                 </div>
@@ -141,4 +141,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, null)(MainWindow);
+export default connect(mapStateToProps, null)(Patient);

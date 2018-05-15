@@ -6,7 +6,7 @@ import PatientForm from "./patientForm";
 import {getDoctorPlan} from "../../utils/communication-manager";
 
 
-class Patient extends Component {
+class NewPatient extends Component {
 
     componentWillMount(){
         getDoctorPlan(this.props.token)
@@ -56,6 +56,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, null)(Patient);
+export default connect(mapStateToProps, null)(NewPatient);
 
 
