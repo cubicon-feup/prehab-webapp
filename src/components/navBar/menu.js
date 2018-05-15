@@ -9,7 +9,6 @@ import { Link } from "react-router-dom"
 import "../../styles/menu_style.css";
 import Logo from "../../images/icons/logo.svg";
 import Logout from "../../images/icons/logout.svg";
-import Dashboard from "../../images/icons/dashboard.svg";
 import Patients from "../../images/icons/patients.svg";
 import Doctors from "../../images/icons/doctors.svg";
 import Nutrition from "../../images/icons/nutrition.svg";

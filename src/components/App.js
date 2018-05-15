@@ -56,7 +56,7 @@ class App extends Component {
                         <Route path="/newDoctor" name="newDoctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition auth={this.props.auth} {...props}/>)}/>
                         <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition auth={this.props.auth} {...props}/>)}/>
-                        //<Redirect to="/prehab" />
+                        <Redirect to="/prehab" />
                     </Switch>
                 </div>
             </Row>

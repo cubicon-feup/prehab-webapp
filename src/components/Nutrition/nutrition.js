@@ -2,10 +2,8 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PatientTable from "../MainWindow/patientTable";
 import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
 //import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
 

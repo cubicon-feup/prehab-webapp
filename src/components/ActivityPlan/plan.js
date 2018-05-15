@@ -1,18 +1,9 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import PatientTable from "../MainWindow/patientTable";
-import Logout from "../Logout/logout";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-//import SearchBar from 'material-ui-search-bar';
-import ContentAdd from "material-ui/svg-icons/content/add";
+import TaskTable from "./taskTable";
 import { Link } from "react-router-dom";
-import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/pacientes_style.css";
-
-import PlanForm from "./planForm";
 import {getTaskList} from "../../utils/communication-manager";
-import RaisedButton from "material-ui/RaisedButton";
-
 
 class Plan extends Component {
 
@@ -30,12 +21,12 @@ class Plan extends Component {
 		    marginTop: '15%'
 	    };
         let props = {
-            list:this.state.patientList,
+            list:this.state.taskList,
             term:this.state.term,
         };
         let role = this.props.role;
 
-        if (this.props.auth === true && this.state.patientList !== undefined) {
+        if (this.props.auth === true && this.state.taskList !== undefined) {
             return (
                 <div className="row">
                     <div className="row ">
@@ -46,14 +37,14 @@ class Plan extends Component {
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
-                                onChange = {this.filterList.bind(this)}
+                                onChange = {this.taskList.bind(this)}
                             />
 
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-9 text-left">
-                            <PatientTable {...props}/>
+                            <TaskTable {...props}/>
                         </div>
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
@@ -110,50 +101,38 @@ class Plan extends Component {
     }
 
 
-    filterList (event) {
-        this.setState({term: event.target.value});
-    }
-
     componentDidMount() {
         //console.log(this.props.token);
         this.taskList(this.props.token);
     }
 
-
     componentWillReceiveProps(nextProps) {
-        this.patientList(nextProps.token);
-
+	    this.taskList(nextProps.token);
     }
 
-    componentDidMount() {
-        this.patientList(this.props.token);
-    }
+	taskList(token){
+		getTaskList(token).then(list => {
+			//console.log(list);
+			this.setState({
+				taskList: list.data
+			});
 
-
-	render() {
-		return (
-            <div >
-                {this.MainActivity()}
-            </div>
-		);
+		}).catch(err => {
+			console.log(err);
+			this.setState({
+				taskList: undefined
+			});
+		});
 	}
 
 
 
-
-    patientList(token){
-        getPatientList(token).then(list => {
-                    console.log(list);
-                    this.setState({
-                        patientList: list.data
-                    });
-
-                }).catch(err => {
-                    console.log(err);
-                    this.setState({
-                        patientList: undefined
-                    });
-                });
+    render() {
+        return (
+            <div >
+                {this.MainActivity()}
+            </div>
+        );
     }
 }
 
