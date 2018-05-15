@@ -79,31 +79,6 @@ class Settings extends Component {
 			                         <p className="addPatientLabel">Adicionar Médico</p>
 		                        </div>
 	                        </div>
-	                        <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <Link to="/task" style={{textDecoration: 'none' }}>
-                                        <div className="botaoMais">+</div>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                     <p className="addPatientLabel">Criar Tarefas</p>
-                                </div>
-                            </div>
-	                        <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <Link to="/nutrition" style={{textDecoration: 'none' }}>
-                                        <div className="botaoMais">+</div>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                     <p className="addPatientLabel">Criar Plano Nutricional</p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

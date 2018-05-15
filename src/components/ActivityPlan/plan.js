@@ -1,71 +1,105 @@
 import React, {Component} from "react";
-import PlanForm from "./planForm"
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import TaskTable from "./taskTable";
+import { Link } from "react-router-dom";
+import "../../styles/pacientes_style.css";
 import {getTaskList} from "../../utils/communication-manager";
-import RaisedButton from "material-ui/RaisedButton";
-
 
 class Plan extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            taskList: undefined,
-            step_value: 1
+            patientList: undefined,
+            term: '',
         }
 
     }
 
-    create2Stepper = () =>{
-        this.setState({ step_value: 2});
-    };
+    MainActivity = () => {
+        let myStyle = {
+		    marginTop: '15%'
+	    };
+        let props = {
+            list:this.state.taskList,
+            term:this.state.term,
+        };
+        let role = this.props.role;
 
-    create4Stepper = () =>{
-        this.setState({ step_value: 4});
-    };
+        if (this.props.auth === true && this.state.taskList !== undefined) {
+            return (
+                <div className="row">
+                    <div className="row ">
+                        <div className="doctorName col-md-4">
+                            <p className="doctorNameLabel">Olá {role}</p>
+                        </div>
+                        <div className = "searchBarDiv col-md-8 text-right">
+                            <input className = "searchBar"
+                                placeholder = "Pesquisar"
+                                value = {this.state.term}
+                                onChange = {this.taskList.bind(this)}
+                            />
 
-    createActivityPlan = () => {
-        if(this.props.auth === true && this.state.taskList !== undefined) {
-            if(this.state.step_value === 1){
-                return (
-                    <div>
-                        <br />
-                        <div className="row">
-                            <div className="col-md-6 offset-md-4">
-                                <h1>Selecionar tempo do plano</h1>
-                            </div>
-                        </div>
-                        <br />
-                        <div className="row">
-                            <div className="col-md-6 offset-md-6">
-                                <RaisedButton primary={true} onClick={this.create2Stepper} label="2 Semanas" />
-                            </div>
-                        </div>
-                        <br />
-                        <div className="row">
-                            <div className="col-md-6 offset-md-6">
-                                <RaisedButton primary={true} onClick={this.create4Stepper} label="4 Semanas" />
-                            </div>
                         </div>
                     </div>
-                )
-            }
-            else
-            {
-                return(
-                    <div>
-                        <PlanForm steps={this.state.step_value} token={this.props.token} list={this.state.taskList}/>
+                    <div className="row">
+                        <div className="col-md-9 text-left">
+                            <TaskTable {...props}/>
+                        </div>
+                        <div className="col-md-3 text-right " style={myStyle}>
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+	                                <Link to="/newPlan" style={{textDecoration: 'none' }}>
+		                                <div style={divAddPatientStyle}>+</div>
+	                                </Link>
+                                </div>
+                            </div>
+	                        <div className="row">
+		                        <div className="col-md-12 text-center">
+			                        <p className="addPatientLabel">Adicionar Plano</p>
+		                        </div>
+	                        </div>
+
+                            {this.settingsMenu()}
+                        </div>
                     </div>
-                )
-            }
+                </div>
+            )
         }
-        else
-        {
+
+        else if(this.props.auth === false) {
+
             return (
               <h1> </h1>
             )
         }
     };
+
+    settingsMenu = () => {
+        console.log(this.props.role);
+
+        if  (this.props.auth === true && this.props.role === "Admin") {
+            return (
+                <div className="patients">
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <Link to="/task" style={{textDecoration: 'none' }}>
+                                <div style={divAddPatientStyle}>+</div>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <p className="addPatientLabel">Adicionar Tarefa</p>
+                        </div>
+                    </div>   
+                </div>     
+            );
+        } else{
+            return null
+        }
+    }
+
 
     componentDidMount() {
         //console.log(this.props.token);
@@ -96,18 +130,35 @@ class Plan extends Component {
     render() {
         return (
             <div >
-                {this.createActivityPlan()}
+                {this.MainActivity()}
             </div>
         );
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
         auth: state.auth.isLoggedIn,
-        token: state.auth.accessToken
+        token : state.auth.accessToken,
+        role: state.auth.role
+
     };
 };
 
+
 export default connect(mapStateToProps, null)(Plan);
+
+const divAddPatientStyle = {
+    backgroundColor:"#F1F9FF",
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:10,
+    paddingRight:10,
+    borderRadius:100,
+    cursor: "pointer",
+    display:"table",
+    margin: "auto",
+    fontSize:20,
+    width: 50,
+    height: 50,
+};

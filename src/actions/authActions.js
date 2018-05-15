@@ -1,4 +1,4 @@
-import {SESSION_COOKIE_NAME} from "../constants/configuration";
+import {SESSION_COOKIE_NAME, SESSION_ROLE} from "../constants/configuration";
 import {deleteCookie, getCookie, setCookie} from "../utils/cookie-handler";
 
 /*
@@ -27,10 +27,12 @@ export function logIn(username, password) {
  */
 export function getCookieInfo() {
     let sessionCookie = getCookie(SESSION_COOKIE_NAME);
-    if (sessionCookie !== null) {
+    let sessionRole = getCookie(SESSION_ROLE);
+    if (sessionCookie !== null && sessionRole !== null) {
         return  {
             type: "LOGIN",
-            payload: sessionCookie
+            payload: sessionCookie,
+            role: sessionRole
         }
     }
     else
@@ -42,17 +44,19 @@ export function getCookieInfo() {
     }
 }
 
-export function signIn(jwt) {
+export function signIn(jwt, role) {
     setCookie(SESSION_COOKIE_NAME, jwt);
+    setCookie(SESSION_ROLE, role);
     return  {
         type: "LOGIN",
-        payload: jwt
-
+        payload: jwt,
+        role: role
     }
 }
 
 export function logOut() {
     deleteCookie(SESSION_COOKIE_NAME);
+    deleteCookie(SESSION_ROLE);
     return {
         type: "LOGOUT"
     }
