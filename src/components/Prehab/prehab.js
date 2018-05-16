@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import Logout from "../Logout/logout";
 import {getPrehabList} from "../../utils/communication-manager";
-import "../../styles/pacientes_style.css";
+import "../../styles/patients_style.css";
 
 
 

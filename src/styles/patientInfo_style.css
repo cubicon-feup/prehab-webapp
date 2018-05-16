@@ -1,0 +1,90 @@
+
+.doctorName{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+
+::placeholder{
+    font-size: 14px;
+    color: #2699FB;
+    opacity: 0.5;
+}
+
+
+.patientNameLabel{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 26px;
+    text-align: left;
+    margin-top: 20px !important;
+}
+
+.emailLabel{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 16px;
+    text-align: left;
+}
+
+.botaoMais{
+    background-color: #F1F9FF;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:100px;
+    cursor: pointer;
+    margin: auto;
+    font-size:20px;
+    width: 50px;
+    height: 50px;
+}
+
+.tableHeaderItem, .tableBodyItem{
+    border-right: 1px solid rgba(38, 153, 251, 0.2);
+}
+
+ .tableHeaderItem, .tableHeaderLastItem, .tableBodyItem, .tableBodyLastItem{
+    text-align: center !important;
+    color: rgba(38, 153, 251, 0.7) !important;
+    font-family: Quicksand, Regular;
+}
+.tableHeaderItem, .tableHeaderLastItem{
+    font-size: 18px !important;
+}
+
+.tableBodyItem, .tableBodyLastItem{
+    font-size: 14px !important;
+}
+
+.tableBodyRow, .tableHeaderRow{
+    height: 90px !important;
+    shadowColor: 'transparent';
+
+}
+
+.tableBodyRow{
+    background-color:#f2f3f7;
+}
+
+.tableBodyItem, .tableBodyLastItem{
+    padding : 20px 0px 0px 0px!important;
+    height: 100%;
+
+}
+
+.tableBodyItemInnerDiv{
+    background-color:#F1F9FF !important;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+
+}
+
+.alertImg{
+    height: 20px;
+    width: 20px;
+    margin-left: 15px;
+}

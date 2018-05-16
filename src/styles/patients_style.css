@@ -31,6 +31,21 @@
     outline: none;
 }
 
+
+.botaoMais{
+    background-color: #F1F9FF;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:100px;
+    cursor: pointer;
+    margin: auto;
+    font-size:20px;
+    width: 50px;
+    height: 50px;
+}
+
 .doctorNameLabel{
     font-family: Quicksand, Regular;
     color: #7AC4FF;

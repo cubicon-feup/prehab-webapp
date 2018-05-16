@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import "../../styles/pacientes_style.css";
+import "../../styles/patients_style.css";
+import Alert from "../../images/icons/alert.svg"
 
 
 import {
@@ -53,7 +54,8 @@ class PrehabTable extends Component {
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Data da cirurgia">Cirurgia</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Semanas">Nº de Semanas</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Nº de Semanas">Semanas</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Data Inicio do Plano">Inicio Plano</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Data prevista para Fim do Plano">Fim Plano</TableHeaderColumn>
                         </TableRow>
@@ -68,6 +70,7 @@ class PrehabTable extends Component {
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.id}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.number_of_weeks}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.init_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.expected_end_date}</div></TableRowColumn>
                             </TableRow>
