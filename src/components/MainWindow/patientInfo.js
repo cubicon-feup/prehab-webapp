@@ -22,55 +22,61 @@ class PatientInfo extends Component{
             patient_tag: this.state.info.data.patient_tag,
         };
 
+        if(info.sex === "F"){
+            info.sex = "Feminino";
+        }else{
+            info.sex = "Masculino";
+        }
+
         return (
-        <div>
-            <row>
-            <p className="patientNameLabel"> {info.patient_tag}</p>
-            </row>
-            <div className="row ">
-                <div className="col-md-12">
-                    <p className="doctorNameLabel"> Informação Pessoal </p>
-                </div>
-                <div className="doctorName col-md-2">
-                    <p className="emailLabel"> SEXO: {info.sex}</p>
-                </div>
-                <div className="doctorName col-md-2">
-                    <p className="emailLabel"> IDADE: {info.age}</p>
-                </div>
-                <div className="doctorName col-md-2">
-                    <p className="emailLabel">  {info.weight} kg</p>
-                </div>
-                <div className="doctorName col-md-2">
-                    <p className="emailLabel">  {info.height} cm</p>
-                </div>
-            </div>
+        <div className="row">
+            <div className="col-md-9">
 
-            <div className="row">
-                <div className="col-md-12">
-                    <p className="doctorNameLabel"> Médicos </p>
+                <div className="row">
+                    <p className="patientNameLabel"> {info.patient_tag}</p>
                 </div>
-                {doctors.map( (row) => (
-                    <div className="doctorName col-md-2">
-                        <p className="emailLabel"> {row.name}</p>
+                <div className="row ">
+                    <div className="col-md-12">
+                        <p className="doctorNameLabel"> Informação Pessoal </p>
                     </div>
-                ))}
-            </div>
-
-
-            <div className="row">
-                <div className="col-md-12">
-                    <p className="doctorNameLabel"> Restrições </p>
-                </div>
-                {constraints.map( (row) => (
                     <div className="doctorName col-md-2">
-                        <p className="emailLabel"> ALTURA: {info.height}</p>
+                        <p className="emailLabel"> {info.sex}</p>
                     </div>
-                ))}
+                    <div className="doctorName col-md-2">
+                        <p className="emailLabel"> {info.age} anos</p>
+                    </div>
+                    <div className="doctorName col-md-2">
+                        <p className="emailLabel">  {info.weight} kg</p>
+                    </div>
+                    <div className="doctorName col-md-2">
+                        <p className="emailLabel">  {info.height} cm</p>
+                    </div>
+                </div>
+
+
+                <div className="row">
+                    {constraints.map( (row) => (
+                        <div className="doctorName col-md-2 constraint">
+                            <p className="constraint">{row.title}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
+                        <p className="doctorNameLabel"> Médicos </p>
+                    </div>
+                    {doctors.map( (row) => (
+                        <div className="doctorName col-md-2">
+                            <p className="emailLabel"> {row.name}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
 
 
-            <div className="row">
-                <div className="col-md-4 text-right " style={{marginTop: '90px'}}>
+            <div className="col-md-3">
+                <div className="text-right " style={{marginTop: '90px'}}>
                     <div className="row">
                         <div className="col-md-12 text-center">
                             <Link to="/newPrehab" style={{textDecoration: 'none' }} {...data}>
