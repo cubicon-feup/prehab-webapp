@@ -21,7 +21,7 @@ class Nutrition extends Component {
 
     MainActivity = () => {
         let myStyle = {
-		    marginTop: '15%'
+		    marginTop: '90px'
 	    };
         let props = {
             list:this.state.patientList,
@@ -33,10 +33,10 @@ class Nutrition extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-4">
+                        <div className="doctorName col-md-12">
                             <p className="doctorNameLabel">Olá {role}</p>
                         </div>
-                        <div className = "searchBarDiv col-md-8 text-right">
+                        <div className = "searchBarDiv">
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
