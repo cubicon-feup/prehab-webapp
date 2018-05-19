@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import TaskTable from "./taskTable";
 import { Link } from "react-router-dom";
-import "../../styles/pacientes_style.css";
-import {getTaskList} from "../../utils/communication-manager";
+import "../../styles/patients_style.css";
+//import {getTaskList} from "../../utils/communication-manager";
+import {getDoctorPlan} from "../../utils/communication-manager";
 
 class Plan extends Component {
 
@@ -111,8 +112,8 @@ class Plan extends Component {
     }
 
 	taskList(token){
-		getTaskList(token).then(list => {
-			//console.log(list);
+		getDoctorPlan(token).then(list => {
+			console.log(list);
 			this.setState({
 				taskList: list.data
 			});

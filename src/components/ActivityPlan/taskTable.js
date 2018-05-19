@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
-import "../../styles/pacientes_style.css";
+import "../../styles/patients_style.css";
 
 
 import {
@@ -125,8 +125,8 @@ class PatientTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}>
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Tarefa</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Descrição</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Plano">Plano</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Nº de Semanas">Nº de Semanas</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -138,7 +138,7 @@ class PatientTable extends Component {
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.id}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.title}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.description}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.number_of_weeks}</div></TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
