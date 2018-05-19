@@ -43,5 +43,7 @@ body{
 
 .container {
     padding:0;
+    margin-bottom: 100px;
+    margin-left: 170px;
 }
 
