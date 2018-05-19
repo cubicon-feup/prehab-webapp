@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import PatientTable from "../MainWindow/patientTable";
-import Logout from "../Logout/logout";
 //import SearchBar from 'material-ui-search-bar';
 import { Link } from "react-router-dom";
 import {getPatientList} from "../../utils/communication-manager";
@@ -70,9 +69,8 @@ class Nutrition extends Component {
         }
 
         else if(this.props.auth === false) {
-
             return (
-                <Logout/>
+                ""
             )
         }
     };

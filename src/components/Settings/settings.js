@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import DoctorTable from "./doctorTable";
 import DoctorInfo from "./doctorInfo";
-import Logout from "../Logout/logout";
 //import SearchBar from 'material-ui-search-bar';
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
@@ -94,7 +93,7 @@ class Settings extends Component {
         else if(this.props.auth === false) {
 
             return (
-                <Logout/>
+                ""
             )
         }
     };
