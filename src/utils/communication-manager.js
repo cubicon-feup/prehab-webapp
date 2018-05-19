@@ -336,6 +336,8 @@ export function createNewPrehab(secret, prehab_caracteristics) {
 
         let requestUrl = URL +"/api/prehab/";
 
+        console.log(prehab_caracteristics);
+
 
         let requestOptions = {
             uri: requestUrl,
@@ -349,20 +351,17 @@ export function createNewPrehab(secret, prehab_caracteristics) {
                 'platform': 'web'
             },
             body: JSON.stringify({
-                "idPatient": Number(prehab_caracteristics.idPatient),
-                "task_schedule_plan_id": Number(prehab_caracteristics.idPlan),
-                "surgeryDate": String(prehab_caracteristics.surgeryDate),
-                "startDate": String(prehab_caracteristics.startDate),
+                "patient_id": prehab_caracteristics.idPatient,
+                "task_schedule_id": prehab_caracteristics.idPlan,
+                "surgery_date": prehab_caracteristics.surgeryDate,
+                "init_date": prehab_caracteristics.startDate,
 
             })
         };
 
         fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 200) {
-                return resolve(response.json());
-            } else {
-                return reject(Error("An error has occurred! Please try again."));
-            }
+            return resolve(response.json());
+
         }, function (error) {
             return reject(error);
         });
