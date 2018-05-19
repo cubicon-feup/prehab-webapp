@@ -43,10 +43,14 @@ class DoctorTable extends Component {
 
 
         let filteredList = this.state.doctorList.filter(
-                    (row) => {
-                        return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
-                    }
-                );
+            (row) => {
+                if (row.name !== null) {
+                    return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+                } else {
+                    return "";
+                }
+            }
+        );
 
         if(this.state.filteredList.length !== filteredList.length){
             this.setState({
