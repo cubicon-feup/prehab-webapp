@@ -14,24 +14,12 @@ import Doctors from "../../images/icons/doctors.svg";
 import Nutrition from "../../images/icons/nutrition.svg";
 import Tasks from "../../images/icons/tasks.svg";
 import Prehabs from "../../images/icons/prehabs.svg";
-import User from "../../images/icons/user.svg";
 
 class menu extends Component {
     render() {
         if(this.props.auth === true ) {
             return (
-                <div className = "menuDiv">
-                    <div className="patients">
-                        <Link to= "/" style={{textDecoration: 'none' }}>
-                            <Col xs="12">
-                                <div>
-                                    <img src={User} alt="dashboard" className="userImg alignCenter" />
-                                    <p className="patientsLabel"></p>
-                                </div>
-                            </Col>
-                        </Link>
-                    </div>
-        
+                <div className = "menuDiv">        
                     <div className="patients">
                         <Link to= "/prehab" style={{ textDecoration: 'none' }}>
                             <Col xs="12">
@@ -79,8 +67,7 @@ class menu extends Component {
                     </div>
         
                     <div className="logo"><img src={Logo} alt="logo" className="logoImg alignCenter" /></div>
-                 </div>
-        
+                </div>
             );
         } else {
             return null;
