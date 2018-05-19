@@ -46,6 +46,8 @@ class DoctorTable extends Component {
             (row) => {
                 if (row.name !== null) {
                     return row.name.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+                } else {
+                    return "";
                 }
             }
         );
