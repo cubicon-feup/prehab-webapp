@@ -78,21 +78,12 @@ class NewPrehab extends Component {
         this.planList(this.props.token);
     }
 
-    openDialog(message){
-        if(message === ""){
+    openDialog(title, message){
             this.setState({
                 openDialog: true,
-                dialogTitle: "SUCESSO",
-                dialogMessage: "Prehab Criado com Sucesso"
+                dialogTitle: title,
+                dialogMessage: message
             });
-
-        } else{
-            this.setState({
-                openDialog: true,
-                dialogTitle: "ERRO",
-                dialogMessage: "Verifique os campos introduzidos"
-            });
-        }
     }
 
     closeDialog = () =>{
@@ -183,13 +174,17 @@ class NewPrehab extends Component {
         createNewPrehab(this.props.token, form)
             .then(response => {
 
-                console.log(response.details);
-
-                this.openDialog(response.details);
+                this.openDialog("SUCESSO", "Prehab criado com sucesso");
+                console.log(response);
 
             })
-            .catch(err => {
-                console.log("Erro: " + err);
+            .catch((response) => {
+                response.then((error) => {
+
+                    this.openDialog("ERRO", error.custom_message);
+                    console.log(error);
+
+                })
             });
     };
 
