@@ -361,7 +361,7 @@ export function createNewPrehab(secret, prehab_caracteristics) {
 
         fetch(requestUrl, requestOptions).then(function (response) {
 
-        if(parseInt(response.status/100) === 2){
+        if(parseInt(response.status/100, 10) === 2){
             return resolve(response.json());
         } else {
 
