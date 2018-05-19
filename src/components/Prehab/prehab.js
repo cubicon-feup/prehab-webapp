@@ -2,8 +2,7 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import PrehabInfo from "./prehabInfo";
-import Logout from "../Logout/logout";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/prehabs_style.css";
 
@@ -58,8 +57,8 @@ class Prehab extends Component {
                             </div>
                         </div>
                         <div className="row">
-                        <div className="col-md-9 text-left">
-                                <PrehabTable action={this.handler.bind(this)} {...data}/>
+                            <div className="col-md-9 text-left">
+                                    <PrehabTable action={this.handler.bind(this)} {...data}/>
                             </div>
                             <div className="col-md-3 text-right " style={{marginTop: '90px'}}>
                                 <div className="row">
@@ -71,7 +70,7 @@ class Prehab extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12 text-center">
-                                         <p className="addPatientLabel">Criar Prehab</p>
+                                            <p className="addPatientLabel">Criar Prehab</p>
                                     </div>
                                 </div>
                             </div>
@@ -80,15 +79,14 @@ class Prehab extends Component {
                 )
             } else{
                 return(
-                <PrehabInfo info={this.state.prehabInfo} />
+                <PrehabInfo info={this.state.prehabInfo} token={this.props.token}/>
                 );
             }
         }
 
         else if(this.props.auth === false) {
-
             return (
-                <Logout/>
+                ""
             )
         }
     };

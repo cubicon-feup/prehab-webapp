@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import "../../styles/patients_style.css";
-import Alert from "../../images/icons/alert.svg"
+import Alert from "../../images/icons/alert.svg";
 import {getPrehabById} from "../../utils/communication-manager";
-
 
 import {
     Table,

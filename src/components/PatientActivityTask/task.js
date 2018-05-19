@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import TaskForm from "./taskForm"
 import {connect} from "react-redux";
-import Logout from "../Logout/logout";
 
 
 class Task extends Component {
@@ -20,7 +19,7 @@ class Task extends Component {
         else
         {
             return (
-                <Logout />
+                ""
             )
         }
     };

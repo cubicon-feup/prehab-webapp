@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import TaskTable from "./taskTable";
 import { Link } from "react-router-dom";
-import "../../styles/pacientes_style.css";
+import "../../styles/patients_style.css";
 import {getDoctorPlan} from "../../utils/communication-manager";
 
 class Plan extends Component {

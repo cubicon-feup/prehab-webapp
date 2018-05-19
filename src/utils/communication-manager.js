@@ -555,3 +555,30 @@ export function sendNutrition(token, title, restrictions, type, description) {
 	});
 }
 
+export function cancelPrehab(token, prehabId) {
+    return new Promise(function (resolve, reject) {
+        let requestUrl =  URL + "/api/prehab/cancel/" + prehabId + "/";
+        let requestOptions = {
+            uri: requestUrl,
+            method: "PUT",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': token,
+                'platform': 'web'
+            },
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+

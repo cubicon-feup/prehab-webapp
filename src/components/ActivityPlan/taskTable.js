@@ -125,8 +125,9 @@ class PatientTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}>
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Plano">Plano</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Nome do Plano">Plano de Tarefas</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Nº de Semanas">Nº de Semanas</TableHeaderColumn>
+                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Criador do Plano">Criado por</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -139,6 +140,7 @@ class PatientTable extends Component {
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.id}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.title}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.number_of_weeks}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.created_by.name}</div></TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>

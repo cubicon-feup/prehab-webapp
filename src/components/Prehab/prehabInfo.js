@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import "../../styles/prehabInfo_style.css";
 import Circle from 'react-circle';
 import Modal from 'react-modal';
-
+import { withRouter } from "react-router-dom";
+import {cancelPrehab} from "../../utils/communication-manager";
 
 const customStyles = {
   content : {
@@ -23,25 +24,46 @@ class PatientInfo extends Component{
             modalIsOpen: false,
             info: this.props.info,
             term: '',
+            token: this.props.token
         }
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.cancelPrehab = this.cancelPrehab.bind(this);
     }
-
-     openModal(){
-                this.setState({
+    
+    openModal() {
+        this.setState({
             modalIsOpen: true
         });
     }
 
-    closeModal(){
+    closeModal() {
         this.setState({
             modalIsOpen: false
         });
     }
 
-    render(){
+    cancelPrehab() {
+        if (window.confirm('Tem a certeza que pretende cancelar este Prehab?')) {       
+            this.props.history.push('/prehab');
+
+            /*
+            cancelPrehab(this.state.token, this.props.info.data.id).then(suc => {
+                //display dialog
+                console.log("CANCELED");
+                this.props.history.push('/prehab');
+                
+            }).catch(err => {
+                console.log(err);
+            });
+            */
+           
+        } else {
+            // Do nothing!
+        }
+    }
+
+    render() {
 
         let info = this.state.info.data;
         let doctors = info.doctors;
@@ -56,9 +78,9 @@ class PatientInfo extends Component{
             daysLeftPrehab = 0
         }
 
-        var totalProgress = this.calculateTotalProgress(statistics.total_activities_until_now, statistics.total_activities);
-        var doneProgress = this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done);
-        var difficulties =  this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty);
+        var totalProgress = Math.floor(this.calculateTotalProgress(statistics.total_activities_until_now, statistics.total_activities));
+        var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done));
+        var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
 
         if(patient.sex === "F"){
@@ -83,7 +105,9 @@ class PatientInfo extends Component{
                         <div>I am a modal</div>
                         <button onClick={this.closeModal} className="closeModal">Fechar</button>
                 </Modal>
+                <button onClick={this.cancelPrehab} className="cancelPrehab">Cancelar Prehab</button>
             </div>
+
             <div className="row ">
                 <div className="col-md-12">
                     <p className="doctorNameLabel"> Informação Pessoal </p>
@@ -240,4 +264,4 @@ class PatientInfo extends Component{
         this.setState({term: event.target.value});
     }
 }
-export default PatientInfo
+export default withRouter(PatientInfo);
