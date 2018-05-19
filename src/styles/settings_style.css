@@ -93,7 +93,7 @@
 
 .tableBodyItemInnerDiv{
     background-color:#F1F9FF !important;
-    height: 100%;
+    height: auto!important;
     text-align: center;
     vertical-align: middle;
     line-height: 90px;
