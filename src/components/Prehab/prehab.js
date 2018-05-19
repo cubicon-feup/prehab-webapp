@@ -46,9 +46,9 @@ class Prehab extends Component {
                     <div className="row">
                         <div className="row ">
                             <div className="doctorName col-md-12">
-                                <p className="doctorNameLabel">Olá Doutora Maria Santos{role}</p>
+                                <p className="doctorNameLabel">Olá {role}</p>
                             </div>
-                            <div className = "searchBarDiv col-md-5 text-right">
+                            <div className = "searchBarDiv">
                                 <input className = "searchBar"
                                     placeholder = "Pesquisar"
                                     value = {this.state.term}

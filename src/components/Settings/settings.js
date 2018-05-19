@@ -34,7 +34,7 @@ class Settings extends Component {
 
     MainActivity = () => {
         let myStyle = {
-		    marginTop: '15%'
+		    marginTop: '90px'
 	    };
         let data = {
             list:this.state.doctorList,
@@ -50,16 +50,15 @@ class Settings extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-4">
+                        <div className="doctorName col-md-12">
                             <p className="doctorNameLabel">Olá {role}</p>
                         </div>
-                        <div className = "searchBarDiv col-md-8 text-right">
+                        <div className = "searchBarDiv">
                             <input className = "searchBar"
                                 placeholder = "Pesquisar"
                                 value = {this.state.term}
                                 onChange = {this.filterList.bind(this)}
                             />
-
                         </div>
                     </div>
                     <div className="row">
