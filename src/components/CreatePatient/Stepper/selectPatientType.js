@@ -4,11 +4,10 @@ import MenuItem from 'material-ui/MenuItem';
 
 const patient_type = [
     { title: "Diabético", id: 1},
-    { title: "Insuficiente Renal", id: 2},
-    { title: "Desnutrido", id: 3},
-    { title: "Vegetariano", id: 4},
-    { title: "Hepático", id: 5},
-    { title: "Hipertenso", id: 6}
+    { title: "Desnutrido", id: 2},
+    { title: "Vegetariano", id: 3},
+    { title: "Hepático", id: 4},
+    { title: "Hipertenso", id: 5}
 
 ];
 

@@ -36,7 +36,7 @@ class Settings extends Component {
         let myStyle = {
 		    marginTop: '15%'
 	    };
-        let props = {
+        let data = {
             list:this.state.doctorList,
             term:this.state.term,
             token: this.props.token,
@@ -64,7 +64,7 @@ class Settings extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-8 text-left">
-                            <DoctorTable action={this.handler.bind(this)} {...props} />
+                            <DoctorTable action={this.handler.bind(this)} {...data} />
                         </div>
                         <div className="col-md-4 text-right " style={myStyle}>
                             <div className="row">

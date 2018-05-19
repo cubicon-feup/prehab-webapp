@@ -1,25 +1,9 @@
 
-.doctorName, .searchBarDiv{
-    margin-top: 50px;
-    margin-bottom: 74px;
+.doctorName{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
 }
 
-.searchBarDiv{
-    position: absolute;
-    right: 25px;
-    height: 42px;
-}
-
-.searchBar{
-   margin: 0 auto;
-   border: 1px solid #2699FB;
-   border-radius: 50px;
-   background-color: transparent;
-   padding-left: 10px;
-   background: url('../images/icons/search.svg') no-repeat right;
-   background-size: 20px;
-   background-position-x: 97%;
-}
 
 ::placeholder{
     font-size: 14px;
@@ -27,22 +11,47 @@
     opacity: 0.5;
 }
 
-.searchBar:focus{
-    outline: none;
-}
 
-.doctorNameLabel{
+.patientNameLabel{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
-    font-size: 15px;
+    font-size: 26px;
     text-align: left;
+    margin-top: 20px !important;
 }
-.addPatientLabel{
+
+.emailLabel{
     font-family: Quicksand, Regular;
-    color: #2699FB;
-    font-size: 15px;
+    color: #7AC4FF;
+    font-size: 16px;
+    text-align: left;
+    border-bottom: 1px solid #7AC4FF;
+    padding-left: 10px;
+}
+
+.constraint{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 16px;
     text-align: center;
-    display: inline;
+    padding-left: 10px;
+    background-color: #F1F9FF;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.botaoMais{
+    background-color: #F1F9FF;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:100px;
+    cursor: pointer;
+    margin: auto;
+    font-size:20px;
+    width: 50px;
+    height: 50px;
 }
 
 .tableHeaderItem, .tableBodyItem{
@@ -64,6 +73,8 @@
 
 .tableBodyRow, .tableHeaderRow{
     height: 90px !important;
+    shadowColor: 'transparent';
+
 }
 
 .tableBodyRow{

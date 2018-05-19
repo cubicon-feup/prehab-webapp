@@ -1,7 +1,7 @@
 .menuDiv{
     background-color : #ffffff;
     height: 100vh;
-    position : relative;
+    position : fixed;
     padding: 0 25px;
 }
 
@@ -13,7 +13,7 @@
 .patientsImg{
     width:31px;
     height:31px;
-    
+
 }
 
 .userImg{

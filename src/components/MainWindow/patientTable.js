@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
-import "../../styles/pacientes_style.css";
-import Alert from "../../images/icons/alert.svg"
+import "../../styles/patients_style.css";
+import {getPatientById} from "../../utils/communication-manager";
 
 
 import {
@@ -12,83 +12,15 @@ import {
     TableRow,
     TableRowColumn,
 } from "material-ui/Table";
-/*
-const tableData = [
-    {
-        id: "125643162",git
-        alerts: "2",
-        surgery: "23-05-2018",
 
-        doctor: "mani",
-
-    },
-    {
-        id: "6453747",
-        alerts: "0",
-        surgery: "25-05-2018",
-
-        doctor: "Magna",
-
-    },
-    {
-        id: "9786070",
-        alerts: "0",
-        surgery: "01-05-2018",
-
-        doctor: "JOn",
-
-    },
-    {
-        id: "73686382",
-        alerts: "5",
-        surgery: "05-04-2018",
-        doctor: "Magna",
-    },
-    {
-        id: "12312515",
-        alerts: "0",
-        surgery: "25-05-2018",
-
-        doctor: "JOn",
-    },
-    {
-            id: "6453747",
-            alerts: "0",
-            surgery: "25-05-2018",
-            doctor: "Magna",
-        },
-        {
-            id: "9786070",
-            alerts: "0",
-            surgery: "01-05-2018",
-            doctor: "JOn",
-        },
-        {
-            id: "73686382",
-            alerts: "5",
-            surgery: "05-04-2018",
-            doctor: "Magna",
-        },
-        {
-            id: "12312515",
-            alerts: "0",
-            surgery: "25-05-2018",
-            doctor: "Magna",
-        },
-];
-
-function searchingFor(term){
-    return function(x){
-        return x.patient_tag.toLowerCase().includes(term.toLowerCase()) || !term;
-    }
-}
-*/
 
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
 class PatientTable extends Component {
     state = {
+        filteredPatients: this.props.list,
+        token: this.props.token,
         term: this.props.term,
         patientList: this.props.list,
         fixedHeader: true,
@@ -117,6 +49,13 @@ class PatientTable extends Component {
                 return row.patient_tag.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
             }
         );
+
+        if(this.state.filteredPatients.length !== filteredPatients.length){
+            this.setState({
+                filteredPatients: filteredPatients
+            });
+        }
+
         return (
             <div>
                 <Table
@@ -124,6 +63,7 @@ class PatientTable extends Component {
                     fixedFooter={this.state.fixedFooter}
                     selectable={this.state.selectable}
                     multiSelectable={this.state.multiSelectable}
+                    onCellClick={this.getPatient}
                     >
                     <TableHeader
                         displaySelectAll={this.state.showCheckboxes}
@@ -131,10 +71,8 @@ class PatientTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}>
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Cirurgia</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Idade</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Sexo">Sexo</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderLastItem" tooltip="Médicos Associados">Médicos</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
@@ -146,11 +84,12 @@ class PatientTable extends Component {
                         {filteredPatients.map( (row) => (
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{row.doctor}</div></TableRowColumn>
+                                {row.doctors_associated.map((doc) => (
+                                    <TableRowColumn className ="tableBodyLastItem"><div className="tableBodyItemInnerDiv">{doc.name}</div></TableRowColumn>
+                                ))}
+
                             </TableRow>
                         ))}
                     </TableBody>
@@ -158,6 +97,21 @@ class PatientTable extends Component {
             </div>
         );
     }
+
+    getPatient = (row,column, key) => {
+
+            console.log(this.state.filteredPatients[row].name);
+            let patientId = this.state.filteredPatients[row].user;
+            console.log(this.state.token);
+            getPatientById(patientId, this.state.token).then(list => {
+                    console.log(list);
+
+                    this.props.action(list);
+
+                }).catch(err => {
+                    console.log(err);
+                });
+            };
 }
 
 
