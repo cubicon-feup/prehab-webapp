@@ -268,6 +268,38 @@ export function getPrehabList(secret) {
 }
 
 
+export function getPrehabById(id, secret) {
+    return new Promise(function (resolve, reject) {
+
+        console.log(id);
+
+        let requestUrl =  URL + "/api/prehab/"+id;
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
 export function getPatientList(secret) {
     return new Promise(function (resolve, reject) {
 
@@ -285,6 +317,46 @@ export function getPatientList(secret) {
                 'Platform' : 'web'
             }
         };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+export function createNewPrehab(secret, prehab_caracteristics) {
+    return new Promise(function (resolve, reject) {
+
+
+        let requestUrl = URL +"/api/prehab/";
+
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "POST",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'platform': 'web'
+            },
+            body: JSON.stringify({
+                "idPatient": Number(prehab_caracteristics.idPatient),
+                "task_schedule_plan_id": Number(prehab_caracteristics.idPlan),
+                "surgeryDate": String(prehab_caracteristics.surgeryDate),
+                "startDate": String(prehab_caracteristics.startDate),
+
+            })
+        };
+
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());
@@ -330,6 +402,38 @@ export function createNewPatient(secret, patient_caracteristics) {
             })
         };
 
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+
+export function getPatientById(id, secret) {
+    return new Promise(function (resolve, reject) {
+
+        console.log(id);
+
+        let requestUrl =  URL + "/api/patient/"+id;
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
         fetch(requestUrl, requestOptions).then(function (response) {
             if (response.status === 200) {
                 return resolve(response.json());

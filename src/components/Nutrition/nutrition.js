@@ -5,7 +5,7 @@ import Logout from "../Logout/logout";
 //import SearchBar from 'material-ui-search-bar';
 import { Link } from "react-router-dom";
 import {getPatientList} from "../../utils/communication-manager";
-import "../../styles/pacientes_style.css";
+import "../../styles/patients_style.css";
 
 
 

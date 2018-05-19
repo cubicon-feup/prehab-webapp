@@ -1,9 +1,11 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
+import PrehabInfo from "./prehabInfo";
 import Logout from "../Logout/logout";
+import { Link } from "react-router-dom"
 import {getPrehabList} from "../../utils/communication-manager";
-import "../../styles/pacientes_style.css";
+import "../../styles/prehabs_style.css";
 
 
 
@@ -12,49 +14,75 @@ class Prehab extends Component {
     constructor(props){
         super(props);
         this.state = {
-
+            prehabSelected: false,
+            prehabInfo: undefined,
             prehabList: undefined,
             term: '',
         }
 
     }
 
+    handler(prehabInfo) {
+        console.log("HANDELEs");
+        console.log(prehabInfo);
+        this.setState({
+            prehabSelected: true,
+            prehabInfo: prehabInfo
+        })
+    }
+
     MainActivity = () => {
-        let myStyle = {
-		    marginTop: '90px'
-	    };
-        let props = {
+
+        let data = {
             list:this.state.prehabList,
             term:this.state.term,
+            token: this.props.token,
         };
         let role = this.props.role;
 
         if (this.props.auth === true && this.state.prehabList !== undefined) {
-            return (
-                <div className="row">
-                    <div className="row ">
-                        <div className="doctorName col-md-12">
-                            <p className="doctorNameLabel">Olá Doutora Maria Santos{role}</p>
-                        </div>
-                        <div className = "searchBarDiv col-md-5 text-right">
-                            <input className = "searchBar"
-                                placeholder = "Pesquisar"
-                                value = {this.state.term}
-                                onChange = {this.filterList.bind(this)}
-                            />
-
-                        </div>
-                    </div>
+            if(!this.state.prehabSelected){
+                return (
                     <div className="row">
-                    <div className="col-md-9 text-left">
-                            <PrehabTable {...props}/>
-                        </div>
-                        <div className="col-md-3 text-right" style={myStyle}>
+                        <div className="row ">
+                            <div className="doctorName col-md-12">
+                                <p className="doctorNameLabel">Olá Doutora Maria Santos{role}</p>
+                            </div>
+                            <div className = "searchBarDiv col-md-5 text-right">
+                                <input className = "searchBar"
+                                    placeholder = "Pesquisar"
+                                    value = {this.state.term}
+                                    onChange = {this.filterList.bind(this)}
+                                />
 
+                            </div>
+                        </div>
+                        <div className="row">
+                        <div className="col-md-9 text-left">
+                                <PrehabTable action={this.handler.bind(this)} {...data}/>
+                            </div>
+                            <div className="col-md-3 text-right " style={{marginTop: '90px'}}>
+                                <div className="row">
+                                    <div className="col-md-12 text-center">
+                                        <Link to="/newPrehab" style={{textDecoration: 'none' }} {...data}>
+                                            <div className="botaoMais">+</div>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12 text-center">
+                                         <p className="addPatientLabel">Criar Prehab</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
+            } else{
+                return(
+                <PrehabInfo info={this.state.prehabInfo} />
+                );
+            }
         }
 
         else if(this.props.auth === false) {
@@ -73,6 +101,9 @@ class Prehab extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.prehabList(nextProps.token);
+        this.setState({
+            prehabSelected : false
+        });
 
     }
 
@@ -93,6 +124,7 @@ class Prehab extends Component {
 
 
     prehabList(token){
+        console.log(token);
         getPrehabList(token).then(list => {
                     console.log(list);
                     this.setState({
