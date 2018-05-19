@@ -53,7 +53,7 @@ class App extends Component {
                         <Route path="/doctor" name="Doctor" render={(props) => (<Settings auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newPatient" name="newPatient" render={(props) => (<NewPatient auth={this.props.auth} {...props}/>)}/>
                         <Route path="/patient" name="Patient" render={(props) => (<Patient auth={this.props.auth} {...props}/>)}/>
-                        <Route exact path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
+                        <Route path="/prehab" name="Prehab" render={(props) => (<Prehab auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newPrehab" name="newPrehab" render={(props) => (<NewPrehab auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newDoctor" name="newDoctor" render={(props) => (<NewDoctor auth={this.props.auth} {...props}/>)}/>
                         <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition auth={this.props.auth} {...props}/>)}/>

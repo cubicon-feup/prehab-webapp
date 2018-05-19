@@ -24,7 +24,8 @@ class PatientInfo extends Component{
             modalIsOpen: false,
             info: this.props.info,
             term: '',
-            token: this.props.token
+            token: this.props.token,
+            redirect: false
         }
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -45,26 +46,21 @@ class PatientInfo extends Component{
 
     cancelPrehab() {
         if (window.confirm('Tem a certeza que pretende cancelar este Prehab?')) {       
-            this.props.history.push('/prehab');
+            
+            cancelPrehab(this.state.token, this.props.info.data.id).then(() => {
+                window.location.reload();
 
-            /*
-            cancelPrehab(this.state.token, this.props.info.data.id).then(suc => {
-                //display dialog
-                console.log("CANCELED");
-                this.props.history.push('/prehab');
-                
             }).catch(err => {
                 console.log(err);
             });
-            */
-           
+            
+
         } else {
             // Do nothing!
         }
     }
 
     render() {
-
         let info = this.state.info.data;
         let doctors = info.doctors;
         let patient = info.patient;
