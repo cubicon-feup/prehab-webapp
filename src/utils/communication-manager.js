@@ -360,14 +360,18 @@ export function createNewPrehab(secret, prehab_caracteristics) {
         };
 
         fetch(requestUrl, requestOptions).then(function (response) {
+
         if(parseInt(response.status/100) === 2){
             return resolve(response.json());
         } else {
-            return reject(response.json().custom_message);
+
+            return reject(response.json());
         }
 
+
+
         }, function (error) {
-            return reject(error);
+            return reject(error.json());
         });
     });
 }

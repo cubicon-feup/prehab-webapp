@@ -178,9 +178,13 @@ class NewPrehab extends Component {
                 console.log(response);
 
             })
-            .catch(err => {
-                console.log("Erro: " + err);
-                this.openDialog("ERRO", err);
+            .catch((response) => {
+                response.then((error) => {
+
+                    this.openDialog("ERRO", error.custom_message);
+                    console.log(error);
+
+                })
             });
     };
 
