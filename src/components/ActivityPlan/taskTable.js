@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 //import doctorIcon from "../../images/icons/doctor_icon.svg";
-import "../../styles/patients_style.css";
+import "../../styles/pacientes_style.css";
 
 
 import {
