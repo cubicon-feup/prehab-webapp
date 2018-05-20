@@ -92,14 +92,16 @@ export function createTask(title, description, multi_link, type, secret) {
             body: JSON.stringify({ "title": title, "description": description, "multimedia_link": multi_link, "task_type_id": type })
         };
         fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 201) {
-                return resolve(response.json());
-            } else {
-                return reject(Error("An error has occurred! Please try again."));
-            }
-        }, function (error) {
-            return reject(error);
-        });
+                if(parseInt(response.status/100, 10) === 2){
+                    return resolve(response.json());
+                } else {
+
+                    return reject(response.json());
+                }
+
+            }, function (error) {
+                return reject(error.json());
+            });
     });
 }
 
@@ -226,14 +228,16 @@ export function createNewDoctor(secret, doctor_caracteristics) {
         };
 
         fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 200) {
-                return resolve(response.json());
-            } else {
-                return reject(Error("An error has occurred! Please try again."));
-            }
-        }, function (error) {
-            return reject(error);
-        });
+                if(parseInt(response.status/100, 10) === 2){
+                    return resolve(response.json());
+                } else {
+
+                    return reject(response.json());
+                }
+
+            }, function (error) {
+                return reject(error.json());
+            });
     });
 }
 
@@ -410,13 +414,15 @@ export function createNewPatient(secret, patient_caracteristics) {
         };
 
         fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 200) {
+            if(parseInt(response.status/100, 10) === 2){
                 return resolve(response.json());
             } else {
-                return reject(Error("An error has occurred! Please try again."));
+
+                return reject(response.json());
             }
+
         }, function (error) {
-            return reject(error);
+            return reject(error.json());
         });
     });
 }
@@ -482,13 +488,15 @@ export function createNewPlan(secret, planTitle, planWeek, plan) {
         };
 
         fetch(requestUrl, requestOptions).then(function (response) {
-            if (response.status === 201) {
+            if(parseInt(response.status/100, 10) === 2){
                 return resolve(response.json());
             } else {
-                return reject(Error("An error has occurred! Please try again."));
+
+                return reject(response.json());
             }
+
         }, function (error) {
-            return reject(error);
+            return reject(error.json());
         });
     });
 }
@@ -551,14 +559,16 @@ export function sendNutrition(token, title, restrictions, type, description) {
             })
 		};
 		fetch(requestUrl, requestOptions).then(function (response) {
-			if (response.status === 201) {
-				return resolve(response.json());
-			} else {
-				return reject(Error("An error has occurred! Please try again."));
-			}
-		}, function (error) {
-			return reject(error);
-		});
+			if(parseInt(response.status/100, 10) === 2){
+                return resolve(response.json());
+            } else {
+
+                return reject(response.json());
+            }
+
+        }, function (error) {
+            return reject(error.json());
+        });
 	});
 }
 

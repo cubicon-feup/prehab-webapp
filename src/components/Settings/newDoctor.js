@@ -14,7 +14,8 @@ class NewDoctor extends Component{
         this.state = {
 
             openDialog: false,
-            submitMessage: "Ocurreu um erro na Criação"
+            dialogTitle: "",
+            dialogMessage: ""
 
         };
 
@@ -23,21 +24,29 @@ class NewDoctor extends Component{
     doctorFormSubmit = (form) => {
         createNewDoctor(this.props.token, form)
             .then(response => {
-                console.log(response);
-                 this.setState({
-                    openDialog: true,
-                    submitMessage: "Médico Adicionado com Sucesso"
 
-                });
+                this.openDialog("SUCESSO", "Médico criado com sucesso");
+                console.log(response);
+
             })
-            .catch(err => {
-                console.log("Erro: " + err);
-                this.setState({
-                    openDialog: true,
-                    submitMessage: "Ocurreu um erro na Criação"
-                });
+            .catch((response) => {
+                response.then((error) => {
+
+                    this.openDialog("ERRO", error.custom_message);
+                    console.log(error);
+
+                })
+
             });
     };
+
+    openDialog(title, message){
+        this.setState({
+            openDialog: true,
+            dialogTitle: title,
+            dialogMessage: message
+        });
+    }
 
     handleClose = () => {
             this.setState({openDialog: false});
@@ -57,12 +66,12 @@ class NewDoctor extends Component{
             <div>
                 <Dialog
                     contentStyle={{width: "350px",}}
-                    title="Notificação de registo"
+                    title={this.state.dialogTitle}
                     actions={actions}
                     modal={false}
                     open={this.state.openDialog}
                     onRequestClose={this.handleClose}>
-                    {this.state.submitMessage}
+                    {this.state.dialogMessage}
                 </Dialog>
                 <div className="registoLabel">
                     Registo de Médico
