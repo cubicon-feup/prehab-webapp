@@ -25,7 +25,7 @@ const SelectOptions = [
 
 const typeOptions = [
 	{ value: 1, label: "Pequeno-Almoço"},
-	{ value: 2, label: "Refeição Grande"},
+	{ value: 2, label: "Refeição Principal"},
 	{ value: 3, label: "Lanche"}
 ];
 
@@ -39,7 +39,8 @@ class MyAmazingForm extends Component {
 			type: "",
 			allText: "",
 			openDialog: false,
-			dialogMessage: "",
+			dialogTitle: "",
+			dialogMessage: ""
 		};
 	}
 
@@ -50,6 +51,14 @@ class MyAmazingForm extends Component {
 			allText: convertToRaw(editorState.getCurrentContent())
 		});
 	};
+
+	openDialog(title, message){
+        this.setState({
+            openDialog: true,
+            dialogTitle: title,
+            dialogMessage: message
+        });
+    }
 
 	handleClose = () => {
 		this.setState({openDialog: false});
@@ -70,7 +79,7 @@ class MyAmazingForm extends Component {
 				<div>
 					<Dialog
 						contentStyle={{width: "350px",}}
-						title="Registo de Nutrição"
+						title={this.state.dialogTitle}
 						actions={actions}
 						modal={false}
 						open={openDialog}
@@ -126,20 +135,21 @@ class MyAmazingForm extends Component {
 
 					sendNutrition(this.props.token, values.title, restrictions, values.nutritionType.value, allText).then(
 						success => {
-							this.setState({
-								dialogMessage: "Registo com Sucesso",
-								openDialog: true,
-							});
+							this.openDialog("SUCESSO", "Refeição criada com sucesso");
 							actions.setSubmitting(false)
 						})
-						.catch( err => {
-							this.setState({
-								dialogMessage: "Erro no registo",
-								openDialog: true,
-							});
-							console.log("Err: " + err);
-							actions.setSubmitting(false)
-						});
+						.catch((response) => {
+                            response.then((error) => {
+
+                                this.openDialog("ERRO", error.custom_message);
+                                console.log(error);
+
+                                actions.setSubmitting(false)
+
+                            })
+                        });
+
+
 
 					/*setTimeout(() => {
 						alert(JSON.stringify(values, null, 2))
@@ -176,7 +186,7 @@ class MyAmazingForm extends Component {
 						/>
 
 						<SpecialSelect
-							id="Restrições"
+							id="Apropriada para"
 							value={values.topics}
 							onChange={setFieldValue}
 							onBlur={setFieldTouched}

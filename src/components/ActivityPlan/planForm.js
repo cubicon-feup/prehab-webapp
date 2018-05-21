@@ -13,9 +13,18 @@ class planForm extends Component {
             number_of_weeks: this.props.steps,
             week: [],
             openDialog: false,
-            submitMessage: "Erro - Registo de plano falhou"
+            dialogTitle:"",
+            dialogMessage: ""
 
         };
+    }
+
+    openDialog(title, message){
+        this.setState({
+            openDialog: true,
+            dialogTitle: title,
+            dialogMessage: message
+        });
     }
 
     handleClose = () => {
@@ -35,16 +44,19 @@ class planForm extends Component {
     createNewPlan(completeForm){
         //console.log(completeForm);
         createNewPlan(this.props.token, this.state.planTitle, this.props.steps, completeForm)
-            .then(success => {
-                console.log(success);
+            .then(response => {
 
-                this.setState({
-                    openDialog: true,
-                    submitMessage: "Novo plano criado com sucesso"
-                });
+                this.openDialog("SUCESSO", "Plano criado com sucesso");
+                console.log(response);
+
             })
-            .catch(err => {
-                console.log("Erro: "+ err);
+            .catch((response) => {
+                response.then((error) => {
+
+                    this.openDialog("ERRO", error.custom_message);
+                    console.log(error);
+
+                })
             });
     }
 
@@ -62,13 +74,13 @@ class planForm extends Component {
             <div className="container">
                 <Dialog
                     contentStyle={{width: "350px",}}
-                    title="Notificação de registo"
+                    title={this.state.dialogTitle}
                     actions={actions}
                     modal={false}
                     open={this.state.openDialog}
                     onRequestClose={this.handleClose}
                 >
-                    {this.state.submitMessage}
+                    {this.state.dialogMessage}
                 </Dialog>
                 <div className="row">
                     <div className="col-md-2" >

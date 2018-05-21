@@ -20,9 +20,19 @@ class taskForm extends Component {
             description: "",
             multi_link: "",
             errors: {},
-            openDialog: false
+            openDialog: false,
+            dialogTitle: "",
+            dialogMessage:""
         };
         this.onChange = this.onChange.bind(this);
+    }
+
+    openDialog(title, message){
+            this.setState({
+                openDialog: true,
+                dialogTitle: title,
+                dialogMessage: message
+            });
     }
 
     handleClose = () => {
@@ -51,21 +61,20 @@ class taskForm extends Component {
         if(this.isValid()) {
             const {task_type, title, description, multi_link} = this.state;
             createTask(title, description, multi_link, task_type, this.props.token)
-                .then(suc => {
-                    //display dialog
-                    console.log("Save");
-                    this.setState({
-                        openDialog: true,
-                        task_type: 1,
-                        title: "",
-                        description: "",
-                        multi_link: ""
-                    });
+                .then(response => {
 
-            }).catch(err => {
-                console.log(err);
-                wrongCredentials();
-            });
+                    this.openDialog("SUCESSO", "Tarefa criada com sucesso");
+                    console.log(response);
+
+                })
+                .catch((response) => {
+                    response.then((error) => {
+
+                        this.openDialog("ERRO", error.custom_message);
+                        console.log(error);
+                        wrongCredentials();
+                    })
+                });
         }
     };
 
@@ -86,13 +95,13 @@ class taskForm extends Component {
             <div>
                 <Dialog
                     contentStyle={{width: "350px",}}
-                    title="Registo Validado"
+                    title={this.state.dialogTitle}
                     actions={actions}
                     modal={false}
                     open={openDialog}
                     onRequestClose={this.handleClose}
                 >
-                    Nova tarefa registada com sucesso
+                    {this.state.dialogMessage}
                 </Dialog>
             </div>
             <form onSubmit={this.onSubmit}>

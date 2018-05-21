@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import Dialog from "material-ui/Dialog";
+import RaisedButton from "material-ui/RaisedButton";
+
 import {
     Step,
     Stepper,
@@ -22,25 +25,49 @@ class PatientStepper extends Component {
         this.state = {
             finished: false,
             stepIndex: 0,
-            accessCode: ''
+            accessCode: '',
+            openDialog: false,
+            dialogTitle:"",
+            dialogMessage:""
         };
     }
 
+    openDialog(title, message){
+            this.setState({
+            openDialog: true,
+            dialogTitle: title,
+            dialogMessage: message
+        });
+    }
+
+     handleClose = () => {
+        this.setState({openDialog: false});
+    };
 
 
 	patientFormSubmit = (form) => {
 		createNewPatient(this.props.token, form)
 			.then(response => {
-				const {stepIndex} = this.state;
-				console.log(response);
-				this.setState({
-                    accessCode: response.data.access_code,
-					stepIndex: stepIndex + 1,
-				});
-			})
-			.catch(err => {
-				console.log("Erro: " + err);
-			});
+
+			    const {stepIndex} = this.state;
+
+                this.openDialog("SUCESSO", "Paciente criado com sucesso");
+                console.log(response);
+
+                this.setState({
+                    accessCode: response.details.access_code,
+                    stepIndex: stepIndex + 1,
+                });
+
+            })
+            .catch((response) => {
+                response.then((error) => {
+
+                    this.openDialog("ERRO", error.custom_message);
+                    console.log(error);
+
+                })
+            });
     };
 
     getStepContent(stepIndex) {
@@ -61,8 +88,28 @@ class PatientStepper extends Component {
         const {stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
 
+        const actions = [
+            <RaisedButton
+                label="Ok"
+                primary={true}
+                onClick={this.handleClose}
+            />,
+        ];
+
         return (
             <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+                <div>
+                    <Dialog
+                        contentStyle={{width: "350px",}}
+                        title={this.state.dialogTitle}
+                        actions={actions}
+                        modal={false}
+                        open={this.state.openDialog}
+                        onRequestClose={this.handleClose}
+                    >
+                        {this.state.dialogMessage}
+                    </Dialog>
+                </div>
                 <Stepper activeStep={stepIndex}>
                     <Step>
                         <StepLabel>Registar Paciente</StepLabel>
