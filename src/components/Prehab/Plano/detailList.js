@@ -46,22 +46,6 @@ class DetailList extends Component {
 	render() {
 		return (
 			<div>
-                <Tabs
-                    onChange={this.handleChange}
-                    value={this.state.slideIndex}
-                >
-                    {this.renderTabs()}
-                </Tabs>
-                <Card>
-                    <CardText>
-                        <SwipeableViews
-                            index={this.state.slideIndex}
-                            onChangeIndex={this.handleChange}
-                        >                    
-                            {this.renderTabContent()}
-                        </SwipeableViews>
-                    </CardText>
-                </Card>
                 <div className="detailsListTabsHeader">
 
                     <Tabs

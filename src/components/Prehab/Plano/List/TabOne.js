@@ -54,7 +54,7 @@ class TabOne extends Component {
     renderTaskContent = (task) => {
         let content = [];
         content.push(
-            <div className="col-md-12 "  > 
+            <div className="col-md-12 noScroll"  > 
             <ExpansionPanel>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <p>{task.title}</p>
@@ -79,7 +79,7 @@ class TabOne extends Component {
     renderMealContent = (meal) => {
         let content = [];
         content.push(
-            <div className="col-md-12"  > 
+            <div className="col-md-12 noScroll"  > 
                 <ExpansionPanel>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <p>{meal.title}</p>
@@ -107,7 +107,7 @@ class TabOne extends Component {
         }
         this.props.tabDates.forEach( (date, index) => {    
             content.push( 
-                <div  key={index}>
+                <div className="noScroll" key={index}>
                     { this.props.tabContent[date].map( (task, index) => (
                         <div className="row tabContent" key={index} >
                              {this.props.contentType === "Plan" ? (
