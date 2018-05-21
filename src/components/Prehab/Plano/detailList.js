@@ -33,7 +33,7 @@ class DetailList extends Component {
     renderTabs = () => {
         let tabs = [];
         for(var i = 0; i < this.state.number_of_weeks; i++){
-            tabs.push(<Tab style={{Width: '300'}} inkBarStyle={{width: '50'}} label={"Semana "+(i+1)} key={i} value={i} />)
+            tabs.push(<Tab style={{Width: '300'}} inkBarStyle={{width: '50px'}} label={"Semana "+(i+1)} key={i} value={i} />)
         }
         return tabs;
     }
@@ -55,12 +55,15 @@ class DetailList extends Component {
 	render() {
 		return (
 			<div>
-                <Tabs
-                    onChange={this.handleChange}
-                    value={this.state.slideIndex}
-                >
-                    {this.renderTabs()}
-                </Tabs>
+                <div class="detailsListTabsHeader">
+                    <Tabs
+                        onChange={this.handleChange}
+                        value={this.state.slideIndex}
+                    > 
+                        {this.renderTabs()}
+                        
+                    </Tabs>
+                </div>
                 <SwipeableViews
                     index={this.state.slideIndex}
                     onChangeIndex={this.handleChange}

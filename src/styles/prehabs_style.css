@@ -105,3 +105,18 @@
     width: 20px;
     margin-left: 15px;
 }
+
+.detailsListTabsHeader{
+    background-color: rgb(0, 188, 212);
+    width: 100%!important    
+}
+
+.detailsListTabsHeader div:first-child{
+    width: 70%!important;
+    margin: 0 auto    
+}
+
+.detailsListTabsHeader div:nth-child(1) button{
+    width: 100%!important;
+    max-width: 100%!important;
+}
