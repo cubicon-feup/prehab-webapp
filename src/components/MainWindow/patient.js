@@ -5,6 +5,7 @@ import PatientInfo from "./patientInfo";
 import { Link } from "react-router-dom"
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/patients_style.css";
+import Patients from "../../images/icons/patients.svg";
 
 
 
@@ -47,8 +48,11 @@ class Patient extends Component {
                 return (
                     <div className="row">
                         <div className="row ">
-                            <div className="doctorName col-md-12">
-                                <p className="doctorNameLabel">Olá {role}</p>
+                            <div className="doctorName col-md-5">
+                                <img src={Patients} alt="dashboard" className="doctorsImg " />
+                            </div>
+                            <div className="doctorName col-md-7">
+                                <p className="titleLabel">Pacientes</p>
                             </div>
                             <div className = "searchBarDiv">
                                 <input className = "searchBar"

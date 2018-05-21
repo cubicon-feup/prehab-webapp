@@ -4,6 +4,7 @@ import TaskTable from "./taskTable";
 import { Link } from "react-router-dom";
 import "../../styles/patients_style.css";
 import {getDoctorPlan} from "../../utils/communication-manager";
+import Tasks from "../../images/icons/tasks.svg";
 
 class Plan extends Component {
 
@@ -30,8 +31,11 @@ class Plan extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-12">
-                            <p className="doctorNameLabel">Olá {role}</p>
+                        <div className="doctorName col-md-5">
+                            <img src={Tasks} alt="dashboard" className="doctorsImg " />
+                        </div>
+                        <div className="doctorName col-md-7">
+                            <p className="titleLabel">Planos</p>
                         </div>
                         <div className = "searchBarDiv">
                             <input className = "searchBar"
