@@ -11,7 +11,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 class TabOne extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
