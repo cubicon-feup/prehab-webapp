@@ -3,10 +3,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
 import "../../../../styles/prehabInfo_style.css";
-
-
 class TabOne extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

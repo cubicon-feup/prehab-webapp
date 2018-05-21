@@ -3,9 +3,6 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import TabOne from "./List/TabOne";
 
-import {Card, CardText} from 'material-ui/Card';
-
-
 class DetailList extends Component {
 
     constructor(props) {
