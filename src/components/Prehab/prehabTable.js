@@ -85,7 +85,7 @@ class PrehabTable extends Component {
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.info.patient_tag}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.number_of_weeks}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.alerts}<img src={Alert} alt="alert" className="alertImg"/></div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.info.number_of_alerts_unseen}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.init_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.expected_end_date}</div></TableRowColumn>
                             </TableRow>

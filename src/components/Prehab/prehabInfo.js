@@ -7,7 +7,12 @@ import { withRouter } from "react-router-dom";
 import {cancelPrehab} from "../../utils/communication-manager";
 import RaisedButton from "material-ui/RaisedButton";
 
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import MailIcon from '@material-ui/icons/Mail';
+
 import DetailList from "./Plano/detailList";
+import AlertTable from "./Alert/alertTable";
 
 class PatientInfo extends Component{
 
@@ -15,6 +20,7 @@ class PatientInfo extends Component{
         super(props);
         this.state = {
             openDialog: false,
+            openAlerts: false,
             info: this.props.info,
             term: '',
             token: this.props.token,
@@ -27,6 +33,18 @@ class PatientInfo extends Component{
         //this.openModal = this.openModal.bind(this);
         //this.closeModal = this.closeModal.bind(this);
         this.cancelPrehab = this.cancelPrehab.bind(this);
+    }
+
+    openAlerts = () =>{
+        this.setState({
+            openAlerts: true,
+        })
+    }
+
+    closeAlerts = () =>{
+        this.setState({
+            openAlerts: false,
+        })
     }
     
     openDialog = () => {
@@ -80,6 +98,7 @@ class PatientInfo extends Component{
         var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
         const actions = [ <RaisedButton label="Ok" primary={true} onClick={this.closeDialog}/> ];
+        const actionsAlert = [ <RaisedButton label="Ok" primary={true} onClick={this.closeAlerts}/> ];
 
         if(patient.sex === "F"){
             patient.sex = "Feminino";
@@ -87,11 +106,30 @@ class PatientInfo extends Component{
             patient.sex = "Masculino";
         }
 
+        var color = "primary";
+        if(info.number_of_alerts_unseen !== 0){
+            color = "secondary";
+        }
+
 
         return (
         <div>
             <div className="row">
                 <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
+                <IconButton onClick={this.openAlerts} className="alertIcon">
+                      <Badge badgeContent={info.number_of_alerts_unseen} color={color}>
+                        <MailIcon />
+                      </Badge>
+                </IconButton>
+                <Dialog
+                    title="Alertas"
+                    actions={actionsAlert}
+                    modal={false}
+                    open={this.state.openAlerts}
+                    onRequestClose={this.closeAlerts}>
+                    <AlertTable alertsList={info.alerts} />
+                </Dialog>
+
                 <button onClick={this.openDialog} className="openModal">Plano de Atividades</button>
                 <Dialog
                     title="My Title"
