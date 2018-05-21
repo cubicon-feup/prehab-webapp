@@ -7,10 +7,47 @@
 .tabContent{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
-    font-size: 26px;
+    font-size: 16px;
     text-align: left;
+}
+
+.expansionContent{
+    width: 100%;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
+    padding: 5px;
+}
+
+.myDialog{
+    margin-bottom: 20px !important;
+    max-height: 500px !important;
+    width: auto;
+    height: auto;
+}
+
+.myPanel{
+    overflow-x: 'hidden' !important;
+    overflow-y: 'hidden' !important;
+    
+}
+
+.noScroll{
+    overflow: 'hidden' !important;
+}
+
+.myButton{
+    margin-bottom: 20px !important;
+    width: auto;
+}
+
+.myCardContent{
+    max-height: 350px;
+    overflow-y: 'scroll';
+    overflow-x: 'hidden'!important;
+    width: auto;
+    margin-right: 20px !important;
+    margin-left: 20px !important;
+    margin-top: 20px !important;
 }
 
 

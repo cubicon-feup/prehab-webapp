@@ -21,21 +21,40 @@ class PatientInfo extends Component{
             redirect: false,
             number_of_weeks: this.props.number_of_weeks,
             tabDates: this.props.tabDates,
-            tabContent: this.props.tabContent,
-            
+            tabContent: undefined,
+            mealContent: this.props.mealContent,
+            planContent: this.props.planContent,
+            contentType: undefined,
+            dialogTitle: 'Amazing',
         }
         //this.openModal = this.openModal.bind(this);
         //this.closeModal = this.closeModal.bind(this);
         this.cancelPrehab = this.cancelPrehab.bind(this);
     }
     
-    openDialog = () => {
-        console.log(this.state);
+   
+    openPlan = () => {
+        
         this.setState({
             number_of_weeks: this.props.number_of_weeks,
             tabDates: this.props.tabDates,
-            tabContent: this.props.tabContent,
+            tabContent: this.state.planContent,
             openDialog: true,
+            contentType: "Plan",
+            dialogTitle: 'Plano de Actividades',
+            
+        });
+        console.log(this.state);
+    }
+
+    openMeal = () => {
+        this.setState({
+            number_of_weeks: this.props.number_of_weeks,
+            tabDates: this.props.tabDates,
+            tabContent: this.state.mealContent,
+            openDialog: true,
+            contentType: "Meal",
+            dialogTitle: 'Plano de Refeições',
         });
     }
 
@@ -79,7 +98,7 @@ class PatientInfo extends Component{
         var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done));
         var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
-        const actions = [ <RaisedButton label="Ok" primary={true} onClick={this.closeDialog}/> ];
+        const actions = [ <RaisedButton label="Ok" className="myButton" primary={true} onClick={this.closeDialog}/> ];
 
         if(patient.sex === "F"){
             patient.sex = "Feminino";
@@ -92,14 +111,21 @@ class PatientInfo extends Component{
         <div>
             <div className="row">
                 <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
-                <button onClick={this.openDialog} className="openModal">Plano de Atividades</button>
+                <button onClick={this.openPlan} className="openModal">Plano de Atividades</button>
+                <button onClick={this.openMeal} className="openModal">Plano de Nutrição</button>
                 <Dialog
-                    title="My Title"
+                    className="myDialog"
+                    title={this.state.dialogTitle}
                     actions={actions}
                     modal={false}
                     open={this.state.openDialog}
                     onRequestClose={this.closeDialog}>
-                        <DetailList number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
+                        <DetailList 
+                            number_of_weeks={this.state.number_of_weeks} 
+                            tabDates={this.state.tabDates} 
+                            tabContent={this.state.tabContent}
+                            contentType={this.state.contentType}
+                            />
                 </Dialog>
                 <button onClick={this.cancelPrehab} className="cancelPrehab">Cancelar Prehab</button>
             </div>

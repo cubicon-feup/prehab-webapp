@@ -35,7 +35,7 @@ class DetailList extends Component {
         this.props.tabDates.forEach((element, index) => {
             tabContent.push( 
                 <div key={index} >
-                   <div class="detailsListContentTab"><TabOne key={index} tabDates={element} tabContent={this.props.tabContent} /></div>
+                   <div className="detailsListContentTab"><TabOne key={index} tabDates={element} tabContent={this.props.tabContent} contentType={this.props.contentType} /></div>
                 </div>
             );
         });
@@ -46,7 +46,8 @@ class DetailList extends Component {
 	render() {
 		return (
 			<div>
-                <div class="detailsListTabsHeader">
+                <div className="detailsListTabsHeader">
+
                     <Tabs
                         onChange={this.handleChange}
                         value={this.state.slideIndex}
@@ -61,6 +62,7 @@ class DetailList extends Component {
                 >                    
                     {this.renderTabContent()}
                 </SwipeableViews>
+
 			</div>
 		);
 	}

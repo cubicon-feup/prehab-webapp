@@ -3,6 +3,13 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
 import "../../../../styles/prehabInfo_style.css";
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 class TabOne extends Component {
     constructor(props) {
         super(props);
@@ -44,26 +51,70 @@ class TabOne extends Component {
         return tabs;
     }
 
+    renderTaskContent = (task) => {
+        let content = [];
+        content.push(
+            <div className="col-md-12 noScroll"  > 
+            <ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <p>{task.title}</p>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                <div className="row">
+                    <div className="col-md-6"  > 
+                        < p>{task.description}</ p>
+                    </div> 
+                    <div className="col-md-6"  > 
+                        < p>Estado:{task.status}</p>
+                    </div>
+                </div>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            </div>
+
+        );
+        return content;
+    }
+
+    renderMealContent = (meal) => {
+        let content = [];
+        content.push(
+            <div className="col-md-12 noScroll"  > 
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <p>{meal.title}</p>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <div className="row">
+                            <div className="col-md-6"  > 
+                                < p>{meal.description}</ p>
+                            </div> 
+                            <div className="col-md-6"  > 
+                                <p>Tipo:{meal.meal_order}</p>
+                            </div>
+                        </div>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+            </div>
+        );
+        return content;
+    }
+
     renderTabsContent = () => {
         let content = [];
-
         if(this.props.tabContent === undefined){
             return;
         }
         this.props.tabDates.forEach( (date, index) => {    
             content.push( 
-                <div key={index}>
+                <div className="noScroll" key={index}>
                     { this.props.tabContent[date].map( (task, index) => (
                         <div className="row tabContent" key={index} >
-                            <div className="col-md-12"  > 
-                            <p>{task.title} ({task.task_type})</p>
-                            </div> 
-                            <div className="col-md-6"  > 
-                                < p>{task.description}</ p>
-                            </div> 
-                            <div className="col-md-3"  > 
-                                < p>Estado:{task.status}</p>
-                            </div> 
+                             {this.props.contentType === "Plan" ? (
+                                    this.renderTaskContent(task)
+                                ) : (
+                                    this.renderMealContent(task)
+                                )}
                         </div>
                     ))}
                 </div>
@@ -82,13 +133,17 @@ class TabOne extends Component {
                 >
                     {this.renderTabs()}
                 </Tabs>
-                <SwipeableViews
-                    index={this.state.slideIndex}
-                    onChangeIndex={this.handleChange}
+
+                <div className="myCardContent">
+                    <SwipeableViews
+                        index={this.state.slideIndex}
+                        onChangeIndex={this.handleChange}
+                        className="noScroll"
+                        >
+                        {this.renderTabsContent()}
+                    </SwipeableViews>
+                </div>
                     
-                >
-                    {this.renderTabsContent()}
-                </SwipeableViews>
 			</div>
 		);
 	}
