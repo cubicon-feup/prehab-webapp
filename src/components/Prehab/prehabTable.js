@@ -103,7 +103,7 @@ class PrehabTable extends Component {
         console.log(this.state.token);
         getPrehabById(prehabId, this.state.token).then(list => {
                 console.log(list);
-
+                
                 this.props.action(list);
 
             }).catch(err => {

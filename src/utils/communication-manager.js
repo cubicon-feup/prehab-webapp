@@ -599,3 +599,32 @@ export function cancelPrehab(token, prehabId) {
     });
 }
 
+export function getPrehabTasks(token, prehabNumber) {
+	return new Promise(function (resolve, reject) {
+
+		let requestUrl = URL + "/api/prehab/"+ prehabNumber +"/";
+		let requestOptions = {
+			uri: requestUrl,
+			method: "GET",
+			headers: {
+				'Authorization': 'Basic ',
+				'Content-Type': 'application/json',
+				'pragma': 'no-cache',
+				'cache-control': 'no-cache',
+				'platform': 'web',
+				'jwt': token
+			},
+		};
+		fetch(requestUrl, requestOptions).then(function (response) {
+			if (response.status === 200) {
+				return resolve(response.json());
+			} else {
+				return reject(Error("An error has occurred! Please try again."));
+			}
+		}, function (error) {
+			return reject(error);
+		});
+	});
+}
+
+

@@ -1,47 +1,48 @@
 import React, {Component} from "react";
 import "../../styles/prehabInfo_style.css";
 import Circle from 'react-circle';
-import Modal from 'react-modal';
+import Dialog from "material-ui/Dialog";
+
 import { withRouter } from "react-router-dom";
 import {cancelPrehab} from "../../utils/communication-manager";
+import RaisedButton from "material-ui/RaisedButton";
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+import DetailList from "./Plano/detailList";
 
 class PatientInfo extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            modalIsOpen: false,
+            openDialog: false,
             info: this.props.info,
             term: '',
             token: this.props.token,
-            redirect: false
+            redirect: false,
+            number_of_weeks: this.props.number_of_weeks,
+            tabDates: this.props.tabDates,
+            tabContent: this.props.tabContent,
+            
         }
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        //this.openModal = this.openModal.bind(this);
+        //this.closeModal = this.closeModal.bind(this);
         this.cancelPrehab = this.cancelPrehab.bind(this);
     }
     
-    openModal() {
+    openDialog = () => {
+        console.log(this.state);
         this.setState({
-            modalIsOpen: true
+            number_of_weeks: this.props.number_of_weeks,
+            tabDates: this.props.tabDates,
+            tabContent: this.props.tabContent,
+            openDialog: true,
         });
     }
 
-    closeModal() {
+    closeDialog = () =>{
         this.setState({
-            modalIsOpen: false
-        });
+            openDialog: false,
+        })
     }
 
     cancelPrehab() {
@@ -78,6 +79,7 @@ class PatientInfo extends Component{
         var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done));
         var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
+        const actions = [ <RaisedButton label="Ok" primary={true} onClick={this.closeDialog}/> ];
 
         if(patient.sex === "F"){
             patient.sex = "Feminino";
@@ -90,17 +92,15 @@ class PatientInfo extends Component{
         <div>
             <div className="row">
                 <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
-                <button onClick={this.openModal} className="openModal">Plano de Atividades</button>
-                <Modal
-                          isOpen={this.state.modalIsOpen}
-                          onAfterOpen={this.afterOpenModal}
-                          onRequestClose={this.closeModal}
-                          contentLabel="Example Modal"
-                          style={customStyles}
-                        >
-                        <div>I am a modal</div>
-                        <button onClick={this.closeModal} className="closeModal">Fechar</button>
-                </Modal>
+                <button onClick={this.openDialog} className="openModal">Plano de Atividades</button>
+                <Dialog
+                    title="My Title"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.openDialog}
+                    onRequestClose={this.closeDialog}>
+                        <DetailList number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
+                </Dialog>
                 <button onClick={this.cancelPrehab} className="cancelPrehab">Cancelar Prehab</button>
             </div>
 
