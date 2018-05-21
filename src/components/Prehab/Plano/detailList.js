@@ -3,16 +3,13 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import TabOne from "./List/TabOne";
 
-import {Card, CardText} from 'material-ui/Card';
-
-
 class DetailList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
           slideIndex: 0,
-          number_of_weeks: 1,
+          number_of_weeks: 2,
           tabDates: [],
         };
     }
@@ -38,7 +35,7 @@ class DetailList extends Component {
         this.props.tabDates.forEach((element, index) => {
             tabContent.push( 
                 <div key={index} >
-                   <TabOne key={index} tabDates={element} tabContent={this.props.tabContent} />
+                   <div class="detailsListContentTab"><TabOne key={index} tabDates={element} tabContent={this.props.tabContent} /></div>
                 </div>
             );
         });
@@ -49,22 +46,21 @@ class DetailList extends Component {
 	render() {
 		return (
 			<div>
-                <Tabs
-                    onChange={this.handleChange}
-                    value={this.state.slideIndex}
-                >
-                    {this.renderTabs()}
-                </Tabs>
-                <Card>
-                    <CardText>
-                        <SwipeableViews
-                            index={this.state.slideIndex}
-                            onChangeIndex={this.handleChange}
-                        >                    
-                            {this.renderTabContent()}
-                        </SwipeableViews>
-                    </CardText>
-                </Card>
+                <div class="detailsListTabsHeader">
+                    <Tabs
+                        onChange={this.handleChange}
+                        value={this.state.slideIndex}
+                    > 
+                        {this.renderTabs()}
+                        
+                    </Tabs>
+                </div>
+                <SwipeableViews
+                    index={this.state.slideIndex}
+                    onChangeIndex={this.handleChange}
+                >                    
+                    {this.renderTabContent()}
+                </SwipeableViews>
 			</div>
 		);
 	}

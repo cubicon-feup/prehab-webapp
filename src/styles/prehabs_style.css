@@ -117,3 +117,19 @@
     width: 20px;
     margin-left: 15px;
 }
+
+.detailsListTabsHeader{
+    background-color: rgb(0, 188, 212);
+    width: 100%!important;
+    padding-left: 25%;
+    padding-right: 25%   
+}
+
+.detailsListTabsHeader div:nth-child(1) button{
+    width: 100%!important;
+    max-width: 100%!important;
+}
+
+.detailsListContentTab button {
+    max-width: 100% !important;
+}
