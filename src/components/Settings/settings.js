@@ -41,7 +41,7 @@ class Settings extends Component {
             token: this.props.token,
 
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.doctorList !== undefined) {
         console.log("DS:" + this.state.doctorSelected);

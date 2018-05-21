@@ -41,7 +41,7 @@ class Patient extends Component {
             term:this.state.term,
             token: this.props.token,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
             if(!this.state.patientSelected){

@@ -38,7 +38,7 @@ class Prehab extends Component {
             term:this.state.term,
             token: this.props.token,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.prehabList !== undefined) {
             if(!this.state.prehabSelected){

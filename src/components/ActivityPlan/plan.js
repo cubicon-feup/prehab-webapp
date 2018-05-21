@@ -25,7 +25,7 @@ class Plan extends Component {
             list:this.state.taskList,
             term:this.state.term,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.taskList !== undefined) {
             return (

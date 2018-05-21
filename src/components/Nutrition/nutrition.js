@@ -27,7 +27,7 @@ class Nutrition extends Component {
             list:this.state.patientList,
             term:this.state.term,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
             return (
