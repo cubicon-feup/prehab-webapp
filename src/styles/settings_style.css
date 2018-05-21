@@ -1,3 +1,14 @@
+.doctorsImg{
+    width:42px;
+    height:42px;
+}
+
+.titleLabel{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 24px;
+    margin-top: 7px;
+}
 
 .doctorName, .searchBarDiv{
     margin-top: 50px;

@@ -6,7 +6,7 @@ import DoctorInfo from "./doctorInfo";
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
 import "../../styles/settings_style.css";
-
+import Doctors from "../../images/icons/doctors.svg";
 
 class Settings extends Component {
 
@@ -41,7 +41,7 @@ class Settings extends Component {
             token: this.props.token,
 
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.doctorList !== undefined) {
         console.log("DS:" + this.state.doctorSelected);
@@ -49,8 +49,11 @@ class Settings extends Component {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-12">
-                            <p className="doctorNameLabel">Olá {role}</p>
+                        <div className="doctorName col-md-5">
+                            <img src={Doctors} alt="dashboard" className="doctorsImg " />
+                        </div>
+                        <div className="doctorName col-md-7">
+                            <p className="titleLabel">Médicos</p>
                         </div>
                         <div className = "searchBarDiv">
                             <input className = "searchBar"

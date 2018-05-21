@@ -5,6 +5,7 @@ import PrehabInfo from "./prehabInfo";
 import { Link } from "react-router-dom";
 import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/prehabs_style.css";
+import Prehabs from "../../images/icons/prehabs.svg";
 
 
 
@@ -37,15 +38,18 @@ class Prehab extends Component {
             term:this.state.term,
             token: this.props.token,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.prehabList !== undefined) {
             if(!this.state.prehabSelected){
                 return (
                     <div className="row">
                         <div className="row ">
-                            <div className="doctorName col-md-12">
-                                <p className="doctorNameLabel">Olá {role}</p>
+                            <div className="doctorName col-md-5">
+                                <img src={Prehabs} alt="dashboard" className="doctorsImg " />
+                            </div>
+                            <div className="doctorName col-md-7">
+                                <p className="titleLabel">Prehabs</p>
                             </div>
                             <div className = "searchBarDiv">
                                 <input className = "searchBar"

@@ -5,7 +5,7 @@ import PatientTable from "../MainWindow/patientTable";
 import { Link } from "react-router-dom";
 import {getPatientList} from "../../utils/communication-manager";
 import "../../styles/patients_style.css";
-
+import Nutri from "../../images/icons/nutrition.svg";
 
 
 class Nutrition extends Component {
@@ -27,14 +27,17 @@ class Nutrition extends Component {
             list:this.state.patientList,
             term:this.state.term,
         };
-        let role = this.props.role;
+
 
         if (this.props.auth === true && this.state.patientList !== undefined) {
             return (
                 <div className="row">
                     <div className="row ">
-                        <div className="doctorName col-md-12">
-                            <p className="doctorNameLabel">Olá {role}</p>
+                        <div className="doctorName col-md-5">
+                            <img src={Nutri} alt="dashboard" className="doctorsImg " />
+                        </div>
+                        <div className="doctorName col-md-7">
+                            <p className="titleLabel">Nutrição</p>
                         </div>
                         <div className = "searchBarDiv">
                             <input className = "searchBar"
