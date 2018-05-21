@@ -9,7 +9,6 @@ import RaisedButton from "material-ui/RaisedButton";
 
 import DetailList from "./Plano/detailList";
 
-
 class PatientInfo extends Component{
 
     constructor(props){
@@ -19,7 +18,11 @@ class PatientInfo extends Component{
             info: this.props.info,
             term: '',
             token: this.props.token,
-            redirect: false
+            redirect: false,
+            number_of_weeks: this.props.number_of_weeks,
+            tabDates: this.props.tabDates,
+            tabContent: this.props.tabContent,
+            
         }
         //this.openModal = this.openModal.bind(this);
         //this.closeModal = this.closeModal.bind(this);
@@ -27,7 +30,11 @@ class PatientInfo extends Component{
     }
     
     openDialog = () => {
+        console.log(this.state);
         this.setState({
+            number_of_weeks: this.props.number_of_weeks,
+            tabDates: this.props.tabDates,
+            tabContent: this.props.tabContent,
             openDialog: true,
         });
     }
@@ -92,7 +99,7 @@ class PatientInfo extends Component{
                     modal={false}
                     open={this.state.openDialog}
                     onRequestClose={this.closeDialog}>
-                    <DetailList />
+                        <DetailList number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
                 </Dialog>
                 <button onClick={this.cancelPrehab} className="cancelPrehab">Cancelar Prehab</button>
             </div>

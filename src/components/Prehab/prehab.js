@@ -7,6 +7,7 @@ import {getPrehabList} from "../../utils/communication-manager";
 import "../../styles/prehabs_style.css";
 
 
+import {chunkArray} from "../../utils/helper";
 
 class Prehab extends Component {
 
@@ -17,17 +18,37 @@ class Prehab extends Component {
             prehabInfo: undefined,
             prehabList: undefined,
             term: '',
+            number_of_weeks: 0,
+            tabDates: [],
+            tabContent: undefined,
+
         }
 
     }
 
+    sortDate(a, b) {
+        return new Date(a).getTime() - new Date(b).getTime();
+    }
+
     handler(prehabInfo) {
-        console.log("HANDELEs");
-        console.log(prehabInfo);
+        let myDates = [];
+        const orderedSchedule = {};
+        const unorderedSchedule = prehabInfo.data.task_schedule;
+        Object.keys(unorderedSchedule).sort(this.sortDate).forEach(function(key) {
+            orderedSchedule[key] = unorderedSchedule[key];
+        });
+        Object.entries(prehabInfo.data.task_schedule).forEach((exercises, i) => { 
+            myDates.push( Object.keys(orderedSchedule)[i] );
+        });        
+        let tabDatesArray = chunkArray(myDates, ( myDates.length / prehabInfo.data.number_of_weeks));
+        //let tabContentArray = chunkArray(orderedSchedule, ( orderedSchedule.length / prehabInfo.data.number_of_weeks));
         this.setState({
+            number_of_weeks: prehabInfo.data.number_of_weeks,
+            tabDates: tabDatesArray,
+            tabContent: orderedSchedule,
             prehabSelected: true,
             prehabInfo: prehabInfo
-        })
+        });
     }
 
     MainActivity = () => {
@@ -79,7 +100,7 @@ class Prehab extends Component {
                 )
             } else{
                 return(
-                <PrehabInfo info={this.state.prehabInfo} token={this.props.token}/>
+                    <PrehabInfo info={this.state.prehabInfo} token={this.props.token} number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
                 );
             }
         }
