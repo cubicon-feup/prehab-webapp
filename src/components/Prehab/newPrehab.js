@@ -113,6 +113,10 @@ class NewPrehab extends Component {
                     onRequestClose={this.closeDialog}>
                     {this.state.dialogMessage}
                 </Dialog>
+
+                <div className="registoLabel">
+                    Criação de Prehab
+                </div>
                 <form onSubmit={this.onSubmit}>
 
                     <div className="row">
@@ -143,11 +147,11 @@ class NewPrehab extends Component {
 
                     <div className="row">
                         <div className="col-md-3">
-                             <p className = "col-md-12"> Data da Cirurgia</p>
+                             <p className = "col-md-12 dateLabel"> Data da Cirurgia</p>
                              <DatePicker className = "col-md-12" selected={this.state.surgeryDate} onChange={this.handleChangeSurgery} />
                         </div>
                         <div className="col-md-3">
-                            <p className = "col-md-12"> Data de Inicio do Prehab</p>
+                            <p className = "col-md-12 dateLabel"> Data de Inicio do Prehab</p>
                             <DatePicker className = "col-md-12" selected={this.state.startDate} onChange={this.handleChangeStart} />
                         </div>
                     </div>
