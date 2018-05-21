@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
+import "../../../../styles/prehabInfo_style.css";
 
 
 class TabOne extends Component {
@@ -56,15 +57,15 @@ class TabOne extends Component {
             content.push( 
                 <div key={index}>
                     { this.props.tabContent[date].map( (task, index) => (
-                        <div className="row" key={index}>
+                        <div className="row tabContent" key={index} >
                             <div className="col-md-12"  > 
-                            <h1>{task.task_type} : {task.id}</h1>
+                            <p>{task.title} ({task.task_type})</p>
                             </div> 
                             <div className="col-md-6"  > 
-                                < h3>{task.description}</ h3>
+                                < p>{task.description}</ p>
                             </div> 
                             <div className="col-md-3"  > 
-                                < h3>Estado:{task.status}</h3>
+                                < p>Estado:{task.status}</p>
                             </div> 
                         </div>
                     ))}
