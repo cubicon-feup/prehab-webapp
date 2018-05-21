@@ -12,7 +12,7 @@ class DetailList extends Component {
         super(props);
         this.state = {
           slideIndex: 0,
-          number_of_weeks: 1,
+          number_of_weeks: 2,
           tabDates: [],
         };
     }
@@ -38,7 +38,7 @@ class DetailList extends Component {
         this.props.tabDates.forEach((element, index) => {
             tabContent.push( 
                 <div key={index} >
-                   <TabOne key={index} tabDates={element} tabContent={this.props.tabContent} />
+                   <div class="detailsListContentTab"><TabOne key={index} tabDates={element} tabContent={this.props.tabContent} /></div>
                 </div>
             );
         });
