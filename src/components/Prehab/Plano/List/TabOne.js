@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 
-import {ObjectLength} from "../../../../utils/helper";
+import "../../../../styles/prehabInfo_style.css";
 
 
 class TabOne extends Component {
@@ -16,22 +16,20 @@ class TabOne extends Component {
           
         };
     }
-
-    componentWillReceiveProps(nextProps, oldProps){
-
-        if(nextProps.tabDates === undefined)
+    
+    componentWillReceiveProps(){
+        if(this.props.tabDates === undefined)
             return;
         let new_state = Object.assign({}, this.state); 
         let a = new_state.tabDates;
-        nextProps.tabDates.forEach((element, index) => {
+        this.props.tabDates.forEach((element, index) => {
             a[index] = element;
         });
         this.setState(
-            {tabDates: a, tabContent: nextProps.tabContent}            
+            {tabDates: a, tabContent: this.props.tabContent}            
         );
 
-        console.log(this.state);
-        console.log(ObjectLength(nextProps.tabContent));
+
     }
 
     handleChange = (value) => {
@@ -42,8 +40,8 @@ class TabOne extends Component {
 
     renderTabs = () => {
         let tabs = [];
-        this.state.tabDates.forEach((element, index) => {
-            tabs.push(<Tab label={this.state.tabDates[index]} key={index} value={index} />)
+        this.props.tabDates.forEach((element, index) => {
+            tabs.push(<Tab label={this.props.tabDates[index]} key={index} value={index} />)
         });
 
         return tabs;
@@ -52,45 +50,28 @@ class TabOne extends Component {
     renderTabsContent = () => {
         let content = [];
 
-        if(this.state.tabContent === undefined){
-            console.log("Shit");
+        if(this.props.tabContent === undefined){
             return;
         }
-            
-        else
-            console.log("Damm");
-
-       /* this.state.tabContent.forEach((element, index) => {
+        this.props.tabDates.forEach( (date, index) => {    
             content.push( 
-                <div className="row">
-                    <div className="col-md-12"> 
-                        {element.task_type}
-                    </div> 
-                    <div className="col-md-12"> 
-                        {element.description}
-                    </div> 
+                <div key={index}>
+                    { this.props.tabContent[date].map( (task, index) => (
+                        <div className="row tabContent" key={index} >
+                            <div className="col-md-12"  > 
+                            <p>{task.title} ({task.task_type})</p>
+                            </div> 
+                            <div className="col-md-6"  > 
+                                < p>{task.description}</ p>
+                            </div> 
+                            <div className="col-md-3"  > 
+                                < p>Estado:{task.status}</p>
+                            </div> 
+                        </div>
+                    ))}
                 </div>
                 )
-        });*/
-
-        Object.entries(this.state.tabContent).forEach(([key, value]) => {
-            value.forEach(element => {
-                //console.log(element);
-                content.push( 
-                    <div className="row" style={{overflow: 'hidden'}}>
-                        <div className="col-md-10" style={{overflow: 'hidden'}}> 
-                            {element.task_type}
-                        </div> 
-                        <div className="col-md-4" style={{overflow: 'hidden'}}> 
-                            {element.description}
-                        </div> 
-                        <div className="col-md-6" style={{overflow: 'hidden'}}> 
-                            {element.status}
-                        </div> 
-                    </div>
-                    )
             });
-        });
 
         return content;
     }
@@ -107,7 +88,7 @@ class TabOne extends Component {
                 <SwipeableViews
                     index={this.state.slideIndex}
                     onChangeIndex={this.handleChange}
-                    style={{overflow: 'hidden'}}
+                    
                 >
                     {this.renderTabsContent()}
                 </SwipeableViews>

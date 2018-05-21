@@ -7,6 +7,8 @@ import {chunkArray, groupweek} from "../../utils/helper";
 
 import { connect } from "react-redux";
 
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+
 
 class TestComponent extends Component {
 
@@ -37,7 +39,7 @@ class TestComponent extends Component {
     }
 
     getPrehabTask = () => {
-        getPrehabTasks(this.props.token, 29)
+        getPrehabTasks(this.props.token, 1)
             .then(suc => {
                 //console.log(suc);
                 const orderedSchedule = {};
@@ -70,7 +72,7 @@ class TestComponent extends Component {
                     tabContent: suc.data.task_schedule
                 });
 
-                //console.log(newArray);
+                console.log("state");
 
                 console.log(this.state);
 
@@ -90,8 +92,15 @@ class TestComponent extends Component {
                     </RaisedButton>
                 </div>
                 <div className="col-md-12">
-                    <DetailList number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
-
+                    <Card>
+                        <CardHeader
+                        title="Lista de Tarefas"
+                        subtitle="Paciente X"
+                        />
+                        <CardText>
+                            <DetailList number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
+                        </CardText>
+                    </Card>
                 </div>
             </div>
 		);
