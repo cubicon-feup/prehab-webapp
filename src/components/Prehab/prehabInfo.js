@@ -4,10 +4,15 @@ import Circle from 'react-circle';
 import Dialog from "material-ui/Dialog";
 
 import { withRouter } from "react-router-dom";
-import {cancelPrehab} from "../../utils/communication-manager";
+import {cancelPrehab, changeAlertStatus} from "../../utils/communication-manager";
 import RaisedButton from "material-ui/RaisedButton";
 
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import MailIcon from '@material-ui/icons/Mail';
+
 import DetailList from "./Plano/detailList";
+import AlertTable from "./Alert/alertTable";
 
 class PatientInfo extends Component{
 
@@ -15,7 +20,9 @@ class PatientInfo extends Component{
         super(props);
         this.state = {
             openDialog: false,
+            openAlerts: false,
             info: this.props.info,
+            number_of_alerts_unseen: this.props.info.data.number_of_alerts_unseen,
             term: '',
             token: this.props.token,
             redirect: false,
@@ -30,6 +37,21 @@ class PatientInfo extends Component{
         //this.openModal = this.openModal.bind(this);
         //this.closeModal = this.closeModal.bind(this);
         this.cancelPrehab = this.cancelPrehab.bind(this);
+    }
+
+    openAlerts = () =>{
+        this.setState({
+            openAlerts: true,
+        })
+    }
+
+    closeAlerts = () =>{
+
+        this.setState({
+            openAlerts: false,
+        });
+
+        this.changeAlertStatus();
     }
     
    
@@ -95,10 +117,15 @@ class PatientInfo extends Component{
         }
 
         var totalProgress = Math.floor(this.calculateTotalProgress(statistics.total_activities_until_now, statistics.total_activities));
-        var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done));
+        var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.total_activities_until_now));
         var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
+
+        
+        const actionsAlert = [ <RaisedButton label="Ok" primary={true} onClick={this.closeAlerts}/> ];
+
         const actions = [ <RaisedButton label="Ok" className="myButton" primary={true} onClick={this.closeDialog}/> ];
+
 
         if(patient.sex === "F"){
             patient.sex = "Feminino";
@@ -106,13 +133,39 @@ class PatientInfo extends Component{
             patient.sex = "Masculino";
         }
 
+        var color = "primary";
+        if(this.state.number_of_alerts_unseen !== 0){
+            color = "secondary";
+        }
+
 
         return (
         <div>
             <div className="row">
-                <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
+
+                <p className="patientNameLabel">
+                    {patient.patient_tag}
+                    <IconButton onClick={this.openAlerts} className="alertIcon">
+                          <Badge badgeContent={this.state.number_of_alerts_unseen} color={color}>
+                            <MailIcon />
+                          </Badge>
+                    </IconButton>
+                    <p className="emailLabel"> {daysLeft} Dias p/ cirurgia ({info.surgery_date})</p>
+                </p>
+
+                <Dialog
+                    title="Alertas"
+                    actions={actionsAlert}
+                    modal={false}
+                    open={this.state.openAlerts}
+                    onRequestClose={this.closeAlerts}>
+                    <AlertTable alertsList={info.alerts} />
+                </Dialog>
+
+               
                 <button onClick={this.openPlan} className="openModal">Plano de Atividades</button>
                 <button onClick={this.openMeal} className="openModal">Plano de Nutrição</button>
+
                 <Dialog
                     className="myDialog"
                     title={this.state.dialogTitle}
@@ -149,8 +202,8 @@ class PatientInfo extends Component{
             </div>
             <div className="row">
                 {patient.patient_constraints.map( (row) => (
-                    <div className="doctorName col-md-2">
-                        <p className="emailLabel">{row.title}</p>
+                    <div className="doctorName col-md-2 constraint">
+                        <p className="constraint">{row}</p>
                     </div>
                 ))}
             </div>
@@ -246,6 +299,17 @@ class PatientInfo extends Component{
 
     }
 
+    changeAlertStatus(){
+        changeAlertStatus(this.state.token, this.props.info.data.id).then(() => {
+            this.setState({
+                number_of_alerts_unseen: 0
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+
+    }
+
 
 
     calculateTotalProgress(tasksTillNow, totalTasks){
@@ -260,9 +324,9 @@ class PatientInfo extends Component{
         return percentage;
     }
 
-    calculateDoneProgress(tasksDone, tasksNotDone){
+    calculateDoneProgress(tasksDone, tasksTillNow){
 
-        var percentage = (tasksDone)/(tasksDone+tasksNotDone) * 100;
+        var percentage = (tasksDone * 100)/tasksTillNow;
 
         if(isNaN(percentage)){
             percentage = 0;
