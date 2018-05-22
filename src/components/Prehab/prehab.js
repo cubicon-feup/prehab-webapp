@@ -21,8 +21,8 @@ class Prehab extends Component {
             term: '',
             number_of_weeks: 0,
             tabDates: [],
-            tabContent: undefined,
-
+            planContent: undefined,
+            mealContent: undefined
         }
 
     }
@@ -34,9 +34,15 @@ class Prehab extends Component {
     handler(prehabInfo) {
         let myDates = [];
         const orderedSchedule = {};
-        const unorderedSchedule = prehabInfo.data.task_schedule;
+        const orderedMeal = {};
+        let unorderedSchedule = prehabInfo.data.task_schedule;
         Object.keys(unorderedSchedule).sort(this.sortDate).forEach(function(key) {
             orderedSchedule[key] = unorderedSchedule[key];
+        });
+
+        unorderedSchedule = prehabInfo.data.meal_schedule;
+        Object.keys(unorderedSchedule).sort(this.sortDate).forEach(function(key) {
+            orderedMeal[key] = unorderedSchedule[key];
         });
         Object.entries(prehabInfo.data.task_schedule).forEach((exercises, i) => { 
             myDates.push( Object.keys(orderedSchedule)[i] );
@@ -46,7 +52,8 @@ class Prehab extends Component {
         this.setState({
             number_of_weeks: prehabInfo.data.number_of_weeks,
             tabDates: tabDatesArray,
-            tabContent: orderedSchedule,
+            planContent: orderedSchedule,
+            mealContent: orderedMeal,
             prehabSelected: true,
             prehabInfo: prehabInfo
         });
@@ -104,7 +111,14 @@ class Prehab extends Component {
                 )
             } else{
                 return(
-                    <PrehabInfo info={this.state.prehabInfo} token={this.props.token} number_of_weeks={this.state.number_of_weeks} tabDates={this.state.tabDates} tabContent={this.state.tabContent}/>
+                    <PrehabInfo 
+                        info={this.state.prehabInfo} 
+                        token={this.props.token} 
+                        number_of_weeks={this.state.number_of_weeks} 
+                        tabDates={this.state.tabDates} 
+                        planContent={this.state.planContent}
+                        mealContent={this.state.mealContent}
+                        />
                 );
             }
         }
