@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import TaskForm from "./taskForm"
 import {connect} from "react-redux";
+import "../../styles/newTask_style.css";
 
 
 class Task extends Component {
@@ -8,11 +9,11 @@ class Task extends Component {
     CreateACtivityTask = () => {
         if(this.props.auth === true) {
             return (
-                <div className="row">
-                    <div className="col-md-12">
-                        <h1>Criar Tarefa</h1>
-                        <TaskForm token={this.props.token}/>
+                <div>
+                    <div className="registoLabel">
+                        Criar Tarefa
                     </div>
+                    <TaskForm token={this.props.token}/>
                 </div>
             )
         }

@@ -69,6 +69,7 @@ class DoctorForm extends Component{
                                 onChange={this.onChange}
                                 hintText="Inserir email"
                                 fullWidth={true}
+                                className="formInput"
                             />
                         </div>
                     </div>
@@ -81,6 +82,7 @@ class DoctorForm extends Component{
                                 onChange={this.onChange}
                                 hintText="Inserir username"
                                 fullWidth={true}
+                                className="formInput"
                             />
                         </div>
                     </div>
@@ -94,12 +96,13 @@ class DoctorForm extends Component{
                                 onChange={this.onChange}
                                 hintText="Inserir password"
                                 fullWidth={true}
+                                className="formInput"
                             />
                         </div>
                     </div>
-                <div className="other-content-center">
+                <br/>
                     <RaisedButton type="submit" primary={true} label="Criar"/>
-                </div>
+
                 </form>
             </div>
         );

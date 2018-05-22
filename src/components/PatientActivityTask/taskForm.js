@@ -4,7 +4,8 @@ import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import Dialog from "material-ui/Dialog";
 import RaisedButton from "material-ui/RaisedButton";
-
+import "../../styles/newTask_style.css";
+import "../../styles/styles.css";
 
 import { createTask } from "../../utils/communication-manager";
 import { validaTask, wrongCredentials } from "../../validation/task";
@@ -113,6 +114,7 @@ class taskForm extends Component {
                         onChange={this.onChange}
                         hintText="Inserir Titulo"
                         fullWidth={true}
+                        className="formInput"
                     />
                 </div>
                 <div className="form-group">
@@ -123,6 +125,7 @@ class taskForm extends Component {
                         onChange={this.onChange}
                         hintText="Inserir descrição"
                         fullWidth={true}
+                        className="formInput"
                     />
                 </div>
                 <div className="form-group">
@@ -133,6 +136,7 @@ class taskForm extends Component {
                         onChange={this.onChange}
                         hintText="Inserir link multimédia"
                         fullWidth={true}
+                        className="formInput"
                     />
                 </div>
                 <div className="form-group">
@@ -142,6 +146,7 @@ class taskForm extends Component {
                         value={task_type}
                         onChange={this.handleChange}
                         fullWidth={true}
+                        className="dropdown"
                     >
                         <MenuItem value={1} primaryText="Respiratório" />
                         <MenuItem value={2} primaryText="Endurance" />
@@ -149,7 +154,7 @@ class taskForm extends Component {
                     </SelectField>
                 </div>
                 <br/>
-                <RaisedButton type="submit" primary={true} label="Submeter" />
+                <RaisedButton type="submit" primary={true} label="Criar" />
             </form>
         </div>
         );
