@@ -101,7 +101,7 @@ class PrehabTable extends Component {
             return(
                 <div>
                     {number_alerts}
-                    <img id="img" src={Alert} className="alertImg"/>
+                    <img id="img" src={Alert} alt="alert" className="alertImg"/>
                 </div>
 
             );

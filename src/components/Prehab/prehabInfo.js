@@ -170,7 +170,7 @@ class PatientInfo extends Component{
             <div className="row">
                 {patient.patient_constraints.map( (row) => (
                     <div className="doctorName col-md-2 constraint">
-                        <p className="constraint">{row.title}</p>
+                        <p className="constraint">{row}</p>
                     </div>
                 ))}
             </div>
