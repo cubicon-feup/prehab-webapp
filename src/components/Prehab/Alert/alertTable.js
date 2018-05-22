@@ -33,8 +33,11 @@ class AlertTable extends Component{
 
 
     render(){
+
+
+        if(this.state.alertsList.length !== 0){
         return(
-            <div>
+            <div className="alertDiv">
                 <Table
                     fixedHeader={this.state.fixedHeader}
                     fixedFooter={this.state.fixedFooter}
@@ -71,11 +74,11 @@ class AlertTable extends Component{
                 </Table>
             </div>
         );
-    }
-
-
-    sortDate(a, b) {
-        return new Date(a) - new Date(b);
+        }else{
+            return (
+                <p className="patientNameLabel"> Não tem alertas </p>
+            );
+        }
     }
 
     componentWillReceiveProps(){

@@ -84,13 +84,13 @@ class StepPlan extends Component {
                     ))}
                     <div className="row">
                         <div className="col-md-6">
-                            <RaisedButton label="Adicionar Exercicio" primary={true} onClick={this.handleAddTask} />
+                            <RaisedButton primary={true} onClick={this.handleAddTask} > Adicionar Exercicio </RaisedButton>
                         </div>
                     </div>
                     <br />
                     <div className="row">
                         <div className="col-md-6">
-                            <RaisedButton label="Próxima Semana" type="submit" primary={true}/>
+                            <RaisedButton type="submit" primary={true}> Próxima Semana </RaisedButton>
                         </div>
                     </div>
                 </form>

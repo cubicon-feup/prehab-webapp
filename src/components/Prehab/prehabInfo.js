@@ -119,12 +119,16 @@ class PatientInfo extends Component{
         return (
         <div>
             <div className="row">
-                <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
-                <IconButton onClick={this.openAlerts} className="alertIcon">
-                      <Badge badgeContent={this.state.number_of_alerts_unseen} color={color}>
-                        <MailIcon />
-                      </Badge>
-                </IconButton>
+                <p className="patientNameLabel">
+                    {patient.patient_tag}
+                    <IconButton onClick={this.openAlerts} className="alertIcon">
+                          <Badge badgeContent={this.state.number_of_alerts_unseen} color={color}>
+                            <MailIcon />
+                          </Badge>
+                    </IconButton>
+                    <p className="emailLabel"> {daysLeft} Dias p/ cirurgia ({info.surgery_date})</p>
+                </p>
+
                 <Dialog
                     title="Alertas"
                     actions={actionsAlert}
@@ -165,8 +169,8 @@ class PatientInfo extends Component{
             </div>
             <div className="row">
                 {patient.patient_constraints.map( (row) => (
-                    <div className="doctorName col-md-2">
-                        <p className="emailLabel">{row.title}</p>
+                    <div className="doctorName col-md-2 constraint">
+                        <p className="constraint">{row.title}</p>
                     </div>
                 ))}
             </div>
