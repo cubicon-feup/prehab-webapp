@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "../../styles/patients_style.css";
-import Alert from "../../images/icons/alert.svg";
 import {getPrehabById} from "../../utils/communication-manager";
+import Alert from "../../images/icons/alert.svg"
 
 import {
     Table,
@@ -85,7 +85,7 @@ class PrehabTable extends Component {
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.info.patient_tag}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.surgery_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.number_of_weeks}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.info.number_of_alerts_unseen}</div></TableRowColumn>
+                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{this.putAlertIcon(row.info.number_of_alerts_unseen)}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.init_date}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.expected_end_date}</div></TableRowColumn>
                             </TableRow>
@@ -94,6 +94,22 @@ class PrehabTable extends Component {
                 </Table>
             </div>
         );
+    }
+
+    putAlertIcon = (number_alerts) =>{
+        if(number_alerts !== 0){
+            return(
+                <div>
+                    {number_alerts}
+                    <img id="img" src={Alert} className="alertImg"/>
+                </div>
+
+            );
+        } else{
+            return number_alerts;
+        }
+
+
     }
 
     getPrehab = (row,column, key) => {

@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import "../../../styles/alertTable_style.css";
+
 
 
 import {
@@ -16,7 +18,7 @@ class AlertTable extends Component{
     constructor(props){
         super(props);
         this.state = {
-            alertsList: this.props.alertsList,
+            alertsList: {},
             fixedHeader: true,
             fixedFooter: false,
             stripedRows: false,
@@ -43,10 +45,12 @@ class AlertTable extends Component{
                         displaySelectAll={this.state.showCheckboxes}
                         adjustForCheckbox={this.state.showCheckboxes}
                         enableSelectAll={this.state.enableSelectAll}>
-                        <TableRow className = "tableHeaderRow">
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Tarefa">Tarefa</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Descrição">Descrição</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Data">Data</TableHeaderColumn>
+                        <TableRow className = "headerRow">
+                            <TableHeaderColumn className ="headerItem" tooltip="Tarefa">Tarefa</TableHeaderColumn>
+                            <TableHeaderColumn className ="headerItem" tooltip="Descrição">Descrição</TableHeaderColumn>
+                            <TableHeaderColumn className ="headerItem" tooltip="Estado">Estado</TableHeaderColumn>
+                            <TableHeaderColumn className ="headerItem" tooltip="Teve dificuldade?">Dificuldade</TableHeaderColumn>
+                            <TableHeaderColumn className ="headerItem" tooltip="Data">Data</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -54,17 +58,47 @@ class AlertTable extends Component{
                         deselectOnClickaway={this.state.deselectOnClickaway}
                         showRowHover={this.state.showRowHover}
                         stripedRows={this.state.stripedRows}>
-                        {this.state.alertsList.map( (row) => (
-                            <TableRow className = "tableBodyRow" style={{border:'none'}}>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.task_title} ({row.task_type})</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.tas_description}</div></TableRowColumn>
-                                <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.date}</div></TableRowColumn>
+                        {this.state.alertsList.reverse().map( (row) => (
+                            <TableRow className = "bodyRow" style={{border:'none'}}>
+                                <TableRowColumn className ="bodyItem">{row.task_title} ({row.task_type})</TableRowColumn>
+                                <TableRowColumn className ="bodyItem">{row.task_description}</TableRowColumn>
+                                <TableRowColumn className ="bodyItem">{row.status}</TableRowColumn>
+                                <TableRowColumn className ="bodyItem">{row.was_difficult ? "Sim" : "Não"}</TableRowColumn>
+                                <TableRowColumn className ="bodyItem">{row.date}</TableRowColumn>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </div>
         );
+    }
+
+
+    sortDate(a, b) {
+        return new Date(a) - new Date(b);
+    }
+
+    componentWillReceiveProps(){
+        this.setState({
+            alertsList : this.props.alertsList
+        })
+    }
+
+    componentDidMount(){
+        this.setState({
+            alertsList : this.props.alertsList
+        })
+    }
+
+    componentWillMount(){
+
+        this.props.alertsList.sort(function(a, b) {
+            return b.patient_task_schedule_id - a.patient_task_schedule_id;
+        });
+
+        this.setState({
+            alertsList : this.props.alertsList
+        })
     }
 
 

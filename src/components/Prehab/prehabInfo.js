@@ -4,7 +4,7 @@ import Circle from 'react-circle';
 import Dialog from "material-ui/Dialog";
 
 import { withRouter } from "react-router-dom";
-import {cancelPrehab} from "../../utils/communication-manager";
+import {cancelPrehab, changeAlertStatus} from "../../utils/communication-manager";
 import RaisedButton from "material-ui/RaisedButton";
 
 import Badge from '@material-ui/core/Badge';
@@ -22,6 +22,7 @@ class PatientInfo extends Component{
             openDialog: false,
             openAlerts: false,
             info: this.props.info,
+            number_of_alerts_unseen: this.props.info.data.number_of_alerts_unseen,
             term: '',
             token: this.props.token,
             redirect: false,
@@ -42,9 +43,12 @@ class PatientInfo extends Component{
     }
 
     closeAlerts = () =>{
+
         this.setState({
             openAlerts: false,
-        })
+        });
+
+        this.changeAlertStatus();
     }
     
     openDialog = () => {
@@ -94,7 +98,7 @@ class PatientInfo extends Component{
         }
 
         var totalProgress = Math.floor(this.calculateTotalProgress(statistics.total_activities_until_now, statistics.total_activities));
-        var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.activities_not_done));
+        var doneProgress = Math.floor(this.calculateDoneProgress(statistics.activities_done, statistics.total_activities_until_now));
         var difficulties = Math.floor(this.calculateDifficulties(statistics.total_activities_until_now, statistics.activities_with_difficulty));
 
         const actions = [ <RaisedButton label="Ok" primary={true} onClick={this.closeDialog}/> ];
@@ -107,7 +111,7 @@ class PatientInfo extends Component{
         }
 
         var color = "primary";
-        if(info.number_of_alerts_unseen !== 0){
+        if(this.state.number_of_alerts_unseen !== 0){
             color = "secondary";
         }
 
@@ -117,7 +121,7 @@ class PatientInfo extends Component{
             <div className="row">
                 <p className="patientNameLabel"> {patient.patient_tag} <p className="emailLabel"> {daysLeft} Dias p/ cirurgia</p></p>
                 <IconButton onClick={this.openAlerts} className="alertIcon">
-                      <Badge badgeContent={info.number_of_alerts_unseen} color={color}>
+                      <Badge badgeContent={this.state.number_of_alerts_unseen} color={color}>
                         <MailIcon />
                       </Badge>
                 </IconButton>
@@ -258,6 +262,17 @@ class PatientInfo extends Component{
 
     }
 
+    changeAlertStatus(){
+        changeAlertStatus(this.state.token, this.props.info.data.id).then(() => {
+            this.setState({
+                number_of_alerts_unseen: 0
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+
+    }
+
 
 
     calculateTotalProgress(tasksTillNow, totalTasks){
@@ -272,9 +287,9 @@ class PatientInfo extends Component{
         return percentage;
     }
 
-    calculateDoneProgress(tasksDone, tasksNotDone){
+    calculateDoneProgress(tasksDone, tasksTillNow){
 
-        var percentage = (tasksDone)/(tasksDone+tasksNotDone) * 100;
+        var percentage = (tasksDone * 100)/tasksTillNow;
 
         if(isNaN(percentage)){
             percentage = 0;
