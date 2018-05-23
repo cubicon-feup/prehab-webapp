@@ -48,6 +48,9 @@ class NutritionTable extends Component {
                 return <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">Refeição Principal</div></TableRowColumn>;
             case 3:
                 return <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">Lanche</div></TableRowColumn>;
+            
+            default:
+                return <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv"></div></TableRowColumn>;
         }
     }
 
