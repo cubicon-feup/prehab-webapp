@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import PatientTable from "../MainWindow/patientTable";
+import NutritionTable from "./nutritionTable";
 //import SearchBar from 'material-ui-search-bar';
 import { Link } from "react-router-dom";
-import {getPatientList} from "../../utils/communication-manager";
+import {getNutritionList} from "../../utils/communication-manager";
 import "../../styles/patients_style.css";
 import Nutri from "../../images/icons/nutrition.svg";
 
@@ -13,7 +13,7 @@ class Nutrition extends Component {
     constructor(props){
         super(props);
         this.state = {
-            patientList: undefined,
+            nutritionList: undefined,
             term: '',
         }
 
@@ -24,12 +24,12 @@ class Nutrition extends Component {
 		    marginTop: '90px'
 	    };
         let props = {
-            list:this.state.patientList,
+            list:this.state.nutritionList,
             term:this.state.term,
         };
 
 
-        if (this.props.auth === true && this.state.patientList !== undefined) {
+        if (this.props.auth === true && this.state.nutritionList !== undefined) {
             return (
                 <div className="row">
                     <div className="row ">
@@ -50,7 +50,7 @@ class Nutrition extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-9 text-left">
-                            <PatientTable {...props}/>
+                            <NutritionTable {...props}/>
                         </div>
                         <div className="col-md-3 text-right " style={myStyle}>
                             <div className="row">
@@ -85,12 +85,12 @@ class Nutrition extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        this.patientList(nextProps.token);
+        this.nutritionList(nextProps.token);
 
     }
 
     componentDidMount() {
-        this.patientList(this.props.token);
+        this.nutritionList(this.props.token);
     }
 
 
@@ -105,17 +105,17 @@ class Nutrition extends Component {
 
 
 
-    patientList(token){
-        getPatientList(token).then(list => {
+    nutritionList(token){
+        getNutritionList(token).then(list => {
                     console.log(list);
                     this.setState({
-                        patientList: list.data
+                        nutritionList: list.data
                     });
 
                 }).catch(err => {
                     console.log(err);
                     this.setState({
-                        patientList: undefined
+                        nutritionList: undefined
                     });
                 });
     }
