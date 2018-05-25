@@ -91,7 +91,7 @@ class taskForm extends Component {
         ];
 
         return (
-        <div >
+        <div>
             <div>
                 <Dialog
                     contentStyle={{width: "350px",}}
@@ -149,7 +149,7 @@ class taskForm extends Component {
                     </SelectField>
                 </div>
                 <br/>
-                <RaisedButton type="submit" primary={true} label="Submeter" />
+                <RaisedButton type="submit" primary={true} label="Criar Tarefa" />
             </form>
         </div>
         );

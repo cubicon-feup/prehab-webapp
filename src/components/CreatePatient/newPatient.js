@@ -17,6 +17,7 @@ class NewPatient extends Component {
             .catch(err => {
                 console.log("Erro: " + err);
             });
+            this.props.setTitle('Novo Paciente');
     }
 
 
@@ -29,9 +30,7 @@ class NewPatient extends Component {
         else
         {
             return (
-
                 <PatientForm token={this.props.token}/>
-
             )
         }
     };

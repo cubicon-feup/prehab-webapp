@@ -115,9 +115,7 @@ class PatientStepper extends Component {
                         <StepLabel>Registar Paciente</StepLabel>
                     </Step>
                     <Step>
-
                         <StepLabel>Código de acesso</StepLabel>
-
                     </Step>
                 </Stepper>
                 <div style={contentStyle}>

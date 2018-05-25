@@ -4,17 +4,15 @@ import {connect} from "react-redux";
 
 
 class NewNutrition extends Component {
-
+	componentDidMount() {
+        this.props.setTitle('Novo plano de Nutrição');
+	}
+	
 	render() {
 		return (
 			<div>
 				<div className="row">
-					<div className="col-md-12">
-						<h1>Nutrição</h1>
-					</div>
-					<div className="col-md-12">
-						<NutritionForm token={this.props.token}/>
-					</div>
+					<NutritionForm token={this.props.token}/>
 				</div>
 			</div>
 		);

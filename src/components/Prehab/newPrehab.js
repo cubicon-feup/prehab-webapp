@@ -53,7 +53,6 @@ class NewPrehab extends Component {
     handleChangePlan = (event, index, value) => this.setState({idPlan: value});
 
     onSubmit = (e) => {
-
         const form = {
             idPatient: this.state.idPatient,
             idPlan : this.state.idPlan,
@@ -76,6 +75,7 @@ class NewPrehab extends Component {
     componentDidMount() {
         this.patientList(this.props.token);
         this.planList(this.props.token);
+        this.props.setTitle('Novo Prehab');
     }
 
     openDialog(title, message){
@@ -103,7 +103,7 @@ class NewPrehab extends Component {
 
         return (
 
-            <div>
+            <div >
                 <Dialog
                     contentStyle={{width: "350px",}}
                     title={this.state.dialogTitle}
@@ -114,13 +114,9 @@ class NewPrehab extends Component {
                     {this.state.dialogMessage}
                 </Dialog>
 
-                <div className="registoLabel">
-                    Criação de Prehab
-                </div>
-                <form onSubmit={this.onSubmit}>
-
+                <form className="content-middle-page col-md-8" onSubmit={this.onSubmit}>
                     <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-6">
                             <SelectField
                                 hintText="Paciente"
                                 value={idPatient}
@@ -132,7 +128,7 @@ class NewPrehab extends Component {
                             </SelectField>
                         </div>
 
-                        <div className="col-md-3">
+                        <div className="col-md-6">
                             <SelectField
                                 hintText="Plano"
                                 value={idPlan}
@@ -146,17 +142,20 @@ class NewPrehab extends Component {
                     </div>
 
                     <div className="row">
-                        <div className="col-md-3">
-                             <p className = "col-md-12 dateLabel"> Data da Cirurgia</p>
-                             <DatePicker className = "col-md-12" selected={this.state.surgeryDate} onChange={this.handleChangeSurgery} />
+                        <div className="col-md-6">
+                             <p className = "dateLabel"> Data da Cirurgia</p>
+                             <DatePicker selected={this.state.surgeryDate} onChange={this.handleChangeSurgery} />
                         </div>
-                        <div className="col-md-3">
-                            <p className = "col-md-12 dateLabel"> Data de Inicio do Prehab</p>
+                        <div className="col-md-6">
+                            <p className = "dateLabel"> Data de Inicio do Prehab</p>
                             <DatePicker className = "col-md-12" selected={this.state.startDate} onChange={this.handleChangeStart} />
                         </div>
                     </div>
-                    <div className="other-content-center">
-                        <RaisedButton type="submit" primary={true} label="Criar"/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <br/><br/>
+                            <RaisedButton type="submit" primary={true} label="Criar Prehab"/>
+                        </div>
                     </div>
                 </form>
             </div>

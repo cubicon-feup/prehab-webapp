@@ -14,8 +14,8 @@
 
 .content-middle-page {
     margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .btn-to-middle {
@@ -47,3 +47,55 @@ body{
     margin-left: 170px;
 }
 
+.Connect-App--root-1 .row{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Connect-App--root-1 {
+    height: 100%;
+}
+
+.MuiInput-root-94{
+    position: absolute!important;
+    right: 25px;
+    width: 300px;
+    background: #ffffff4d;
+    border-radius: 2px;
+    padding: 0 10px;
+    color: #FFF!important
+}
+
+.MuiInput-underline-98::before {
+    border-color: #FFF!important;
+}
+
+.MuiInput-underline-98::before {
+    border-color: #FFF!important;
+}
+
+.MuiInput-underline-98:hover:not(.MuiInput-disabled-97):not(.MuiInput-focused-96):not(.MuiInput-error-99)::before {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.39)!important;
+}
+
+.MuiInput-root-94 #input-with-icon-adornment{
+    color:#FFF;
+}
+
+.MuiButton-raisedPrimary-270 {
+    color: #fff;
+    background-color: #323bea!important;
+}
+
+.MuiAvatar-colorDefault-156, .MuiAvatar-colorDefault-157,.MuiAvatar-root-154{
+    color: #fafafa;
+    background-color: #fff!important;
+}
+
+.MuiTypography-subheading-77 {
+    color: rgb(110, 110, 110)!important;
+}
+
+main{
+    overflow-y: auto!important
+}

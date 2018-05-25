@@ -28,22 +28,22 @@ class NewPlan extends Component {
         if(this.props.auth === true && this.state.taskList !== undefined) {
             if(this.state.step_value === 1){
                 return (
-                    <div>
+                    <div className="content-middle-page col-md-8">
                         <br />
                         <div className="row">
-                            <div className="col-md-6 offset-md-4">
-                                <h1>Selecionar tempo do plano</h1>
+                            <div className="col-md-12">
+                                <h3>Selecionar o tempo do plano</h3>
                             </div>
                         </div>
                         <br />
                         <div className="row">
-                            <div className="col-md-6 offset-md-6">
-                                <RaisedButton primary={true} onClick={this.create2Stepper} label="2 Semanas" />
-                            </div>
+                            <div className="col-md-6">
+                                <RaisedButton primary={true} onClick={this.create2Stepper} label="2 Semanas" />                                
+                            </div>                            
                         </div>
-                        <br />
+                        <br/>
                         <div className="row">
-                            <div className="col-md-6 offset-md-6">
+                            <div className="col-md-6">
                                 <RaisedButton primary={true} onClick={this.create4Stepper} label="4 Semanas" />
                             </div>
                         </div>
@@ -70,6 +70,7 @@ class NewPlan extends Component {
     componentDidMount() {
         //console.log(this.props.token);
         this.taskList(this.props.token);
+        this.props.setTitle('Novo Plano de Tarefas');
     }
 
     componentWillReceiveProps(nextProps) {

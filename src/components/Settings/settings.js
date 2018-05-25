@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
+import {compose} from 'redux';
 import DoctorTable from "./doctorTable";
 import DoctorInfo from "./doctorInfo";
 //import SearchBar from 'material-ui-search-bar';
@@ -7,6 +8,29 @@ import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
 import "../../styles/settings_style.css";
 import Doctors from "../../images/icons/doctors.svg";
+
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+
+const styles = theme => ({
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    },
+    fabGreen: {
+        position: 'fixed',
+        bottom: theme.spacing.unit * 10,
+        right: theme.spacing.unit * 2,
+        backgroundColor:'green',
+      }
+});
+
+const newDoctor = props => <Link to="/newDoctor" {...props} />
 
 class Settings extends Component {
 
@@ -32,57 +56,29 @@ class Settings extends Component {
     }
 
     MainActivity = () => {
-        let myStyle = {
-		    marginTop: '90px'
-	    };
         let data = {
             list:this.state.doctorList,
             term:this.state.term,
             token: this.props.token,
-
         };
 
-
+        const { classes} = this.props;
         if (this.props.auth === true && this.state.doctorList !== undefined) {
         console.log("DS:" + this.state.doctorSelected);
         if(!this.state.doctorSelected){
             return (
-                <div className="row">
-                    <div className="row ">
-                        <div className="doctorName col-md-5">
-                            <img src={Doctors} alt="dashboard" className="doctorsImg " />
-                        </div>
-                        <div className="doctorName col-md-7">
-                            <p className="titleLabel">Médicos</p>
-                        </div>
-                        <div className = "searchBarDiv">
-                            <input className = "searchBar"
-                                placeholder = "Pesquisar"
-                                value = {this.state.term}
-                                onChange = {this.filterList.bind(this)}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-8 text-left">
-                            <DoctorTable action={this.handler.bind(this)} {...data} />
-                        </div>
-                        <div className="col-md-4 text-right " style={myStyle}>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-	                                <Link to="/newDoctor" style={{textDecoration: 'none' }}>
-		                                <div className="botaoMais">+</div>
-	                                </Link>
-                                </div>
-                            </div>
-	                        <div className="row">
-		                        <div className="col-md-12 text-center">
-			                         <p className="addPatientLabel">Adicionar Médico</p>
-		                        </div>
-	                        </div>
-                        </div>
-                    </div>
-                </div>
+                <Grid container spacing={32}>
+                    <Grid item md={11} xs={12}>
+                        <DoctorTable action={this.handler.bind(this)} {...data} />
+                    </Grid>
+                    <Grid item md={1} xs={12}>
+                        <Tooltip id="tooltip-fab"title="Criar Médico">
+                            <Button variant="fab" color="primary" aria-label="add" component={newDoctor} className={classes.fab}>
+                                <AddIcon />
+                            </Button>
+                        </Tooltip>
+                    </Grid>
+                </Grid>
             );
             } else{
 
@@ -101,22 +97,18 @@ class Settings extends Component {
     };
 
 
-    filterList (event) {
-        this.setState({term: event.target.value});
-    }
-
-
     componentWillReceiveProps(nextProps) {
         this.doctorList(nextProps.token);
         this.setState({
             doctorSelected : false
         });
+        this.setState({term: nextProps.filter});
 
     }
 
     componentDidMount() {
         this.doctorList(this.props.token);
-
+        this.props.setTitle('Médicos');
     }
 
 
@@ -156,5 +148,9 @@ const mapStateToProps = (state) => {
     };
 };
 
+Settings.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+};
 
-export default connect(mapStateToProps, null)(Settings);
+export default compose(withStyles(styles, { withTheme: true }),connect(mapStateToProps,null))(Settings);

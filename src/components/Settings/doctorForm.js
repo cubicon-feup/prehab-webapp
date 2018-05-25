@@ -46,7 +46,7 @@ class DoctorForm extends Component{
         return(
 
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form className="content-middle-page col-md-8" onSubmit={this.onSubmit}>
                     <div className="row ">
                         <div className="col-md-12">
                             <TextField
@@ -97,8 +97,10 @@ class DoctorForm extends Component{
                             />
                         </div>
                     </div>
-                <div className="other-content-center">
-                    <RaisedButton type="submit" primary={true} label="Criar"/>
+                <div className="row">
+                    <div className="col-md-12">
+                        <RaisedButton type="submit" primary={true} label="Criar Médico"/>
+                    </div>
                 </div>
                 </form>
             </div>

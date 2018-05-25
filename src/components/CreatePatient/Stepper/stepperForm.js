@@ -47,23 +47,6 @@ class StepperForm extends Component{
 
     render() {
         const { errors, email, sex, height, weight, age } = this.state;
-        /**const MyInnerForm = props => {
-          const {
-            email,
-            sex,
-            height,
-            weight,
-            age,
-            touched,
-            errors,
-            dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            handleReset,
-          } = this.state;**/
-
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -139,8 +122,8 @@ class StepperForm extends Component{
                         <SelectPatientType changeField={this.onChangePatientType.bind(this)}/>
                     </div>
                 </div>
-                <div className="other-content-center">
-                    <RaisedButton type="submit" primary={true} label="Criar"/>
+                <div>
+                    <RaisedButton type="submit" primary={true} label="Criar Paciente"/>
                 </div>
                 </form>
 

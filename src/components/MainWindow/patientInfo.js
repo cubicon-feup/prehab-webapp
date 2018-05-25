@@ -1,6 +1,21 @@
 import React, {Component} from "react";
 import "../../styles/patientInfo_style.css";
 import { Link } from "react-router-dom"
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
+const styles = theme => ({
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    }
+  });
+
+const newPrehab = props => <Link to="/newPrehab" {...props} />
 
 class PatientInfo extends Component{
 
@@ -8,20 +23,15 @@ class PatientInfo extends Component{
         super(props);
         this.state = {
             info: this.props.info,
-            term: '',
         }
     }
 
     render(){
-
+        const { classes} = this.props;
         let info = this.state.info.data;
         let constraints = info.constraints;
         let doctors = info.doctors_associated;
-
-        let data = {
-            patient_tag: this.state.info.data.patient_tag,
-        };
-
+        
         if(info.sex === "F"){
             info.sex = "Feminino";
         }else{
@@ -73,31 +83,20 @@ class PatientInfo extends Component{
                     ))}
                 </div>
             </div>
-
-
-            <div className="col-md-3">
-                <div className="text-right " style={{marginTop: '90px'}}>
-                    <div className="row">
-                        <div className="col-md-12 text-center">
-                            <Link to="/newPrehab" style={{textDecoration: 'none' }} {...data}>
-                                <div className="botaoMais">+</div>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 text-center">
-                             <p className="addPatientLabel">Criar Prehab</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Tooltip id="tooltip-fab" title="Criar Prehabs">
+                <Button variant="fab" color="primary" aria-label="add" component={newPrehab} className={classes.fab}>
+                    <AddIcon />
+                </Button>
+            </Tooltip>
         </div>
 
         )
     }
 
-    filterList (event) {
-        this.setState({term: event.target.value});
-    }
 }
-export default PatientInfo
+
+PatientInfo.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(PatientInfo)
