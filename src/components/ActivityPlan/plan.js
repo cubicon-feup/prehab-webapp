@@ -1,26 +1,46 @@
 import React, {Component} from "react";
+import {compose} from 'redux';
 import { connect } from "react-redux";
 import TaskTable from "./taskTable";
 import { Link } from "react-router-dom";
 import "../../styles/patients_style.css";
 import {getDoctorPlan} from "../../utils/communication-manager";
-import Tasks from "../../images/icons/tasks.svg";
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 
+const styles = theme => ({
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    },
+    fabGreen: {
+        position: 'fixed',
+        bottom: theme.spacing.unit * 10,
+        right: theme.spacing.unit * 2,
+        backgroundColor:'green',
+      }
+});
+
+const newtask = props => <Link to="/task" {...props} />
+const newPlan = props => <Link to="/newPlan" {...props} />
 class Plan extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            patientList: undefined,
+            taskList: undefined,
             term: '',
         }
 
     }
 
     MainActivity = () => {
-        let myStyle = {
-		    marginTop: '90px'
-	    };
+        const { classes} = this.props;
         let props = {
             list:this.state.taskList,
             term:this.state.term,
@@ -29,48 +49,21 @@ class Plan extends Component {
 
         if (this.props.auth === true && this.state.taskList !== undefined) {
             return (
-                <div className="row">
-                    <div className="row ">
-                        <div className="doctorName col-md-5">
-                            <img src={Tasks} alt="dashboard" className="doctorsImg " />
-                        </div>
-                        <div className="doctorName col-md-7">
-                            <p className="titleLabel">Planos</p>
-                        </div>
-                        <div className = "searchBarDiv">
-                            <input className = "searchBar"
-                                placeholder = "Pesquisar"
-                                value = {this.state.term}
-                                onChange = {this.taskList.bind(this)}
-                            />
-
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-9 text-left">
+                <Grid container spacing={32}>
+                    <Grid item md={11} xs={12}>
                             <TaskTable {...props}/>
-                        </div>
-                        <div className="col-md-3 text-right " style={myStyle}>
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-	                                <Link to="/newPlan" style={{textDecoration: 'none' }}>
-		                                <div style={divAddPatientStyle}>+</div>
-	                                </Link>
-                                </div>
-                            </div>
-	                        <div className="row">
-		                        <div className="col-md-12 text-center">
-			                        <p className="addPatientLabel">Adicionar Plano</p>
-		                        </div>
-	                        </div>
-
+                    </Grid>
+                    <Grid item md={1} xs={12}>
+                        <Tooltip id="tooltip-fab"title="Novo Plano">
+                            <Button variant="fab" color="primary" aria-label="add" component={newPlan} className={classes.fab}>
+                                <AddIcon />
+                            </Button>
+                        </Tooltip>
                             {this.settingsMenu()}
-                        </div>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             )
         }
-
         else if(this.props.auth === false) {
 
             return (
@@ -80,24 +73,16 @@ class Plan extends Component {
     };
 
     settingsMenu = () => {
+        const { classes} = this.props;
         console.log(this.props.role);
 
         if  (this.props.auth === true && this.props.role === "Admin") {
             return (
-                <div className="patients">
-                    <div className="row">
-                        <div className="col-md-12 text-center">
-                            <Link to="/task" style={{textDecoration: 'none' }}>
-                                <div style={divAddPatientStyle}>+</div>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12 text-center">
-                            <p className="addPatientLabel">Adicionar Tarefa</p>
-                        </div>
-                    </div>   
-                </div>     
+                <Tooltip id="tooltip-fab" title="Criar Tarefa">
+                <Button variant="fab" color="primary" aria-label="add" component={newtask} className={classes.fabGreen}>
+                    <AddIcon />
+                </Button>
+                </Tooltip>
             );
         } else{
             return null
@@ -107,11 +92,13 @@ class Plan extends Component {
 
     componentDidMount() {
         //console.log(this.props.token);
+        this.props.setTitle('Tarefas');
         this.taskList(this.props.token);
     }
 
     componentWillReceiveProps(nextProps) {
 	    this.taskList(nextProps.token);
+        this.setState({term:nextProps.filter});
     }
 
 	taskList(token){
@@ -145,24 +132,12 @@ const mapStateToProps = (state) => {
         auth: state.auth.isLoggedIn,
         token : state.auth.accessToken,
         role: state.auth.role
-
     };
 };
 
-
-export default connect(mapStateToProps, null)(Plan);
-
-const divAddPatientStyle = {
-    backgroundColor:"#F1F9FF",
-    paddingTop:10,
-    paddingBottom:10,
-    paddingLeft:10,
-    paddingRight:10,
-    borderRadius:100,
-    cursor: "pointer",
-    display:"table",
-    margin: "auto",
-    fontSize:20,
-    width: 50,
-    height: 50,
+Plan.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
+
+export default compose(withStyles(styles, { withTheme: true }),connect(mapStateToProps,null))(Plan);

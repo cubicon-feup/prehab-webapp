@@ -86,10 +86,12 @@ function searchingFor(term){
 /**
  * A more complex example, allowing the table height to be set, and key boolean properties to be toggled.
  */
-class PatientTable extends Component {
+class TaskTable extends Component {
     state = {
+        filteredPatients: this.props.list,
+        token: this.props.token,
         term: this.props.term,
-        taskList: this.props.list,
+        patientList: this.props.list,
         fixedHeader: true,
         fixedFooter: false,
         stripedRows: false,
@@ -109,8 +111,22 @@ class PatientTable extends Component {
     };
 
     render() {
-        console.log(this.state.taskList);
+        console.log(this.state.patientList);
         console.log(this.props.term);
+        let filteredPatients = this.state.patientList.filter(
+            (row) => {
+                return row.title.toLowerCase().indexOf(this.props.term.toLowerCase()) !== -1;
+            }
+        );
+
+        console.log(filteredPatients)
+
+        if(this.state.filteredPatients.length !== filteredPatients.length){
+            this.setState({
+                filteredPatients: filteredPatients
+            });
+        }
+        
         return (
             <div>
                 <Table
@@ -135,7 +151,7 @@ class PatientTable extends Component {
                         deselectOnClickaway={this.state.deselectOnClickaway}
                         showRowHover={this.state.showRowHover}
                         stripedRows={this.state.stripedRows}>
-                        {this.state.taskList.map( (row) => (
+                        {filteredPatients.map( (row) => (
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.id}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.title}</div></TableRowColumn>
@@ -151,4 +167,4 @@ class PatientTable extends Component {
 }
 
 
-export default PatientTable;
+export default TaskTable;

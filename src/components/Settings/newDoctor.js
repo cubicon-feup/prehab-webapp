@@ -52,6 +52,10 @@ class NewDoctor extends Component{
             this.setState({openDialog: false});
     };
 
+    componentDidMount() {
+        this.props.setTitle('Criar Médico');
+    }
+
 
     render(){
 
@@ -73,9 +77,6 @@ class NewDoctor extends Component{
                     onRequestClose={this.handleClose}>
                     {this.state.dialogMessage}
                 </Dialog>
-                <div className="registoLabel">
-                    Registo de Médico
-                </div>
                 <DoctorForm doctorFormSubmit={this.doctorFormSubmit.bind(this)}/>
             </div>
         );

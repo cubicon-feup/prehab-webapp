@@ -71,7 +71,7 @@ class planForm extends Component {
         ];
 
         return (
-            <div className="container">
+            <div className="content-middle-page col-md-8">
                 <Dialog
                     contentStyle={{width: "350px",}}
                     title={this.state.dialogTitle}
@@ -83,19 +83,14 @@ class planForm extends Component {
                     {this.state.dialogMessage}
                 </Dialog>
                 <div className="row">
-                    <div className="col-md-2" >
-                        <h1>Criar Plano</h1>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <TextField
-                            name="Activity Plan name"
-                            value={this.state.planTitle}
-                            onChange={this.handleNameChange}
-                            hintText="Insert name"
-                            fullWidth={true}
-                        />
+                    <div  className="col-md-12">
+                    <TextField
+                        name="Activity Plan name"
+                        value={this.state.planTitle}
+                        onChange={this.handleNameChange}
+                        hintText="Insert name"
+                        fullWidth={true}
+                    />
                     </div>
                 </div>
                 <div className="row">

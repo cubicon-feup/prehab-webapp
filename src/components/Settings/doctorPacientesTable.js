@@ -130,11 +130,8 @@ class PatientTable extends Component {
                         enableSelectAll={this.state.enableSelectAll}>
                         <TableRow className = "tableHeaderRow">
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="ID">ID</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Dias para cirurgia">Cirurgia</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Idade">Idade</TableHeaderColumn>
                             <TableHeaderColumn className ="tableHeaderItem" tooltip="Sexo">Sexo</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderItem" tooltip="Alertas">Alertas</TableHeaderColumn>
-                            <TableHeaderColumn className ="tableHeaderLastItem" tooltip="Médicos Associados">Médicos</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -145,11 +142,8 @@ class PatientTable extends Component {
                         {filteredPatients.map( (row) => (
                             <TableRow className = "tableBodyRow" style={{border:'none'}}>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.patient_tag}</div></TableRowColumn>
-
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.age}</div></TableRowColumn>
                                 <TableRowColumn className ="tableBodyItem"><div className="tableBodyItemInnerDiv">{row.sex}</div></TableRowColumn>
-
-
                             </TableRow>
                         ))}
                     </TableBody>

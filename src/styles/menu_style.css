@@ -54,3 +54,10 @@
     margin-right: auto;
 }
 
+.navIcon{
+    max-width: 50%;
+}
+
+.navIconLogo{
+    margin: 0 auto;
+}

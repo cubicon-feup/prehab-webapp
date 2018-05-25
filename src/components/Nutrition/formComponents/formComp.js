@@ -211,7 +211,7 @@ class MyAmazingForm extends Component {
 							</CardText>
 						</Card>
 						<button type="submit" disabled={isSubmitting}>
-							Submit
+							Criar Plano
 						</button>
 					</Form>
 				)}

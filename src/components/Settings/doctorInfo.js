@@ -26,23 +26,15 @@ class DoctorInfo extends Component{
         return (
         <div>
             <div className="row ">
-                <div className="doctorName col-md-4">
-                    <p className="doctorNameLabel"> {info.name}</p>
-                    <p className="emailLabel"> {info.email}</p>
-                </div>
-                <div className = "searchBarDiv col-md-8 text-right">
-                    <input className = "searchBar"
-                        placeholder = "Pesquisar"
-                        value = {this.state.term}
-                        onChange = {this.filterList.bind(this)}
-                    />
+                <div className="doctorName col-md-12">
+                    <p className="doctorNameLabel">{info.name} / {info.email}</p>
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <p className="doctorNameLabel"> Os Seus Pacientes </p>
+                    <p className="doctorNameLabel">Pacientes </p>
                 </div>
-                <div className="col-md-9 text-left">
+                <div className="col-md-12 text-left">
                     <DoctorPacientesTable  {...props} />
                 </div>
             </div>

@@ -9,11 +9,10 @@ import MyAmazingForm from "./formComponents/formComp";
 class NutritionForm extends Component {
 	render() {
 		return (
-			<div className="content-middle-page">
-				<div className="col-md-12">
-					<MyAmazingForm token={this.props.token}/>
-				</div>
+			<div className="col-md-12">
+				<MyAmazingForm token={this.props.token}/>
 			</div>
+			
 		)
 	}
 

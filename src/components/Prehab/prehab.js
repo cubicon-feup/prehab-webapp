@@ -1,15 +1,28 @@
 import React, {Component} from "react";
+import {compose} from 'redux';
 import { connect } from "react-redux";
 import PrehabTable from "./prehabTable";
 import PrehabInfo from "./prehabInfo";
 import { Link } from "react-router-dom";
 import {getPrehabList} from "../../utils/communication-manager";
-import "../../styles/prehabs_style.css";
-import Prehabs from "../../images/icons/prehabs.svg";
 
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
 import {chunkArray} from "../../utils/helper";
+const styles = theme => ({
+    fab: {
+      position: 'fixed',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    }
+  });
 
+const newPrehab = props => <Link to="/newPrehab" {...props} />
 class Prehab extends Component {
 
     constructor(props){
@@ -25,6 +38,10 @@ class Prehab extends Component {
             mealContent: undefined
         }
 
+    }
+    componentDidMount() {
+        this.props.setTitle('Prehabs');
+        this.prehabList(this.props.token);
     }
 
     sortDate(a, b) {
@@ -60,7 +77,7 @@ class Prehab extends Component {
     }
 
     MainActivity = () => {
-
+        const { classes} = this.props;
         let data = {
             list:this.state.prehabList,
             term:this.state.term,
@@ -71,43 +88,18 @@ class Prehab extends Component {
         if (this.props.auth === true && this.state.prehabList !== undefined) {
             if(!this.state.prehabSelected){
                 return (
-                    <div className="row">
-                        <div className="row ">
-                            <div className="doctorName col-md-5">
-                                <img src={Prehabs} alt="dashboard" className="doctorsImg " />
-                            </div>
-                            <div className="doctorName col-md-7">
-                                <p className="titleLabel">Prehabs</p>
-                            </div>
-                            <div className = "searchBarDiv">
-                                <input className = "searchBar"
-                                    placeholder = "Pesquisar"
-                                    value = {this.state.term}
-                                    onChange = {this.filterList.bind(this)}
-                                />
-
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-9 text-left">
-                                    <PrehabTable action={this.handler.bind(this)} {...data}/>
-                            </div>
-                            <div className="col-md-3 text-right " style={{marginTop: '90px'}}>
-                                <div className="row">
-                                    <div className="col-md-12 text-center">
-                                        <Link to="/newPrehab" style={{textDecoration: 'none' }} {...data}>
-                                            <div className="botaoMais">+</div>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-12 text-center">
-                                            <p className="addPatientLabel">Criar Prehab</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Grid container spacing={32}>
+                        <Grid item md={11} xs={12}>
+                            <PrehabTable action={this.handler.bind(this)} {...data}/>
+                        </Grid>
+                        <Grid item md={1} xs={12}>
+                            <Tooltip id="tooltip-fab" title="Criar Prehabs">
+                                <Button variant="fab" color="primary" aria-label="add" component={newPrehab} className={classes.fab}>
+                                    <AddIcon />
+                                </Button>
+                            </Tooltip>
+                        </Grid>
+                    </Grid>
                 )
             } else{
                 return(
@@ -130,24 +122,13 @@ class Prehab extends Component {
         }
     };
 
-
-    filterList (event) {
-        this.setState({term: event.target.value});
-    }
-
-
     componentWillReceiveProps(nextProps) {
         this.prehabList(nextProps.token);
         this.setState({
             prehabSelected : false
         });
-
+        this.setState({term:nextProps.filter});
     }
-
-    componentDidMount() {
-        this.prehabList(this.props.token);
-    }
-
 
 	render() {
 		return (
@@ -156,9 +137,6 @@ class Prehab extends Component {
             </div>
 		);
 	}
-
-
-
 
     prehabList(token){
         console.log(token);
@@ -187,5 +165,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-
-export default connect(mapStateToProps, null)(Prehab);
+Prehab.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+};
+export default compose(withStyles(styles, { withTheme: true }),connect(mapStateToProps,null))(Prehab);

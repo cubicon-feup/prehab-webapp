@@ -4,14 +4,17 @@ import {connect} from "react-redux";
 
 
 class Task extends Component {
-
+    componentDidMount() {
+        this.props.setTitle('Criar Tarefa');
+    }
     CreateACtivityTask = () => {
         if(this.props.auth === true) {
             return (
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Criar Tarefa</h1>
-                        <TaskForm token={this.props.token}/>
+                        <div className="content-middle-page">
+                            <TaskForm token={this.props.token}/>
+                        </div>
                     </div>
                 </div>
             )

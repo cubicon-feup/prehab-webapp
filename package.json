@@ -6,6 +6,7 @@
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
     "axios": "^0.18.0",
+    "babel-plugin-transform-decorators": "^6.24.1",
     "bootstrap": "^4.0.0",
     "draft-js": "^0.10.5",
     "formik": "^0.11.11",
@@ -49,6 +50,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-plugin-transform-decorators": "^6.24.1",
     "cross-env": "^5.1.4",
     "redux-logger": "^3.0.6"
   }

@@ -7,6 +7,7 @@ import {logOut, signIn} from "../../actions/authActions";
 import { Link } from 'react-router-dom'
 import {wrongCredentials} from "../Login/login";
 import {authenticateUser} from "../../utils/communication-manager";
+import "../../styles/styles.css";
 
 class Home extends Component {
 

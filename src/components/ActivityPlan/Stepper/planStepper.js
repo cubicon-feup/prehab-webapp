@@ -33,7 +33,7 @@ class PlanStepper extends Component {
             //Inner loop to create children
             children.push(<Step key={i}><StepLabel>Semana {i+1}</StepLabel></Step>)
         }
-        children.push(<Step key={number_of_steps}><StepLabel>Submeter</StepLabel></Step>);
+        children.push(<Step key={number_of_steps}><StepLabel>Criar Plano</StepLabel></Step>);
         //steps.push(<Stepper activeStep={1}>{children}</Stepper>)
         return children
     };
@@ -93,9 +93,7 @@ class PlanStepper extends Component {
             }
         }
         else {
-            switch (stepIndex) {
-                default: return 'wrong'
-            }
+            return 'wrong'
         }
 
     }
