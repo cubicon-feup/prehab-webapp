@@ -3,12 +3,9 @@ import { connect } from "react-redux";
 import {compose} from 'redux';
 import DoctorTable from "./doctorTable";
 import DoctorInfo from "./doctorInfo";
-//import SearchBar from 'material-ui-search-bar';
 import { Link } from "react-router-dom"
 import {getDoctorList} from "../../utils/communication-manager";
 import "../../styles/settings_style.css";
-import Doctors from "../../images/icons/doctors.svg";
-
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';

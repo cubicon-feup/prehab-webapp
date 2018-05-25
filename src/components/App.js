@@ -29,7 +29,7 @@ import NavBar from "./navBar/navBar";
 import NewPatient from "./CreatePatient/newPatient";
 import Settings from "./Settings/settings";
 import NewDoctor from "./Settings/newDoctor";
-import Prehab, {appbarPrehab} from "./Prehab/prehab";
+import Prehab from "./Prehab/prehab";
 import NewPrehab from "./Prehab/newPrehab";
 import NewNutrition from "./Nutrition/newNutrition";
 import Nutrition from "./Nutrition/nutrition";
