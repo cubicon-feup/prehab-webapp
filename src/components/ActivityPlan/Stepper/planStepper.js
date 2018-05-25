@@ -116,7 +116,7 @@ class PlanStepper extends Component {
                 <div style={contentStyle}>
                     {stepIndex === stepNumber ? (
                         <div>
-                            <RaisedButton label="Enviar Formulário" primary={true} onClick={this.submitForm} />
+                            <RaisedButton primary={true} onClick={this.submitForm}> Enviar Formulário </RaisedButton>
                         </div>
                     ) : (
                         <div>{this.getStepContent(stepIndex)}</div>

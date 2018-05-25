@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {compose} from 'redux';
 import { connect } from "react-redux";
-import PatientTable from "../MainWindow/patientTable";
+import NutritionTable from "./nutritionTable";
 import { Link } from "react-router-dom";
-import {getPatientList} from "../../utils/communication-manager";
+import {getNutritionList} from "../../utils/communication-manager";
 import "../../styles/patients_style.css";
 
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +27,7 @@ class Nutrition extends Component {
     constructor(props){
         super(props);
         this.state = {
-            patientList: undefined,
+            nutritionList: undefined,
             term: '',
         }
 
@@ -36,16 +36,16 @@ class Nutrition extends Component {
     MainActivity = () => {
         const { classes} = this.props;
         let props = {
-            list:this.state.patientList,
+            list:this.state.nutritionList,
             term:this.state.term,
         };
 
 
-        if (this.props.auth === true && this.state.patientList !== undefined) {
+        if (this.props.auth === true && this.state.nutritionList !== undefined) {
             return (
                 <Grid container spacing={32}>
                     <Grid item md={11} xs={12}>
-                        <PatientTable {...props}/>
+                         <NutritionTable {...props}/>
                     </Grid>
                     <Grid item md={1} xs={12}>
                         <Tooltip id="tooltip-fab" title="Novo Plano">
@@ -67,14 +67,14 @@ class Nutrition extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        this.patientList(nextProps.token);
-        this.setState({term: nextProps.filter});
+      this.setState({term: nextProps.filter});
+      this.nutritionList(nextProps.token);
 
     }
 
     componentDidMount() {
-        this.patientList(this.props.token);
-        this.props.setTitle('Planos de nutrição');
+      this.props.setTitle('Planos de nutrição');
+      this.nutritionList(this.props.token);
     }
 
 
@@ -89,17 +89,17 @@ class Nutrition extends Component {
 
 
 
-    patientList(token){
-        getPatientList(token).then(list => {
+    nutritionList(token){
+        getNutritionList(token).then(list => {
                     console.log(list);
                     this.setState({
-                        patientList: list.data
+                        nutritionList: list.data
                     });
 
                 }).catch(err => {
                     console.log(err);
                     this.setState({
-                        patientList: undefined
+                        nutritionList: undefined
                     });
                 });
     }

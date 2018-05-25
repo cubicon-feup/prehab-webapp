@@ -380,6 +380,65 @@ export function createNewPrehab(secret, prehab_caracteristics) {
     });
 }
 
+export function getNutritionList(secret) {
+    return new Promise(function (resolve, reject) {
+
+        let requestUrl =  URL + "/api/meal/";
+
+        let requestOptions = {
+            uri: requestUrl,
+            method: "GET",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': secret,
+                'Platform' : 'web'
+            }
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
+export function changeAlertStatus(token, prehabId) {
+    return new Promise(function (resolve, reject) {
+        let requestUrl =  URL + "/api/patient/schedule/seen/bulk/";
+        let requestOptions = {
+            uri: requestUrl,
+            method: "PUT",
+            headers: {
+                'Authorization': 'Basic ',
+                'Content-Type': 'application/json',
+                'pragma': 'no-cache',
+                'cache-control': 'no-cache',
+                'jwt': token,
+                'platform': 'web'
+            },
+            body: JSON.stringify({
+                "prehab_id": prehabId,
+            })
+        };
+        fetch(requestUrl, requestOptions).then(function (response) {
+            if (response.status === 200) {
+                return resolve(response.json());
+            } else {
+                return reject(Error("An error has occurred! Please try again."));
+            }
+        }, function (error) {
+            return reject(error);
+        });
+    });
+}
+
 /**
  * Creates a New Patient
  * @param {*} .

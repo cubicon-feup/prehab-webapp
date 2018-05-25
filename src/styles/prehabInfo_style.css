@@ -4,6 +4,14 @@
     margin-bottom: 20px !important;
 }
 
+.alertIcon{
+    height: 40px !important;
+    width: 40px !important;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
 .tabContent{
     font-family: Quicksand, Regular;
     color: #7AC4FF;
@@ -106,6 +114,17 @@
     padding-left: 10px;
 }
 
+.constraint{
+    font-family: Quicksand, Regular;
+    color: #7AC4FF;
+    font-size: 16px;
+    text-align: center;
+    padding-left: 10px;
+    background-color: #F1F9FF;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
 .botaoMais{
     background-color: #F1F9FF;
     padding-top: 10px;
@@ -167,7 +186,7 @@
 }
 
 .alertImg{
-    height: 20px;
-    width: 20px;
+    height: 20px !important;
+    width: 20px !important;
     margin-left: 15px;
 }
