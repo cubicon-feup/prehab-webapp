@@ -119,7 +119,7 @@ class Prehab extends Component {
 
         else if(this.props.auth === false) {
             return (
-                <Redirect to='/'/>
+                <Redirect to="/"/>
             )
         }
     };
