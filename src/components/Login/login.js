@@ -57,7 +57,7 @@
 
                         this.props.signIn(suc.data.jwt);
 
-                        this.props.history.push("/main");
+                        this.props.history.push("/prehab");
                     })
                     .catch(err => {
                         const { errors } = wrongCredentials();

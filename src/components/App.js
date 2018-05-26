@@ -33,7 +33,6 @@ import Prehab from "./Prehab/prehab";
 import NewPrehab from "./Prehab/newPrehab";
 import NewNutrition from "./Nutrition/newNutrition";
 import Nutrition from "./Nutrition/nutrition";
-import Login from "./Login/login";
 import Logout from "./Logout/logout";
 
 import TestComponent from "./TestComponent/testComp";
@@ -231,7 +230,6 @@ class App extends React.Component {
                        <Router>
                             <Switch>
                                 <Route exact path="/" name="home" component={Home}/>
-                                <Route path="/login" name="login" component={Login}/>
                                 <Route path="/logout" name="logout" component={Logout}/>
                                 <Route path="/task" name="Task" render={(props) => (<Task setTitle={this.setTitle} auth={this.props.auth} {...props}/>)}/>
                                 <Route path="/newPlan" name="newPlan" render={(props) => (<NewPlan setTitle={this.setTitle} auth={this.props.auth} {...props}/>)}/>
@@ -245,7 +243,7 @@ class App extends React.Component {
                                 <Route path="/newNutrition" name="newNutrition" render={(props) => (<NewNutrition setTitle={this.setTitle} auth={this.props.auth} {...props}/>)}/>
                                 <Route path="/nutrition" name="Nutrition" render={(props) => (<Nutrition filter={this.state.term} setTitle={this.setTitle} auth={this.props.auth} {...props}/>)}/>
                                 <Route path="/mytest" name="MyTeste" render={(props) => (<TestComponent auth={this.props.auth} {...props}/>)} />
-                                <Redirect to="/prehab" />
+                                <Redirect to="/" />
                             </Switch>
                         </Router>                                                    
                     </main>                

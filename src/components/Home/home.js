@@ -52,7 +52,7 @@ class Home extends Component {
 			authenticateUser(this.state.username, this.state.password)
 				.then(suc => {
 					this.props.signIn(suc.data.jwt, suc.data.role);
-					this.props.history.push("/main");
+					this.props.history.push("/prehab");
 				})
 				.catch(err => {
 					const { errors } = wrongCredentials();
@@ -66,7 +66,7 @@ class Home extends Component {
 	render() {
 		const { errors, username, password } = this.state;
 		if(this.props.auth === true ) {
-			this.props.history.push("/main");
+			this.props.history.push("/prehab");
 			return null
 		 }else{
 			 return(
