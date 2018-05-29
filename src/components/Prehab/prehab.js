@@ -14,6 +14,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import {chunkArray} from "../../utils/helper";
+import { Redirect } from 'react-router-dom';
+
 const styles = theme => ({
     fab: {
       position: 'fixed',
@@ -117,7 +119,7 @@ class Prehab extends Component {
 
         else if(this.props.auth === false) {
             return (
-                ""
+                <Redirect to="/"/>
             )
         }
     };

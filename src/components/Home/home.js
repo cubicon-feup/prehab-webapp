@@ -7,6 +7,7 @@ import {logOut, signIn} from "../../actions/authActions";
 import { Link } from 'react-router-dom'
 import {wrongCredentials} from "../Login/login";
 import {authenticateUser} from "../../utils/communication-manager";
+import { Redirect } from 'react-router-dom';
 import "../../styles/styles.css";
 
 class Home extends Component {
@@ -52,7 +53,7 @@ class Home extends Component {
 			authenticateUser(this.state.username, this.state.password)
 				.then(suc => {
 					this.props.signIn(suc.data.jwt, suc.data.role);
-					this.props.history.push("/main");
+					return <Redirect to="/prehab"/>
 				})
 				.catch(err => {
 					const { errors } = wrongCredentials();
@@ -66,8 +67,7 @@ class Home extends Component {
 	render() {
 		const { errors, username, password } = this.state;
 		if(this.props.auth === true ) {
-			this.props.history.push("/main");
-			return null
+			return <Redirect to="/prehab"/>
 		 }else{
 			 return(
 				<div className="row">
@@ -152,6 +152,4 @@ function mapDispatchToProps(dispatch) {
 		}
 	};
 }
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
